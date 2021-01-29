@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+            prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pl.crystalek.sokoban.controller.ChooseByDifficultyController">
+    <children>
+        <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@titlescreen3.png"/>
+            </image>
+        </ImageView>
+        <Button layoutX="498.0" layoutY="425.0" mnemonicParsing="false" onAction="#hardLevel" prefHeight="79.0"
+                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Trudny" textFill="#a10000">
+            <font>
+                <Font name="System Bold Italic" size="35.0"/>
+            </font>
+        </Button>
+        <Button layoutX="381.0" layoutY="614.0" mnemonicParsing="false" onAction="#back" prefHeight="79.0"
+                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Powrót" textFill="#a10000">
+            <font>
+                <Font name="System Bold Italic" size="35.0"/>
+            </font>
+        </Button>
+        <Button layoutX="498.0" layoutY="331.0" mnemonicParsing="false" onAction="#normalLevel" prefHeight="79.0"
+                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Normalny" textFill="#a10000">
+            <font>
+                <Font name="System Bold Italic" size="31.0"/>
+            </font>
+        </Button>
+        <Button layoutX="498.0" layoutY="241.0" mnemonicParsing="false" onAction="#easyLevel" prefHeight="79.0"
+                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Łatwy" textFill="#a10000">
+            <font>
+                <Font name="System Bold Italic" size="33.0"/>
+            </font>
+        </Button>
+        <Button layoutX="662.0" layoutY="614.0" mnemonicParsing="false" onAction="#start" prefHeight="79.0"
+                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Start" textFill="#a10000">
+            <font>
+                <Font name="System Bold Italic" size="33.0"/>
+            </font>
+        </Button>
+    </children>
+</AnchorPane>
