@@ -1,7 +1,7 @@
 package pl.crystalek.sokoban.io.view;
 
 import javafx.fxml.FXMLLoader;
-import pl.crystalek.sokoban.io.FileLoader;
+import pl.crystalek.sokoban.io.file.FileManager;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,10 +10,10 @@ import java.util.Map;
 
 public final class FXMLFileLoader {
 
-    public Map<String, FXMLLoader> getFXMLList(final FileLoader fileLoader) {
+    public Map<String, FXMLLoader> getFXMLList(final FileManager fileManager) {
         final Map<String, FXMLLoader> resultMap = new HashMap<>();
 
-        for (final Map.Entry<String, InputStream> entry : fileLoader.getFXMLFileList().entrySet()) {
+        for (final Map.Entry<String, InputStream> entry : fileManager.getFXMLFileList().entrySet()) {
             try (
                     final InputStream inputStream = entry.getValue()
             ) {

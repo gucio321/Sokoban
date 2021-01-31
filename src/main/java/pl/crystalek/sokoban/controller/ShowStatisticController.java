@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public final class ShowRankingController {
+public final class ShowStatisticController {
 
     @FXML
     private Label timeLabel;

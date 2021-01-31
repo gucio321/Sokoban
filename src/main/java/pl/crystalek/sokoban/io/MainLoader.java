@@ -3,7 +3,12 @@ package pl.crystalek.sokoban.io;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import pl.crystalek.sokoban.exception.CreateFileException;
+import pl.crystalek.sokoban.exception.LoadResourcesException;
+import pl.crystalek.sokoban.exception.LoadUserException;
+import pl.crystalek.sokoban.io.file.FileManager;
 import pl.crystalek.sokoban.io.view.FXMLFileLoader;
+import pl.crystalek.sokoban.io.view.ImageLoader;
 import pl.crystalek.sokoban.io.view.StageLoader;
 
 import java.util.List;
@@ -15,12 +20,12 @@ public final class MainLoader {
     private final Map<String, Stage> stageList;
     private final Map<String, FXMLLoader> fxmlList;
 
-    public MainLoader() {
-        final FileLoader fileLoader = new FileLoader();
-        fileLoader.loadFiles();
-        this.stringMapList = new MapLoader().getMapsInString(fileLoader);
-        this.imageList = new ImageLoader().getImageList(fileLoader);
-        this.fxmlList = new FXMLFileLoader().getFXMLList(fileLoader);
+    public MainLoader() throws LoadUserException, LoadResourcesException, CreateFileException {
+        final FileManager fileManager = new FileManager();
+        fileManager.load();
+        this.stringMapList = new MapLoader().getMapsInString(fileManager);
+        this.imageList = new ImageLoader().getImageList(fileManager);
+        this.fxmlList = new FXMLFileLoader().getFXMLList(fileManager);
         this.stageList = new StageLoader().getStageList(this);
     }
 

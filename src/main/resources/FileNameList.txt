@@ -4,3 +4,17 @@ bricks.png
 crate.png
 grass.png
 player.png
+changeName.fxml
+chooseByDifficulty.fxml
+doYouWantTo.fxml
+errorWindow.fxml
+firstModuleGameWindow.fxml
+gameModeChoice.fxml
+gameModuleChoice.fxml
+gameSettings.fxml
+load.fxml
+mapEditor.
+secondModuleGameWindow.fxml
+selectLevel.fxml
+shwoStatistic.fxml
+sokobanMain.fxml

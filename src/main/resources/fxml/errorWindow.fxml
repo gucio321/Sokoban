@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+            prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pl.crystalek.sokoban.controller.ErrorWindowController">
+    <children>
+        <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@titlescreen3.png"/>
+            </image>
+        </ImageView>
+        <AnchorPane layoutX="324.0" layoutY="190.0" prefHeight="340.0" prefWidth="632.0"
+                    style="-fx-background-color: #bbbbbb;">
+            <children>
+                <AnchorPane layoutX="30.0" layoutY="25.0" prefHeight="290.0" prefWidth="573.0"
+                            style="-fx-background-color: #a10000;">
+                    <children>
+                        <Button layoutX="170.0" layoutY="197.0" mnemonicParsing="false" onAction="#close"
+                                prefHeight="79.0" prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="OK"
+                                textAlignment="CENTER" textFill="#a10000">
+                            <font>
+                                <Font name="System Bold Italic" size="30.0"/>
+                            </font>
+                        </Button>
+                        <Label alignment="CENTER" layoutX="117.0" layoutY="14.0" prefHeight="40.0" prefWidth="340.0"
+                               style="-fx-background-color: #bbbbbb;" text="Wystąpił błąd" textFill="#a10000">
+                            <font>
+                                <Font name="System Bold Italic" size="18.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="errorTextLabel" alignment="CENTER" layoutX="66.0" layoutY="70.0"
+                               prefHeight="115.0" prefWidth="441.0" style="-fx-background-color: #bbbbbb;"
+                               textFill="#a10000" wrapText="true">
+                            <font>
+                                <Font name="System Bold Italic" size="18.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
