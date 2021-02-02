@@ -15,6 +15,11 @@ class FileSaver {
     }
 
     void saveFiles() throws SaveUserFileException {
+        final File programDirectory = fileManager.getProgramDirectory();
+        if (!programDirectory.exists()) {
+            programDirectory.mkdir();
+        }
+
         saveFile(fileManager.getSettingsFile(), fileManager.getSettings());
         saveFile(fileManager.getStatisticFile(), fileManager.getStatistic());
     }
@@ -30,7 +35,7 @@ class FileSaver {
         }
     }
 
-    private void saveMaps() {
+    private void saveUserMaps() {
 
 
     }

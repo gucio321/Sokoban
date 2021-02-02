@@ -6,7 +6,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="820.0" prefWidth="1458.0"
-            style="-fx-background-image: url('/fxml/screen1.png')" xmlns="http://javafx.com/javafx/8.0.202-ea"
+            style="-fx-background-image: url('/img/backgroundGame.png')" xmlns="http://javafx.com/javafx/8.0.202-ea"
             fx:controller="pl.crystalek.sokoban.controller.MapEditorController">
     <children>
         <Button layoutX="8.0" layoutY="498.0" mnemonicParsing="false" onAction="#leave" prefHeight="37.0"

@@ -20,11 +20,12 @@ public final class ChangeNameController implements Controller {
 
     @FXML
     void cancel(final ActionEvent event) {
-
+        mainLoader.getStage(getClass()).close();
     }
 
     @FXML
     void save(final ActionEvent event) {
-
+        //zapisuje mape wraz z nadaną nazwą
+        mainLoader.getStage(getClass()).close();
     }
 }

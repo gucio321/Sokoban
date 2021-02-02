@@ -21,17 +21,17 @@ public final class LoadController implements Controller {
 
     @FXML
     void back(final ActionEvent event) {
-
+        //odpalony zostaje selectLevel.fxml lub gameModeChoice.fxml, w zależności od wywołania
     }
 
     @FXML
     void delete(final ActionEvent event) {
-
+        //usuwa zapis/mape
     }
 
     @FXML
     void load(final ActionEvent event) {
-
+        //laduje zapis/mape do edycji
     }
 
 }

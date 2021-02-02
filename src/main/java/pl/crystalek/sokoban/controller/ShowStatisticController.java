@@ -27,12 +27,13 @@ public final class ShowStatisticController implements Controller {
 
     @FXML
     void back(final ActionEvent event) {
-
+        mainLoader.getStage(SokobanMainController.class).show();
+        mainLoader.getStage(getClass()).close();
     }
 
     @FXML
     void resetRanking(final ActionEvent event) {
-
+        mainLoader.getStage(DoYouWantToController.class).show(); // i tam, czy ranking ma zostać usunięty //yes or not
     }
 
 }

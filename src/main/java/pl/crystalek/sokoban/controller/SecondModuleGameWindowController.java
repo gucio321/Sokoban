@@ -17,12 +17,12 @@ public final class SecondModuleGameWindowController implements Controller {
 
     @FXML
     void back(final ActionEvent event) {
-
+        mainLoader.getStage(DoYouWantToController.class).show(); //i tam wylaczenie okna selectLevel lub chooseByDifficulty
     }
 
     @FXML
     void saveGame(final ActionEvent event) {
-
+        mainLoader.getStage(ChangeNameController.class).show();
     }
 
 }

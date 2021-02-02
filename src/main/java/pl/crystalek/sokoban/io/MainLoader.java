@@ -7,6 +7,7 @@ import pl.crystalek.sokoban.controller.Controller;
 import pl.crystalek.sokoban.exception.CreateFileException;
 import pl.crystalek.sokoban.exception.LoadResourcesException;
 import pl.crystalek.sokoban.exception.LoadUserFileException;
+import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.io.file.FileManager;
 import pl.crystalek.sokoban.io.view.FXMLFileLoader;
 import pl.crystalek.sokoban.io.view.ImageLoader;
@@ -19,14 +20,18 @@ import java.util.Map;
 
 public final class MainLoader {
     private final Map<Class<?>, Controller> controllerMap = new HashMap<>();
+    private final FileManager fileManager;
     private Map<Class<?>, Stage> stageMap;
     private Map<String, List<String>> stringMapList;
     private Map<String, List<String>> userStringMapList;
     private Map<String, Image> imageList;
 
+    public MainLoader(final FileManager fileManager) {
+        this.fileManager = fileManager;
+    }
+
     public void load() throws LoadUserFileException, LoadResourcesException, CreateFileException, IOException {
         final MapLoader mapLoader = new MapLoader();
-        final FileManager fileManager = new FileManager();
         fileManager.load();
         this.stringMapList = mapLoader.getMapsInString(fileManager.getMapFileList());
         this.userStringMapList = mapLoader.getMapsInString(fileManager.getUserMapFileList());
@@ -34,6 +39,10 @@ public final class MainLoader {
         final List<FXMLLoader> fxmlList = new FXMLFileLoader().getFXMLList(fileManager);
         this.stageMap = new StageLoader().getStageList(fxmlList);
         setControllerMap(fxmlList);
+    }
+
+    public void save() throws SaveUserFileException {
+        fileManager.save();
     }
 
     private void setControllerMap(final List<FXMLLoader> fxmlList) {
@@ -63,5 +72,9 @@ public final class MainLoader {
 
     public Map<String, Image> getImageList() {
         return imageList;
+    }
+
+    public FileManager getFileManager() {
+        return fileManager;
     }
 }

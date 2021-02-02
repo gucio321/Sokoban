@@ -17,7 +17,8 @@ public final class FirstModuleGameWindowController implements Controller {
 
     @FXML
     void back(final ActionEvent event) {
-
+        mainLoader.getStage(LoadController.class).show(); //wyświetla ponownie menu z załadowanymi grami
+        mainLoader.getStage(getClass()).close();
     }
 
 }

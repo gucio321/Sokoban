@@ -14,12 +14,13 @@ public final class SelectLevelController implements Controller {
 
     @FXML
     void back(final ActionEvent event) {
-
+        mainLoader.getStage(GameModeChoiceController.class).show();
+        mainLoader.getStage(getClass()).close();
     }
 
     @FXML
     void showGameSaveList(final ActionEvent event) {
-
+        mainLoader.getStage(LoadController.class).show();
+        mainLoader.getStage(getClass()).close();
     }
-
 }

@@ -17,27 +17,29 @@ public final class MapEditorController implements Controller {
 
     @FXML
     void leave(final ActionEvent event) {
-
+        mainLoader.getStage(DoYouWantToController.class).show(); //i tu dalej cuda
     }
 
     @FXML
     void changeMapName(final ActionEvent event) {
-
+        mainLoader.getStage(ChangeNameController.class).show();
     }
 
     @FXML
     void resetMap(final ActionEvent event) {
+        mainLoader.getStage(DoYouWantToController.class).show(); //i tu dalej cuda
 
     }
 
     @FXML
     void saveMap(final ActionEvent event) {
-
+        //jesli mapa nie ma nadanej nazwy, odpalany zostaje ChangeName
+        mainLoader.getStage(ChangeNameController.class).show();
     }
 
     @FXML
     void showMapList(final ActionEvent event) {
-
+        mainLoader.getStage(LoadController.class).show();
     }
 
 }
