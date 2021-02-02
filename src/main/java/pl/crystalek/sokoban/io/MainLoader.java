@@ -20,7 +20,6 @@ import java.util.Map;
 public final class MainLoader {
     private final Map<Class<?>, Controller> controllerMap = new HashMap<>();
     private Map<Class<?>, Stage> stageMap;
-    private List<FXMLLoader> fxmlList;
     private Map<String, List<String>> stringMapList;
     private Map<String, List<String>> userStringMapList;
     private Map<String, Image> imageList;
@@ -32,14 +31,15 @@ public final class MainLoader {
         this.stringMapList = mapLoader.getMapsInString(fileManager.getMapFileList());
         this.userStringMapList = mapLoader.getMapsInString(fileManager.getUserMapFileList());
         this.imageList = new ImageLoader().getImageList(fileManager);
-        this.fxmlList = new FXMLFileLoader().getFXMLList(fileManager);
-        this.stageMap = new StageLoader().getStageList(this);
-        setControllerMap();
+        final List<FXMLLoader> fxmlList = new FXMLFileLoader().getFXMLList(fileManager);
+        this.stageMap = new StageLoader().getStageList(fxmlList);
+        setControllerMap(fxmlList);
     }
 
-    private void setControllerMap() {
+    private void setControllerMap(final List<FXMLLoader> fxmlList) {
         for (final FXMLLoader fxmlLoader : fxmlList) {
             final Controller controller = fxmlLoader.getController();
+            controller.setManagers(this);
             controllerMap.put(controller.getClass(), controller);
         }
     }
@@ -52,9 +52,6 @@ public final class MainLoader {
         return (T) controllerMap.get(controllerClass);
     }
 
-    public List<FXMLLoader> getFXMLList() {
-        return fxmlList;
-    }
 
     public Map<String, List<String>> getUserStringMapList() {
         return userStringMapList;

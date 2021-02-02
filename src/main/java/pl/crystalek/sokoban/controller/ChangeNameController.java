@@ -4,8 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import pl.crystalek.sokoban.io.MainLoader;
 
 public final class ChangeNameController implements Controller {
+    private MainLoader mainLoader;
+
+    @Override
+    public void setManagers(final MainLoader mainLoader) {
+        this.mainLoader = mainLoader;
+    }
 
     @FXML
     private TextField nameTextField;
@@ -22,5 +29,4 @@ public final class ChangeNameController implements Controller {
     void save(final ActionEvent event) {
 
     }
-
 }
