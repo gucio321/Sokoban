@@ -1,16 +1,37 @@
 package pl.crystalek.sokoban.io.file;
 
+import pl.crystalek.sokoban.exception.SaveUserFileException;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 class FileSaver {
+    private final FileManager fileManager;
 
-    void saveFiles() {
-
+    FileSaver(final FileManager fileManager) {
+        this.fileManager = fileManager;
     }
 
-    private void saveSettings() {
-
+    void saveFiles() throws SaveUserFileException {
+        saveFile(fileManager.getSettingsFile(), fileManager.getSettings());
+        saveFile(fileManager.getStatisticFile(), fileManager.getStatistic());
     }
 
-    private void saveStatistic() {
+    private void saveFile(final File fileToSave, final Object objectToSave) throws SaveUserFileException {
+        try (
+                final FileOutputStream fileOutputStream = new FileOutputStream(fileToSave);
+                final ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)
+        ) {
+            objectOutputStream.writeObject(objectToSave);
+        } catch (final IOException exception) {
+            throw new SaveUserFileException("Wystapił błąd podczas zapisywania pliku: " + fileToSave.getName(), exception);
+        }
+    }
+
+    private void saveMaps() {
+
 
     }
 }

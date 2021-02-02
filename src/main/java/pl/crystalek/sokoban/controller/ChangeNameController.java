@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public final class ChangeNameController {
+public final class ChangeNameController implements Controller {
 
     @FXML
     private TextField nameTextField;

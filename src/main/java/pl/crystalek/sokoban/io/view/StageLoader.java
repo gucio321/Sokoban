@@ -11,16 +11,16 @@ import java.util.Map;
 
 public final class StageLoader {
 
-    public Map<String, Stage> getStageList(final MainLoader mainLoader) {
-        final Map<String, Stage> resultMap = new HashMap<>();
+    public Map<Class<?>, Stage> getStageList(final MainLoader mainLoader) {
+        final Map<Class<?>, Stage> resultMap = new HashMap<>();
 
-        for (final Map.Entry<String, FXMLLoader> entry : mainLoader.getFxmlList().entrySet()) {
+        for (final FXMLLoader fxmlLoader : mainLoader.getFXMLList()) {
             final Stage stage = new Stage();
-            final AnchorPane pane = entry.getValue().getRoot();
+            final AnchorPane pane = fxmlLoader.getRoot();
             final Scene scene = new Scene(pane);
             stage.setScene(scene);
             stage.setTitle("Sokoban");
-            resultMap.put(entry.getKey().replace("Pane", "Stage"), stage);
+            resultMap.put(fxmlLoader.getController().getClass(), stage);
         }
 
         return resultMap;

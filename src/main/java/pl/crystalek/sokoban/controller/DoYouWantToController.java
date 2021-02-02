@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public final class DoYouWantToController {
+public final class DoYouWantToController implements Controller {
 
     @FXML
     private Label textLabel;

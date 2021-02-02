@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 
-public final class SecondModuleGameWindowController {
+public final class SecondModuleGameWindowController implements Controller {
 
     @FXML
     private GridPane mapBox;

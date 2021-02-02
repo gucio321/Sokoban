@@ -4,10 +4,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
-public final class LoadController {
+public final class LoadController implements Controller {
 
     @FXML
     private VBox boxList;
+
+    public VBox getBoxList() {
+        return boxList;
+    }
 
     @FXML
     void back(final ActionEvent event) {

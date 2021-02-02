@@ -3,7 +3,7 @@ package pl.crystalek.sokoban.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public final class SelectLevelController {
+public final class SelectLevelController implements Controller {
 
     @FXML
     void back(final ActionEvent event) {

@@ -1,6 +1,9 @@
 package pl.crystalek.sokoban.statistic;
 
-public final class Statistic {
+import java.io.Serializable;
+
+public final class Statistic implements Serializable {
+    private static final long serialVersionUID = 8952243870070568458L;
     private long time = 0;
     private int steps = 0;
     private int winLevels = 0;

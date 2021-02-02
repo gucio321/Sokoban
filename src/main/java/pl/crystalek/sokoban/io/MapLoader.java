@@ -1,7 +1,5 @@
 package pl.crystalek.sokoban.io;
 
-import pl.crystalek.sokoban.io.file.FileManager;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,10 +11,10 @@ import java.util.stream.Collectors;
 
 final class MapLoader {
 
-    Map<String, List<String>> getMapsInString(final FileManager fileManager) {
+    Map<String, List<String>> getMapsInString(final Map<String, InputStream> mapFileList) {
         final Map<String, List<String>> resultMap = new HashMap<>();
 
-        for (final Map.Entry<String, InputStream> entry : fileManager.getMapFileList().entrySet()) {
+        for (final Map.Entry<String, InputStream> entry : mapFileList.entrySet()) {
             try (
                     final InputStream inputStream = entry.getValue();
                     final InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

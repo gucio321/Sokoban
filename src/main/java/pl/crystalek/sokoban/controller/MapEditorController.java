@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 
-public final class MapEditorController {
+public final class MapEditorController implements Controller {
 
     @FXML
     private GridPane mapBox;

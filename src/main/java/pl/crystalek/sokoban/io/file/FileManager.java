@@ -2,25 +2,30 @@ package pl.crystalek.sokoban.io.file;
 
 import pl.crystalek.sokoban.exception.CreateFileException;
 import pl.crystalek.sokoban.exception.LoadResourcesException;
-import pl.crystalek.sokoban.exception.LoadUserException;
+import pl.crystalek.sokoban.exception.LoadUserFileException;
+import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.settings.Settings;
 import pl.crystalek.sokoban.statistic.Statistic;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FileManager {
     private final Map<String, InputStream> imageFileList = new HashMap<>();
     private final Map<String, InputStream> mapFileList = new HashMap<>();
-    private final Map<String, File> userMapFileList = new HashMap<>();
-    private final Map<String, InputStream> fxmlFileList = new HashMap<>();
+    private final Map<String, InputStream> userMapFileList = new HashMap<>();
+    private final List<InputStream> fxmlFileList = new ArrayList<>();
     private final FileLoader fileLoader = new FileLoader(this);
+    private final FileSaver fileSaver = new FileSaver(this);
     private File programDirectory;
     private File userMapDirectory;
     private File statisticFile;
@@ -28,13 +33,13 @@ public class FileManager {
     private Statistic statistic;
     private Settings settings;
 
-    public void load() throws LoadResourcesException, LoadUserException, CreateFileException {
+    public void load() throws LoadResourcesException, LoadUserFileException, CreateFileException, FileNotFoundException {
         checkFilesExist();
         fileLoader.loadFiles();
     }
 
-    public void save() {
-
+    public void save() throws SaveUserFileException {
+        fileSaver.saveFiles();
     }
 
     private void checkFilesExist() throws CreateFileException {
@@ -52,8 +57,8 @@ public class FileManager {
                 userMapDirectory.mkdir();
             }
 
-            final File statisticFile = new File(programDirectory, "statistics.txt");
-            final File settingsFile = new File(programDirectory, "settings.txt");
+            final File statisticFile = new File(programDirectory, "statistics.sokoban");
+            final File settingsFile = new File(programDirectory, "settings.sokoban");
 
 
             if (!statisticFile.exists()) {
@@ -75,7 +80,7 @@ public class FileManager {
         }
     }
 
-    public Map<String, File> getUserMapFileList() {
+    public Map<String, InputStream> getUserMapFileList() {
         return userMapFileList;
     }
 
@@ -103,7 +108,7 @@ public class FileManager {
         return mapFileList;
     }
 
-    public Map<String, InputStream> getFXMLFileList() {
+    public List<InputStream> getFXMLFileList() {
         return fxmlFileList;
     }
 

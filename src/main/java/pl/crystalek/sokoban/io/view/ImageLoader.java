@@ -10,19 +10,16 @@ import java.util.Map;
 
 public final class ImageLoader {
 
-    public Map<String, Image> getImageList(final FileManager fileManager) {
+    public Map<String, Image> getImageList(final FileManager fileManager) throws IOException {
         final Map<String, Image> resultMap = new HashMap<>();
 
         for (final Map.Entry<String, InputStream> entry : fileManager.getImageFileList().entrySet()) {
-            try (
-                    final InputStream inputStream = entry.getValue()
-            ) {
-                final Image picture = new Image(inputStream);
+            final InputStream inputStream = entry.getValue();
+            final Image picture = new Image(inputStream);
 
-                resultMap.put(entry.getKey(), picture);
-            } catch (final IOException exception) {
-                exception.printStackTrace();
-            }
+            resultMap.put(entry.getKey(), picture);
+
+            inputStream.close();
         }
 
         return resultMap;

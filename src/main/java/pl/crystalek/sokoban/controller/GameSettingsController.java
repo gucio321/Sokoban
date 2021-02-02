@@ -4,7 +4,7 @@ package pl.crystalek.sokoban.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public final class GameSettingsController {
+public final class GameSettingsController implements Controller {
 
     @FXML
     void back(final ActionEvent event) {

@@ -1,6 +1,9 @@
 package pl.crystalek.sokoban.settings;
 
-public final class Settings {
+import java.io.Serializable;
+
+public final class Settings implements Serializable {
+    private static final long serialVersionUID = 5179680418474481551L;
     private Sound sound = Sound.ENABLE;
     private Control controlType = Control.WASD;
     private int brightness = 100;

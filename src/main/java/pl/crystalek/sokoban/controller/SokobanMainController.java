@@ -3,11 +3,9 @@ package pl.crystalek.sokoban.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public final class SokobanMainController {
+public final class SokobanMainController implements Controller {
 
-    @FXML
-    void exit(final ActionEvent event) {
-
+    public void exit(final ActionEvent event) {
     }
 
     @FXML

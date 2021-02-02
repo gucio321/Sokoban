@@ -5,25 +5,22 @@ import pl.crystalek.sokoban.io.file.FileManager;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class FXMLFileLoader {
 
-    public Map<String, FXMLLoader> getFXMLList(final FileManager fileManager) {
-        final Map<String, FXMLLoader> resultMap = new HashMap<>();
+    public List<FXMLLoader> getFXMLList(final FileManager fileManager) throws IOException {
+        final List<FXMLLoader> resultMap = new ArrayList<>();
 
-        for (final Map.Entry<String, InputStream> entry : fileManager.getFXMLFileList().entrySet()) {
-            try (
-                    final InputStream inputStream = entry.getValue()
-            ) {
-                final FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.load(inputStream);
+        for (final InputStream inputStream : fileManager.getFXMLFileList()) {
+            final FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.load(inputStream);
 
-                resultMap.put(entry.getKey(), fxmlLoader);
-            } catch (final IOException exception) {
-                exception.printStackTrace();
-            }
+            resultMap.add(fxmlLoader);
+
+            inputStream.close();
+
         }
 
         return resultMap;

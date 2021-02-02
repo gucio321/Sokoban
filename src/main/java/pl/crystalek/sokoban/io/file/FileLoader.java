@@ -3,12 +3,13 @@ package pl.crystalek.sokoban.io.file;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import pl.crystalek.sokoban.exception.LoadResourcesException;
-import pl.crystalek.sokoban.exception.LoadUserException;
+import pl.crystalek.sokoban.exception.LoadUserFileException;
 import pl.crystalek.sokoban.settings.Settings;
 import pl.crystalek.sokoban.statistic.Statistic;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ final class FileLoader {
         this.fileManager = fileManager;
     }
 
-    void loadFiles() throws LoadResourcesException, LoadUserException {
+    void loadFiles() throws LoadResourcesException, LoadUserFileException, FileNotFoundException {
         loadResources();
         fileManager.setSettings(loadUserFile(fileManager.getSettingsFile()).map(object -> (Settings) object).orElseGet(Settings::new));
         fileManager.setStatistic(loadUserFile(fileManager.getStatisticFile()).map(object -> (Statistic) object).orElseGet(Statistic::new));
@@ -29,7 +30,7 @@ final class FileLoader {
     private void loadResources() throws LoadResourcesException {
         final Map<String, InputStream> mapFileList = fileManager.getMapFileList();
         final Map<String, InputStream> imageFileList = fileManager.getImageFileList();
-        final Map<String, InputStream> fxmlFileList = fileManager.getFXMLFileList();
+        final List<InputStream> fxmlFileList = fileManager.getFXMLFileList();
 
         try (
                 final InputStream fileNameStream = getClass().getResourceAsStream("/FileNameList.txt")
@@ -46,7 +47,7 @@ final class FileLoader {
                         imageFileList.put(fileNameWithoutExtension, getClass().getResourceAsStream("/img/" + fileName));
                         break;
                     case "fxml":
-                        fxmlFileList.put(fileNameWithoutExtension, getClass().getResourceAsStream("/fxml/" + fileName));
+                        fxmlFileList.add(getClass().getResourceAsStream("/fxml/" + fileName));
                         break;
                 }
             }
@@ -56,7 +57,7 @@ final class FileLoader {
         }
     }
 
-    private Optional<Object> loadUserFile(final File fileToLoad) throws LoadUserException {
+    private Optional<Object> loadUserFile(final File fileToLoad) throws LoadUserFileException {
         try (
                 final FileInputStream fileInputStream = new FileInputStream(fileToLoad);
                 final ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)
@@ -64,17 +65,19 @@ final class FileLoader {
             final Object readObject = objectInputStream.readObject();
             return readObject instanceof Statistic || readObject instanceof Settings ? Optional.of(readObject) : Optional.empty();
 
+        } catch (final EOFException exception) {
+            return Optional.empty();
         } catch (final IOException | ClassNotFoundException exception) {
-            throw new LoadUserException("Wystapił błąd podczas ładowania pliku: " + fileToLoad.getName(), exception);
+            throw new LoadUserFileException("Wystapił błąd podczas ładowania pliku: " + fileToLoad.getName(), exception);
         }
     }
 
-    private void loadUserMaps() {
+    private void loadUserMaps() throws FileNotFoundException {
         final File userMapDirectory = fileManager.getUserMapDirectory();
-        final Map<String, File> userMapFileList = fileManager.getUserMapFileList();
+        final Map<String, InputStream> userMapFileList = fileManager.getUserMapFileList();
 
         for (final File fileMap : userMapDirectory.listFiles()) {
-            userMapFileList.put(FilenameUtils.removeExtension(fileMap.getName()), fileMap);
+            userMapFileList.put(FilenameUtils.removeExtension(fileMap.getName()), new FileInputStream(fileMap));
         }
     }
 }
