@@ -8,17 +8,15 @@ import pl.crystalek.sokoban.io.MainLoader;
 
 public final class ChangeNameController implements Controller {
     private MainLoader mainLoader;
+    @FXML
+    private TextField nameTextField;
+    @FXML
+    private Label setName;
 
     @Override
     public void setManagers(final MainLoader mainLoader) {
         this.mainLoader = mainLoader;
     }
-
-    @FXML
-    private TextField nameTextField;
-
-    @FXML
-    private Label setName;
 
     @FXML
     void cancel(final ActionEvent event) {

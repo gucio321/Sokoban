@@ -7,14 +7,13 @@ import pl.crystalek.sokoban.io.MainLoader;
 
 public final class ErrorWindowController implements Controller {
     private MainLoader mainLoader;
+    @FXML
+    private Label errorTextLabel;
 
     @Override
     public void setManagers(final MainLoader mainLoader) {
         this.mainLoader = mainLoader;
     }
-
-    @FXML
-    private Label errorTextLabel;
 
     @FXML
     void close(final ActionEvent event) {

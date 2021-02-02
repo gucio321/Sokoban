@@ -7,14 +7,13 @@ import pl.crystalek.sokoban.io.MainLoader;
 
 public final class LoadController implements Controller {
     private MainLoader mainLoader;
+    @FXML
+    private VBox boxList;
 
     @Override
     public void setManagers(final MainLoader mainLoader) {
         this.mainLoader = mainLoader;
     }
-
-    @FXML
-    private VBox boxList;
 
     public VBox getBoxList() {
         return boxList;

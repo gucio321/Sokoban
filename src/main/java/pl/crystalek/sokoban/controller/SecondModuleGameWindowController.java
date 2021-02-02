@@ -7,14 +7,13 @@ import pl.crystalek.sokoban.io.MainLoader;
 
 public final class SecondModuleGameWindowController implements Controller {
     private MainLoader mainLoader;
+    @FXML
+    private GridPane mapBox;
 
     @Override
     public void setManagers(final MainLoader mainLoader) {
         this.mainLoader = mainLoader;
     }
-
-    @FXML
-    private GridPane mapBox;
 
     @FXML
     void back(final ActionEvent event) {
