@@ -4,28 +4,27 @@ import pl.crystalek.sokoban.exception.CreateFileException;
 import pl.crystalek.sokoban.exception.LoadResourcesException;
 import pl.crystalek.sokoban.exception.LoadUserFileException;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
+import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.settings.Settings;
 import pl.crystalek.sokoban.statistic.Statistic;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FileManager {
+public final class FileManager {
     private final Map<String, InputStream> imageFileList = new HashMap<>();
     private final Map<String, InputStream> mapFileList = new HashMap<>();
-    private final Map<String, InputStream> userMapFileList = new HashMap<>();
+    private final Map<String, File> userMapFileList = new HashMap<>();
     private final List<InputStream> fxmlFileList = new ArrayList<>();
     private final FileLoader fileLoader = new FileLoader(this);
     private final FileSaver fileSaver = new FileSaver(this);
+    private final MainLoader mainLoader;
     private File programDirectory;
     private File userMapDirectory;
     private File statisticFile;
@@ -33,7 +32,11 @@ public class FileManager {
     private Statistic statistic;
     private Settings settings;
 
-    public void load() throws LoadResourcesException, LoadUserFileException, CreateFileException, FileNotFoundException {
+    public FileManager(final MainLoader mainLoader) {
+        this.mainLoader = mainLoader;
+    }
+
+    public void load() throws LoadResourcesException, LoadUserFileException, CreateFileException {
         checkFilesExist();
         fileLoader.loadFiles();
     }
@@ -44,9 +47,7 @@ public class FileManager {
 
     private void checkFilesExist() throws CreateFileException {
         try {
-            final URL url = getClass().getProtectionDomain().getCodeSource().getLocation();
-            final File decode = new File(URLDecoder.decode(url.getFile(), StandardCharsets.UTF_8.toString()));
-            final File programDirectory = new File(decode.getParentFile(), "sokoban");
+            final File programDirectory = new File(FileSystemView.getFileSystemView().getDefaultDirectory(), "Sokoban");
             final File userMapDirectory = new File(programDirectory, "your maps");
 
             if (!programDirectory.exists()) {
@@ -80,7 +81,7 @@ public class FileManager {
         }
     }
 
-    public Map<String, InputStream> getUserMapFileList() {
+    public Map<String, File> getUserMapFileList() {
         return userMapFileList;
     }
 
@@ -126,5 +127,13 @@ public class FileManager {
 
     public void setSettings(final Settings settings) {
         this.settings = settings;
+    }
+
+    public MainLoader getMainLoader() {
+        return mainLoader;
+    }
+
+    public FileSaver getFileSaver() {
+        return fileSaver;
     }
 }

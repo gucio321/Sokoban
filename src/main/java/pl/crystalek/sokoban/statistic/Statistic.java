@@ -71,4 +71,12 @@ public final class Statistic implements Serializable {
         this.createdMaps = createdMaps;
     }
 
+    public void resetStatistic() {
+        this.time = 0;
+        this.steps = 0;
+        this.winLevels = 0;
+        this.crateMove = 0;
+        this.deletedMaps = 0;
+        this.createdMaps = 0;
+    }
 }

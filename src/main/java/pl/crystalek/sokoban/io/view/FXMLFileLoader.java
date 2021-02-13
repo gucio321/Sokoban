@@ -16,13 +16,9 @@ public final class FXMLFileLoader {
         for (final InputStream inputStream : fileManager.getFXMLFileList()) {
             final FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.load(inputStream);
-
             resultMap.add(fxmlLoader);
-
             inputStream.close();
-
         }
-
         return resultMap;
     }
 }

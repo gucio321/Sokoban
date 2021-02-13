@@ -5,94 +5,95 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
-            prefHeight="720.0" prefWidth="1280.0"
-            style="-fx-background-image: url('/img/background.png')" xmlns="http://javafx.com/javafx/8.0.202-ea"
+            prefHeight="820.0" prefWidth="1457.0"
+            style="-fx-background-image: url('/img/gui/background.png')" xmlns="http://javafx.com/javafx/8.0.202-ea"
             fx:controller="pl.crystalek.sokoban.controller.ShowStatisticController">
     <children>
-        <Button layoutX="358.0" layoutY="612.0" mnemonicParsing="false" onAction="#back" prefHeight="79.0"
+        <Button layoutX="773.0" layoutY="691.0" mnemonicParsing="false" onAction="#back" prefHeight="79.0"
                 prefWidth="260.0" style="-fx-background-color: #bbbbbb;" text="Powrót" textAlignment="CENTER"
                 textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="30.0"/>
             </font>
         </Button>
-        <Label alignment="CENTER" layoutX="429.0" layoutY="233.0" prefHeight="40.0" prefWidth="189.0"
+        <Label alignment="CENTER" layoutX="495.0" layoutY="330.0" prefHeight="40.0" prefWidth="189.0"
                style="-fx-background-color: #bbbbbb;" text="Liczba kroków" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="18.0"/>
             </font>
         </Label>
-        <Label fx:id="timeLabel" alignment="CENTER" layoutX="663.0" layoutY="176.0" prefHeight="40.0" prefWidth="189.0"
-               style="-fx-background-color: #bbbbbb;" textFill="#a10000">
-            <font>
-                <Font name="System Bold Italic" size="24.0"/>
-            </font>
-        </Label>
-        <Label alignment="CENTER" layoutX="429.0" layoutY="293.0" prefHeight="40.0" prefWidth="189.0"
+        <Label alignment="CENTER" layoutX="495.0" layoutY="386.0" prefHeight="40.0" prefWidth="189.0"
                style="-fx-background-color: #bbbbbb;" text="Wygranych poziomów" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="17.0"/>
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="429.0" layoutY="347.0" prefHeight="40.0" prefWidth="189.0"
+        <Label alignment="CENTER" layoutX="495.0" layoutY="446.0" prefHeight="40.0" prefWidth="189.0"
                style="-fx-background-color: #bbbbbb;" text="Przesunięć skrzynek" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="18.0"/>
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="429.0" layoutY="176.0" prefHeight="40.0" prefWidth="189.0"
+        <Label alignment="CENTER" layoutX="495.0" layoutY="273.0" prefHeight="40.0" prefWidth="189.0"
                style="-fx-background-color: #bbbbbb;" text="Czas gry" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="18.0"/>
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="429.0" layoutY="452.0" prefHeight="40.0" prefWidth="189.0"
+        <Label alignment="CENTER" layoutX="495.0" layoutY="564.0" prefHeight="40.0" prefWidth="189.0"
                style="-fx-background-color: #bbbbbb;" text="Utworzonych map" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="18.0"/>
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="429.0" layoutY="401.0" prefHeight="40.0" prefWidth="189.0"
+        <Label alignment="CENTER" layoutX="495.0" layoutY="504.0" prefHeight="40.0" prefWidth="189.0"
                style="-fx-background-color: #bbbbbb;" text="Usuniętych map" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="18.0"/>
             </font>
         </Label>
-        <Label fx:id="stepsLabel" alignment="CENTER" layoutX="663.0" layoutY="233.0" prefHeight="40.0" prefWidth="189.0"
+        <Label fx:id="stepsLabel" alignment="CENTER" layoutX="773.0" layoutY="330.0" prefHeight="40.0" prefWidth="189.0"
                style="-fx-background-color: #bbbbbb;" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="24.0"/>
             </font>
         </Label>
-        <Label fx:id="winLevelLabel" alignment="CENTER" layoutX="663.0" layoutY="293.0" prefHeight="40.0"
+        <Label fx:id="winLevelLabel" alignment="CENTER" layoutX="773.0" layoutY="390.0" prefHeight="40.0"
                prefWidth="189.0" style="-fx-background-color: #bbbbbb;" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="24.0"/>
             </font>
         </Label>
-        <Label fx:id="crateMoveLabel" alignment="CENTER" layoutX="663.0" layoutY="347.0" prefHeight="40.0"
+        <Label fx:id="crateMoveLabel" alignment="CENTER" layoutX="773.0" layoutY="446.0" prefHeight="40.0"
                prefWidth="189.0" style="-fx-background-color: #bbbbbb;" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="24.0"/>
             </font>
         </Label>
-        <Label fx:id="deletedMapsLabel" alignment="CENTER" layoutX="663.0" layoutY="401.0" prefHeight="40.0"
+        <Label fx:id="deletedMapsLabel" alignment="CENTER" layoutX="773.0" layoutY="504.0" prefHeight="40.0"
                prefWidth="189.0" style="-fx-background-color: #bbbbbb;" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="24.0"/>
             </font>
         </Label>
-        <Label fx:id="createdMapsLabel" alignment="CENTER" layoutX="663.0" layoutY="452.0" prefHeight="40.0"
+        <Label fx:id="createdMapsLabel" alignment="CENTER" layoutX="773.0" layoutY="564.0" prefHeight="40.0"
                prefWidth="189.0" style="-fx-background-color: #bbbbbb;" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="24.0"/>
             </font>
         </Label>
-        <Button layoutX="663.0" layoutY="612.0" mnemonicParsing="false" onAction="#resetRanking" prefHeight="79.0"
+        <Button layoutX="424.0" layoutY="691.0" mnemonicParsing="false" onAction="#resetStatistic" prefHeight="79.0"
                 prefWidth="260.0" style="-fx-background-color: #bbbbbb;" text="Resetuj statystyki"
                 textAlignment="CENTER" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="27.0"/>
+            </font>
+        </Button>
+        <Button layoutX="773.0" layoutY="273.0" mnemonicParsing="false" onAction="#showPlayTime" prefHeight="40.0"
+                prefWidth="189.0" style="-fx-background-color: #bbbbbb;" text="Pokaż czas gry" textAlignment="CENTER"
+                textFill="#a10000">
+            <font>
+                <Font name="System Bold Italic" size="16.0"/>
             </font>
         </Button>
     </children>

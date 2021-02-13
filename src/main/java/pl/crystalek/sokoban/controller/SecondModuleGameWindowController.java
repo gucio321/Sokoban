@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.io.view.ViewLoader;
 
 public final class SecondModuleGameWindowController implements Controller {
     private MainLoader mainLoader;
@@ -17,12 +18,15 @@ public final class SecondModuleGameWindowController implements Controller {
 
     @FXML
     void back(final ActionEvent event) {
-        mainLoader.getStage(DoYouWantToController.class).show(); //i tam wylaczenie okna selectLevel lub chooseByDifficulty
+        final ViewLoader viewLoader = mainLoader.getViewLoader();
+//        viewLoader.getStage(ConfirmationPane.class).show(); //i tam wlaczanie okna selectLevel lub chooseByDifficulty
+        viewLoader.getMainStage().setWidth(1280);
+        viewLoader.getMainStage().setHeight(720);
     }
 
     @FXML
     void saveGame(final ActionEvent event) {
-        mainLoader.getStage(ChangeNameController.class).show();
+        //no i tu jakieś cuda xD
     }
 
 }

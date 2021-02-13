@@ -2,6 +2,7 @@ package pl.crystalek.sokoban.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import pl.crystalek.sokoban.controller.type.ExecutionSource;
 import pl.crystalek.sokoban.io.MainLoader;
 
 public final class SelectLevelController implements Controller {
@@ -14,13 +15,12 @@ public final class SelectLevelController implements Controller {
 
     @FXML
     void back(final ActionEvent event) {
-        mainLoader.getStage(GameModeChoiceController.class).show();
-        mainLoader.getStage(getClass()).close();
+        mainLoader.getViewLoader().setWindow(GameModeChoiceController.class);
     }
 
     @FXML
     void showGameSaveList(final ActionEvent event) {
-        mainLoader.getStage(LoadController.class).show();
-        mainLoader.getStage(getClass()).close();
+        mainLoader.getController(LoadController.class).setExecutionSource(ExecutionSource.SELECTLEVEL);
+        mainLoader.getViewLoader().setWindow(LoadController.class);
     }
 }

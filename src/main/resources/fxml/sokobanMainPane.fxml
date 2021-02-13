@@ -5,30 +5,30 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
-            prefHeight="720.0" prefWidth="1280.0"
-            style="-fx-background-image: url('/img/background.png')" xmlns="http://javafx.com/javafx/8.0.202-ea"
+            prefHeight="820.0" prefWidth="1457.0"
+            style="-fx-background-image: url('/img/gui/background.png')" xmlns="http://javafx.com/javafx/8.0.202-ea"
             fx:controller="pl.crystalek.sokoban.controller.SokobanMainController">
 
     <children>
-        <Button layoutX="523.0" layoutY="267.0" mnemonicParsing="false" onAction="#start" prefHeight="79.0"
+        <Button layoutX="612.0" layoutY="323.0" mnemonicParsing="false" onAction="#start" prefHeight="79.0"
                 prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Start" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="35.0"/>
             </font>
         </Button>
-        <Button layoutX="523.0" layoutY="619.0" mnemonicParsing="false" onAction="#exit" prefHeight="79.0"
+        <Button layoutX="612.0" layoutY="708.0" mnemonicParsing="false" onAction="#exit" prefHeight="79.0"
                 prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Wyjdź" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="35.0"/>
             </font>
         </Button>
-        <Button layoutX="523.0" layoutY="458.0" mnemonicParsing="false" onAction="#showStatistic" prefHeight="79.0"
+        <Button layoutX="612.0" layoutY="542.0" mnemonicParsing="false" onAction="#showStatistic" prefHeight="79.0"
                 prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Statystyki" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="35.0"/>
             </font>
         </Button>
-        <Button layoutX="523.0" layoutY="360.0" mnemonicParsing="false" onAction="#settings" prefHeight="79.0"
+        <Button layoutX="612.0" layoutY="434.0" mnemonicParsing="false" onAction="#settings" prefHeight="79.0"
                 prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Ustawienia" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="35.0"/>

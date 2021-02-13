@@ -20,11 +20,11 @@ final class FileLoader {
         this.fileManager = fileManager;
     }
 
-    void loadFiles() throws LoadResourcesException, LoadUserFileException, FileNotFoundException {
+    void loadFiles() throws LoadResourcesException, LoadUserFileException {
         loadResources();
         fileManager.setSettings(loadUserFile(fileManager.getSettingsFile()).map(object -> (Settings) object).orElseGet(Settings::new));
         fileManager.setStatistic(loadUserFile(fileManager.getStatisticFile()).map(object -> (Statistic) object).orElseGet(Statistic::new));
-        loadUserMaps();
+        loadUserMapFiles();
     }
 
     private void loadResources() throws LoadResourcesException {
@@ -37,7 +37,8 @@ final class FileLoader {
         ) {
             final String[] fileNameList = IOUtils.toString(fileNameStream, StandardCharsets.UTF_8).split("\r\n");
             for (final String fileName : fileNameList) {
-                final String fileNameWithoutExtension = FilenameUtils.removeExtension(fileName);
+                final String[] fileNameSplit = FilenameUtils.removeExtension(fileName).split("/");
+                final String fileNameWithoutExtension = fileNameSplit[fileNameSplit.length - 1];
 
                 switch (FilenameUtils.getExtension(fileName).toLowerCase()) {
                     case "txt":
@@ -72,12 +73,12 @@ final class FileLoader {
         }
     }
 
-    private void loadUserMaps() throws FileNotFoundException {
+    private void loadUserMapFiles() {
         final File userMapDirectory = fileManager.getUserMapDirectory();
-        final Map<String, InputStream> userMapFileList = fileManager.getUserMapFileList();
+        final Map<String, File> userMapFileList = fileManager.getUserMapFileList();
 
         for (final File fileMap : userMapDirectory.listFiles()) {
-            userMapFileList.put(FilenameUtils.removeExtension(fileMap.getName()), new FileInputStream(fileMap));
+            userMapFileList.put(FilenameUtils.removeExtension(fileMap.getName()), fileMap);
         }
     }
 }

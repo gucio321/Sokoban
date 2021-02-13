@@ -14,25 +14,24 @@ public final class SokobanMainController implements Controller {
 
     @FXML
     void exit(final ActionEvent event) {
-        mainLoader.getStage(getClass()).close();
+        mainLoader.getViewLoader().getMainStage().close();
     }
 
     @FXML
     void settings(final ActionEvent event) {
-        mainLoader.getStage(GameSettingsController.class).show();
-        mainLoader.getStage(getClass()).close();
+        mainLoader.getController(GameSettingsController.class).updateSettings();
+        mainLoader.getViewLoader().setWindow(GameSettingsController.class);
     }
 
     @FXML
     void showStatistic(final ActionEvent event) {
-        mainLoader.getStage(ShowStatisticController.class).show();
-        mainLoader.getStage(getClass()).close();
+        mainLoader.getController(ShowStatisticController.class).showStatistic();
+        mainLoader.getViewLoader().setWindow(ShowStatisticController.class);
     }
 
     @FXML
     void start(final ActionEvent event) {
-        mainLoader.getStage(GameModuleChoiceController.class).show();
-        mainLoader.getStage(getClass()).close();
+        mainLoader.getViewLoader().setWindow(GameModuleChoiceController.class);
     }
 
 }

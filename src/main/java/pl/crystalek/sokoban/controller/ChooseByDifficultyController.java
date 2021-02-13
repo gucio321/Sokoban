@@ -4,6 +4,7 @@ package pl.crystalek.sokoban.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.io.view.ViewLoader;
 
 public final class ChooseByDifficultyController implements Controller {
     private MainLoader mainLoader;
@@ -15,14 +16,14 @@ public final class ChooseByDifficultyController implements Controller {
 
     @FXML
     void back(final ActionEvent event) {
-        mainLoader.getStage(GameModeChoiceController.class).show();
-        mainLoader.getStage(getClass()).close();
+        mainLoader.getViewLoader().setWindow(GameModeChoiceController.class);
+
     }
 
     @FXML
     void start(final ActionEvent event) {
-        mainLoader.getStage(SecondModuleGameWindowController.class).show();
-        mainLoader.getStage(getClass()).close();
+        final ViewLoader viewLoader = mainLoader.getViewLoader();
+        viewLoader.setWindow(SecondModuleGameWindowController.class);
     }
 
     @FXML

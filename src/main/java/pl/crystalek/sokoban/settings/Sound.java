@@ -4,13 +4,13 @@ public enum Sound {
     ENABLE("Włączony"),
     DISABLE("Wyłączony");
 
-    private final String text;
+    private final String name;
 
-    Sound(final String text) {
-        this.text = text;
+    Sound(final String name) {
+        this.name = name;
     }
 
-    public String getText() {
-        return text;
+    public String getName() {
+        return name;
     }
 }
