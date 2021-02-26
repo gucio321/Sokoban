@@ -17,7 +17,7 @@ import java.io.IOException;
 public final class Sokoban extends Application {
     private MainLoader mainLoader;
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args) {//USTAWIENIA: WASD -> WSAD
         launch(args);
     }
 
@@ -31,7 +31,9 @@ public final class Sokoban extends Application {
             exception.printStackTrace();
             return;
         }
-        stage.setScene(new Scene(viewLoader.getPane(SokobanMainController.class)));
+        final Scene scene = new Scene(viewLoader.getPane(SokobanMainController.class));
+        scene.setOnKeyPressed(new CloseGameListener(mainLoader));
+        stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
         this.mainLoader = mainLoader;
@@ -41,6 +43,7 @@ public final class Sokoban extends Application {
     public void stop() {
         try {
             mainLoader.getFileManager().save();
+            System.out.println("Zapisywanie zostalo zakonczone");
         } catch (final SaveUserFileException exception) {
             exception.printStackTrace();
         }

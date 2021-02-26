@@ -7,12 +7,12 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="400.0" prefWidth="711.0"
-            style="-fx-background-image: url('/img/gui/backgroundDialog.png')"
+            style="-fx-background-image: url('/img/gui/background/backgroundDialog.png')" stylesheets="/css/button.css"
             xmlns="http://javafx.com/javafx/8.0.202-ea"
-            fx:controller="pl.crystalek.sokoban.controller.ConfirmationPane">
+            fx:controller="pl.crystalek.sokoban.controller.ConfirmationController">
     <children>
         <Button layoutX="239.0" layoutY="121.0" mnemonicParsing="false" onAction="#yes" prefHeight="79.0"
-                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Tak" textFill="#a10000">
+                prefWidth="234.0" text="Tak" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="31.0"/>
             </font>
@@ -24,7 +24,7 @@
             </font>
         </Label>
         <Button layoutX="239.0" layoutY="227.0" mnemonicParsing="false" onAction="#no" prefHeight="79.0"
-                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Nie" textFill="#a10000">
+                prefWidth="234.0" text="Nie" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="31.0"/>
             </font>

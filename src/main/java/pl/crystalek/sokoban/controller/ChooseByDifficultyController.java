@@ -4,7 +4,6 @@ package pl.crystalek.sokoban.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import pl.crystalek.sokoban.io.MainLoader;
-import pl.crystalek.sokoban.io.view.ViewLoader;
 
 public final class ChooseByDifficultyController implements Controller {
     private MainLoader mainLoader;
@@ -15,29 +14,29 @@ public final class ChooseByDifficultyController implements Controller {
     }
 
     @FXML
-    void back(final ActionEvent event) {
+    private void back(final ActionEvent event) {
         mainLoader.getViewLoader().setWindow(GameModeChoiceController.class);
-
+        //wlaczanie przycisku od zapisywania
     }
 
     @FXML
-    void start(final ActionEvent event) {
-        final ViewLoader viewLoader = mainLoader.getViewLoader();
-        viewLoader.setWindow(SecondModuleGameWindowController.class);
+    private void start(final ActionEvent event) {
+        mainLoader.getViewLoader().setWindow(GameController.class);
+        //wylaczanie przycisku od zapisywania
     }
 
     @FXML
-    void easyLevel(final ActionEvent event) {
+    private void easyLevel(final ActionEvent event) {
         //ustawianie poziomu trudności
     }
 
     @FXML
-    void hardLevel(final ActionEvent event) {
+    private void hardLevel(final ActionEvent event) {
         //ustawianie poziomu trudności
     }
 
     @FXML
-    void normalLevel(final ActionEvent event) {
+    private void normalLevel(final ActionEvent event) {
         //ustawianie poziomu trudności
     }
 

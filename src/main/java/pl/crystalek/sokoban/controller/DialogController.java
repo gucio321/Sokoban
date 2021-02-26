@@ -40,7 +40,7 @@ public final class DialogController implements Controller {
         return infoImageView;
     }
 
-    void showDialogWindow(final String imageName, final String title, final String subtitle) {
+    public void showDialogWindow(final String imageName, final String title, final String subtitle) {
         infoImageView.setImage(mainLoader.getImageList().get(imageName));
         headerTextLabel.setText(title);
         contentTextLabel.setText(subtitle);

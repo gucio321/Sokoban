@@ -5,7 +5,7 @@ public final class TimeUtil {
     private TimeUtil() {
     }
 
-    public static String getDateInString(long timeMilis, final String delimiter) {
+    public static String getDateInString(long timeMilis, final String delimiter, final boolean shortForm) {
         if (timeMilis < 1000) {
             return "0";
         }
@@ -14,7 +14,7 @@ public final class TimeUtil {
         for (final Time time : Time.values()) {
             final long divisionTime = timeMilis / time.getMillis();
 
-            final String form = time.getForm(divisionTime);
+            final String form = time.getForm(divisionTime, shortForm);
             if (!form.isEmpty()) {
                 result.append(delimiter).append(divisionTime).append(" ").append(form);
                 timeMilis -= divisionTime * time.getMillis();

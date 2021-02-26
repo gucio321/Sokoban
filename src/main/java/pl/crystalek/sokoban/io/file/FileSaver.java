@@ -1,20 +1,23 @@
 package pl.crystalek.sokoban.io.file;
 
 import pl.crystalek.sokoban.exception.SaveUserFileException;
-import pl.crystalek.sokoban.map.model.UserMap;
+import pl.crystalek.sokoban.game.progress.Progress;
+import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.map.UserMap;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.List;
 import java.util.Map;
 
 public final class FileSaver {
     private final FileManager fileManager;
+    private final MainLoader mainLoader;
 
-    FileSaver(final FileManager fileManager) {
+    FileSaver(final FileManager fileManager, final MainLoader mainLoader) {
         this.fileManager = fileManager;
+        this.mainLoader = mainLoader;
     }
 
     void saveFiles() throws SaveUserFileException {
@@ -23,9 +26,9 @@ public final class FileSaver {
             programDirectory.mkdir();
         }
 
-        saveFile(fileManager.getSettingsFile(), fileManager.getSettings());
-        saveFile(fileManager.getStatisticFile(), fileManager.getStatistic());
-        saveUserMaps();
+        saveFile(fileManager.getSettingsFile(), mainLoader.getSettings());
+        saveFile(fileManager.getRankingFile(), mainLoader.getRankingManager());
+        saveUserFiles();
     }
 
     private void saveFile(final File fileToSave, final Object objectToSave) throws SaveUserFileException {
@@ -39,27 +42,30 @@ public final class FileSaver {
         }
     }
 
-    private void saveUserMaps() throws SaveUserFileException {
-        final List<UserMap> userMapList = fileManager.getMainLoader().getUserMapManager().getUserMapList();
+    private void saveUserFiles() throws SaveUserFileException {
+        for (final UserMap userMap : fileManager.getMainLoader().getMapManager().getUserMapList()) {
+            saveUserFile(userMap, FileSaveType.MAP);
+        }
 
-        for (final UserMap userMap : userMapList) {
-            saveUserMap(userMap);
+        for (final Progress progress : fileManager.getMainLoader().getProgressManager().getSaveList()) {
+            saveUserFile(progress, FileSaveType.PROGRESS);
         }
     }
 
-    public void saveUserMap(final UserMap userMap) throws SaveUserFileException {
-        final Map<String, File> userMapFileList = fileManager.getUserMapFileList();
-        final String mapName = userMap.getMapName();
+    public void saveUserFile(final UserMap userMap, final FileSaveType fileSaveType) throws SaveUserFileException {
+        final String name = userMap.getName();
+        final Map<String, File> userFileList = fileSaveType == FileSaveType.MAP ? fileManager.getUserMapFileList() : fileManager.getUserGameSaveList();
+        final File directory = fileSaveType == FileSaveType.MAP ? fileManager.getUserMapDirectory() : fileManager.getProgressDirectory();
 
-        userMapFileList.putIfAbsent(mapName, new File(fileManager.getUserMapDirectory(), mapName + ".sokoban"));
+        userFileList.putIfAbsent(name, new File(directory, name + ".sokoban"));
 
         try (
-                final FileOutputStream fileOutputStream = new FileOutputStream(userMapFileList.get(mapName));
+                final FileOutputStream fileOutputStream = new FileOutputStream(userFileList.get(name));
                 final ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)
         ) {
             objectOutputStream.writeObject(userMap);
         } catch (final IOException exception) {
-            throw new SaveUserFileException("Wystapił błąd podczas zapisywania mapy: " + mapName, exception);
+            throw new SaveUserFileException("Wystapił błąd podczas zapisywania mapy: " + name, exception);
         }
     }
 }

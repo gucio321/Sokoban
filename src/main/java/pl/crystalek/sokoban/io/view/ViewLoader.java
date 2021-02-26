@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import pl.crystalek.sokoban.controller.ConfirmationPane;
+import pl.crystalek.sokoban.controller.ConfirmationController;
 import pl.crystalek.sokoban.controller.Controller;
 import pl.crystalek.sokoban.controller.DialogController;
 
@@ -22,14 +22,14 @@ public final class ViewLoader {
         this.mainStage = mainStage;
     }
 
-    public void viewLoad(final List<FXMLLoader> fxmlList) {
+    public void load(final List<FXMLLoader> fxmlList) {
         this.paneMap = new PaneLoader().getPaneList(fxmlList);
         setStageList();
     }
 
     private void setStageList() {
 
-        for (final Class controllerClass : new Class[]{ConfirmationPane.class, DialogController.class}) {
+        for (final Class controllerClass : new Class[]{ConfirmationController.class, DialogController.class}) {
             final Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(new Scene(paneMap.get(controllerClass)));

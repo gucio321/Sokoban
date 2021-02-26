@@ -6,23 +6,24 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="820.0" prefWidth="1457.0"
-            style="-fx-background-image: url('/img/gui/background.png')" xmlns="http://javafx.com/javafx/8.0.202-ea"
+            stylesheets="/css/button.css" style="-fx-background-image: url('/img/gui/background/background.png')"
+            xmlns="http://javafx.com/javafx/8.0.202-ea"
             fx:controller="pl.crystalek.sokoban.controller.GameModuleChoiceController">
     <children>
         <Button layoutX="612.0" layoutY="474.0" mnemonicParsing="false" onAction="#createLevel" prefHeight="79.0"
-                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Tworzenie poziomów" textFill="#a10000">
+                prefWidth="234.0" text="Tworzenie poziomów" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="20.0"/>
             </font>
         </Button>
         <Button layoutX="612.0" layoutY="645.0" mnemonicParsing="false" onAction="#back" prefHeight="79.0"
-                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Powrót" textFill="#a10000">
+                prefWidth="234.0" text="Powrót" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="35.0"/>
             </font>
         </Button>
         <Button layoutX="612.0" layoutY="371.0" mnemonicParsing="false" onAction="#chooseGameMode" prefHeight="79.0"
-                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Wybierz tryb gry" textFill="#a10000">
+                prefWidth="234.0" text="Wybierz tryb gry" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="24.0"/>
             </font>

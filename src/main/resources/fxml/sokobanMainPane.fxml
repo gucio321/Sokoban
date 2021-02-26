@@ -6,30 +6,31 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="820.0" prefWidth="1457.0"
-            style="-fx-background-image: url('/img/gui/background.png')" xmlns="http://javafx.com/javafx/8.0.202-ea"
+            style="-fx-background-image: url('/img/gui/background/background.png')" stylesheets="/css/button.css"
+            xmlns="http://javafx.com/javafx/8.0.202-ea"
             fx:controller="pl.crystalek.sokoban.controller.SokobanMainController">
 
     <children>
-        <Button layoutX="612.0" layoutY="323.0" mnemonicParsing="false" onAction="#start" prefHeight="79.0"
-                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Start" textFill="#a10000">
-            <font>
-                <Font name="System Bold Italic" size="35.0"/>
-            </font>
-        </Button>
         <Button layoutX="612.0" layoutY="708.0" mnemonicParsing="false" onAction="#exit" prefHeight="79.0"
-                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Wyjdź" textFill="#a10000">
+                prefWidth="234.0" text="Wyjdź" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="35.0"/>
             </font>
         </Button>
-        <Button layoutX="612.0" layoutY="542.0" mnemonicParsing="false" onAction="#showStatistic" prefHeight="79.0"
-                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Statystyki" textFill="#a10000">
+        <Button layoutX="612.0" layoutY="542.0" mnemonicParsing="false" onAction="#showRanking" prefHeight="79.0"
+                prefWidth="234.0" text="Ranking" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="35.0"/>
             </font>
         </Button>
         <Button layoutX="612.0" layoutY="434.0" mnemonicParsing="false" onAction="#settings" prefHeight="79.0"
-                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Ustawienia" textFill="#a10000">
+                prefWidth="234.0" text="Ustawienia" textFill="WHITE">
+            <font>
+                <Font name="System Bold Italic" size="35.0"/>
+            </font>
+        </Button>
+        <Button layoutX="612.0" layoutY="326.0" mnemonicParsing="false" onAction="#start" prefHeight="79.0"
+                prefWidth="234.0" text="Start" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="35.0"/>
             </font>

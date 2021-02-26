@@ -3,8 +3,9 @@ package pl.crystalek.sokoban.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import pl.crystalek.sokoban.controller.editor.MapEditorController;
+import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.io.MainLoader;
-import pl.crystalek.sokoban.map.MapEditor;
 
 public final class GameModuleChoiceController implements Controller {
     private MainLoader mainLoader;
@@ -15,12 +16,12 @@ public final class GameModuleChoiceController implements Controller {
     }
 
     @FXML
-    void back(final ActionEvent event) {
+    private void back(final ActionEvent event) {
         mainLoader.getViewLoader().setWindow(SokobanMainController.class);
     }
 
     @FXML
-    void createLevel(final ActionEvent event) {
+    private void createLevel(final ActionEvent event) {
         final MapEditor mapEditor = new MapEditor(mainLoader);
         mainLoader.getController(MapEditorController.class).setMapEditor(mapEditor);
         mapEditor.openCreator();
@@ -28,7 +29,7 @@ public final class GameModuleChoiceController implements Controller {
     }
 
     @FXML
-    void chooseGameMode(final ActionEvent event) {
+    private void chooseGameMode(final ActionEvent event) {
         mainLoader.getViewLoader().setWindow(GameModeChoiceController.class);
     }
 

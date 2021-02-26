@@ -1,48 +1,61 @@
 package pl.crystalek.sokoban.io;
 
 import pl.crystalek.sokoban.exception.LoadUserFileException;
-import pl.crystalek.sokoban.map.UserMapManager;
-import pl.crystalek.sokoban.map.model.UserMap;
+import pl.crystalek.sokoban.io.file.FileManager;
+import pl.crystalek.sokoban.map.DefaultMap;
+import pl.crystalek.sokoban.map.MapManager;
+import pl.crystalek.sokoban.map.UserMap;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 final class MapLoader {
+    private final FileManager fileManager;
 
-    Map<String, List<String>> getMapsInString(final Map<String, InputStream> mapFileList) throws IOException {
-        final Map<String, List<String>> resultMap = new HashMap<>();
+    MapLoader(final FileManager fileManager) {
+        this.fileManager = fileManager;
+    }
 
-        for (final Map.Entry<String, InputStream> entry : mapFileList.entrySet()) {
+    private MapManager getDefaultMap() throws LoadUserFileException {
+        final MapManager mapManager = new MapManager();
+
+        for (final java.util.Map.Entry<String, InputStream> entry : fileManager.getMapFileList().entrySet()) {
             try (
                     final InputStream inputStream = entry.getValue();
                     final InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                     final BufferedReader bufferedReader = new BufferedReader(inputStreamReader)
             ) {
-                final List<String> mapLines = bufferedReader.lines().collect(Collectors.toList());
-                resultMap.put(entry.getKey(), mapLines);
+                final List<String> bufferedReaderLines = bufferedReader.lines().collect(Collectors.toList());
+                mapManager.addMap(new DefaultMap(
+                        entry.getKey(),
+                        Integer.parseInt(bufferedReaderLines.get(0)),
+                        bufferedReaderLines.subList(4, bufferedReaderLines.size()),
+                        Integer.parseInt(bufferedReaderLines.get(1)),
+                        Integer.parseInt(bufferedReaderLines.get(3)),
+                        Integer.parseInt(bufferedReaderLines.get(2)) * 60));
+            } catch (final IOException exception) {
+                throw new LoadUserFileException("Wystapił błąd podczas ładowania mapy: " + entry.getKey(), exception);
             }
         }
-        return resultMap;
+        return mapManager;
     }
 
-    UserMapManager getUserMaps(final Map<String, File> mapFileList) throws LoadUserFileException {
-        final UserMapManager userMapManager = new UserMapManager();
+    MapManager getMaps() throws LoadUserFileException {
+        final MapManager mapManager = getDefaultMap();
 
-        for (final Map.Entry<String, File> entry : mapFileList.entrySet()) {
+        for (final java.util.Map.Entry<String, File> entry : fileManager.getUserMapFileList().entrySet()) {
             try (
                     final FileInputStream fileInputStream = new FileInputStream(entry.getValue());
                     final ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)
             ) {
                 final UserMap userMap = (UserMap) objectInputStream.readObject();
-                userMapManager.addMap(userMap);
+                mapManager.addMap(userMap);
             } catch (final IOException | ClassNotFoundException exception) {
                 throw new LoadUserFileException("Wystapił błąd podczas ładowania mapy: " + entry.getKey(), exception);
             }
         }
-        return userMapManager;
+        return mapManager;
 
     }
 }

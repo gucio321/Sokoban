@@ -6,12 +6,12 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="820.0" prefWidth="1457.0"
-            style="-fx-background-image: url('/img/gui/background.png')" xmlns="http://javafx.com/javafx/8.0.202-ea"
+            style="-fx-background-image: url('/img/gui/background/background.png')" stylesheets="/css/button.css"
+            xmlns="http://javafx.com/javafx/8.0.202-ea"
             fx:controller="pl.crystalek.sokoban.controller.ShowStatisticController">
     <children>
         <Button layoutX="773.0" layoutY="691.0" mnemonicParsing="false" onAction="#back" prefHeight="79.0"
-                prefWidth="260.0" style="-fx-background-color: #bbbbbb;" text="Powrót" textAlignment="CENTER"
-                textFill="#a10000">
+                prefWidth="260.0" text="Powrót" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="30.0"/>
             </font>
@@ -41,13 +41,13 @@
             </font>
         </Label>
         <Label alignment="CENTER" layoutX="495.0" layoutY="564.0" prefHeight="40.0" prefWidth="189.0"
-               style="-fx-background-color: #bbbbbb;" text="Utworzonych map" textFill="#a10000">
+               style="-fx-background-color: #bbbbbb;" text="Utworzonych defaultMap" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="18.0"/>
             </font>
         </Label>
         <Label alignment="CENTER" layoutX="495.0" layoutY="504.0" prefHeight="40.0" prefWidth="189.0"
-               style="-fx-background-color: #bbbbbb;" text="Usuniętych map" textFill="#a10000">
+               style="-fx-background-color: #bbbbbb;" text="Usuniętych defaultMap" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="18.0"/>
             </font>
@@ -83,15 +83,13 @@
             </font>
         </Label>
         <Button layoutX="424.0" layoutY="691.0" mnemonicParsing="false" onAction="#resetStatistic" prefHeight="79.0"
-                prefWidth="260.0" style="-fx-background-color: #bbbbbb;" text="Resetuj statystyki"
-                textAlignment="CENTER" textFill="#a10000">
+                prefWidth="260.0" text="Resetuj statystyki" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="27.0"/>
             </font>
         </Button>
         <Button layoutX="773.0" layoutY="273.0" mnemonicParsing="false" onAction="#showPlayTime" prefHeight="40.0"
-                prefWidth="189.0" style="-fx-background-color: #bbbbbb;" text="Pokaż czas gry" textAlignment="CENTER"
-                textFill="#a10000">
+                prefWidth="189.0" text="Pokaż czas gry" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="16.0"/>
             </font>

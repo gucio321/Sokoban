@@ -4,27 +4,32 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import pl.crystalek.sokoban.exception.LoadResourcesException;
 import pl.crystalek.sokoban.exception.LoadUserFileException;
+import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.ranking.RankingManager;
 import pl.crystalek.sokoban.settings.Settings;
-import pl.crystalek.sokoban.statistic.Statistic;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 final class FileLoader {
     private final FileManager fileManager;
+    private final MainLoader mainLoader;
 
-    FileLoader(final FileManager fileManager) {
+    FileLoader(final FileManager fileManager, final MainLoader mainLoader) {
         this.fileManager = fileManager;
+        this.mainLoader = mainLoader;
     }
 
     void loadFiles() throws LoadResourcesException, LoadUserFileException {
         loadResources();
-        fileManager.setSettings(loadUserFile(fileManager.getSettingsFile()).map(object -> (Settings) object).orElseGet(Settings::new));
-        fileManager.setStatistic(loadUserFile(fileManager.getStatisticFile()).map(object -> (Statistic) object).orElseGet(Statistic::new));
-        loadUserMapFiles();
+        mainLoader.setSettings(loadUserFile(fileManager.getSettingsFile()).map(object -> (Settings) object).orElseGet(Settings::new));
+        mainLoader.setRankingManager(loadUserFile(fileManager.getRankingFile()).map(object -> (RankingManager) object).orElseGet(RankingManager::new));
+        fileManager.setUserMapFileList(loadUserFiles(fileManager.getUserMapDirectory()));
+        fileManager.setUserGameSaveList(loadUserFiles(fileManager.getProgressDirectory()));
     }
 
     private void loadResources() throws LoadResourcesException {
@@ -64,8 +69,7 @@ final class FileLoader {
                 final ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)
         ) {
             final Object readObject = objectInputStream.readObject();
-            return readObject instanceof Statistic || readObject instanceof Settings ? Optional.of(readObject) : Optional.empty();
-
+            return readObject instanceof Settings || readObject instanceof RankingManager ? Optional.of(readObject) : Optional.empty();
         } catch (final EOFException exception) {
             return Optional.empty();
         } catch (final IOException | ClassNotFoundException exception) {
@@ -73,12 +77,13 @@ final class FileLoader {
         }
     }
 
-    private void loadUserMapFiles() {
-        final File userMapDirectory = fileManager.getUserMapDirectory();
-        final Map<String, File> userMapFileList = fileManager.getUserMapFileList();
+    private Map<String, File> loadUserFiles(final File directory) {
+        final Map<String, File> resultMap = new HashMap<>();
 
-        for (final File fileMap : userMapDirectory.listFiles()) {
-            userMapFileList.put(FilenameUtils.removeExtension(fileMap.getName()), fileMap);
+        for (final File file : directory.listFiles()) {
+            resultMap.put(FilenameUtils.removeExtension(file.getName()), file);
         }
+
+        return resultMap;
     }
 }

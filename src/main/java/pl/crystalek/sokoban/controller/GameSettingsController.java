@@ -46,27 +46,27 @@ public final class GameSettingsController implements Controller {
 
     @FXML
     private void control(final ActionEvent event) {
-        final Settings settings = mainLoader.getFileManager().getSettings();
+        final Settings settings = mainLoader.getSettings();
         settings.setControlType(settings.getControlType() == Control.WASD ? Control.ARROWS : Control.WASD);
         controlButton.setText(settings.getControlType().getName());
     }
 
     @FXML
     private void soundButton(final ActionEvent event) {
-        final Settings settings = mainLoader.getFileManager().getSettings();
+        final Settings settings = mainLoader.getSettings();
         settings.setSound(settings.getSound() == Sound.ENABLE ? Sound.DISABLE : Sound.ENABLE);
         soundButton.setText(settings.getSound().getName());
     }
 
     @FXML
     private void texture(final ActionEvent event) {
-        final Settings settings = mainLoader.getFileManager().getSettings();
+        final Settings settings = mainLoader.getSettings();
         settings.setTextureType(settings.getTextureType() == Texture.SET1 ? Texture.SET2 : Texture.SET1);
         textureButton.setText(settings.getTextureType().getName());
     }
 
     void updateSettings() {
-        final Settings settings = mainLoader.getFileManager().getSettings();
+        final Settings settings = mainLoader.getSettings();
         controlButton.setText(settings.getControlType().getName());
         soundButton.setText(settings.getSound().getName());
         textureButton.setText(settings.getTextureType().getName());

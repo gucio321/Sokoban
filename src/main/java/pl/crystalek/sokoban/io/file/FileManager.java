@@ -5,8 +5,6 @@ import pl.crystalek.sokoban.exception.LoadResourcesException;
 import pl.crystalek.sokoban.exception.LoadUserFileException;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.io.MainLoader;
-import pl.crystalek.sokoban.settings.Settings;
-import pl.crystalek.sokoban.statistic.Statistic;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
@@ -20,20 +18,22 @@ import java.util.Map;
 public final class FileManager {
     private final Map<String, InputStream> imageFileList = new HashMap<>();
     private final Map<String, InputStream> mapFileList = new HashMap<>();
-    private final Map<String, File> userMapFileList = new HashMap<>();
     private final List<InputStream> fxmlFileList = new ArrayList<>();
-    private final FileLoader fileLoader = new FileLoader(this);
-    private final FileSaver fileSaver = new FileSaver(this);
+    private final FileLoader fileLoader;
+    private final FileSaver fileSaver;
     private final MainLoader mainLoader;
+    private Map<String, File> userMapFileList;
+    private Map<String, File> userGameSaveList;
     private File programDirectory;
     private File userMapDirectory;
-    private File statisticFile;
+    private File progressDirectory;
     private File settingsFile;
-    private Statistic statistic;
-    private Settings settings;
+    private File rankingFile;
 
     public FileManager(final MainLoader mainLoader) {
         this.mainLoader = mainLoader;
+        this.fileLoader = new FileLoader(this, mainLoader);
+        this.fileSaver = new FileSaver(this, mainLoader);
     }
 
     public void load() throws LoadResourcesException, LoadUserFileException, CreateFileException {
@@ -49,6 +49,7 @@ public final class FileManager {
         try {
             final File programDirectory = new File(FileSystemView.getFileSystemView().getDefaultDirectory(), "Sokoban");
             final File userMapDirectory = new File(programDirectory, "your maps");
+            final File progressDirectory = new File(programDirectory, "game save");
 
             if (!programDirectory.exists()) {
                 programDirectory.mkdir();
@@ -58,24 +59,29 @@ public final class FileManager {
                 userMapDirectory.mkdir();
             }
 
-            final File statisticFile = new File(programDirectory, "statistics.sokoban");
-            final File settingsFile = new File(programDirectory, "settings.sokoban");
-
-
-            if (!statisticFile.exists()) {
-                statisticFile.createNewFile();
-                System.out.println("Plik statystyk został utworzony!");
+            if (!progressDirectory.exists()) {
+                progressDirectory.mkdir();
             }
+
+            final File settingsFile = new File(programDirectory, "settings.sokoban");
+            final File rankingFile = new File(programDirectory, "ranking.sokoban");
+
             if (!settingsFile.exists()) {
                 settingsFile.createNewFile();
                 System.out.println("Plik konfiguracyjny został utworzony!");
             }
 
+            if (!rankingFile.exists()) {
+                rankingFile.createNewFile();
+                System.out.println("Plik rankingowy został utworzony!");
+            }
+
 
             this.programDirectory = programDirectory;
             this.userMapDirectory = userMapDirectory;
-            this.statisticFile = statisticFile;
+            this.progressDirectory = progressDirectory;
             this.settingsFile = settingsFile;
+            this.rankingFile = rankingFile;
         } catch (final IOException exception) {
             throw new CreateFileException("Wystapił błąd podczas próby tworzenia plików konfiguracyjnych", exception);
         }
@@ -85,16 +91,16 @@ public final class FileManager {
         return userMapFileList;
     }
 
+    public void setUserMapFileList(final Map<String, File> userMapFileList) {
+        this.userMapFileList = userMapFileList;
+    }
+
     public File getUserMapDirectory() {
         return userMapDirectory;
     }
 
     public File getProgramDirectory() {
         return programDirectory;
-    }
-
-    public File getStatisticFile() {
-        return statisticFile;
     }
 
     public File getSettingsFile() {
@@ -113,27 +119,27 @@ public final class FileManager {
         return fxmlFileList;
     }
 
-    public Statistic getStatistic() {
-        return statistic;
-    }
-
-    public void setStatistic(final Statistic statistic) {
-        this.statistic = statistic;
-    }
-
-    public Settings getSettings() {
-        return settings;
-    }
-
-    public void setSettings(final Settings settings) {
-        this.settings = settings;
-    }
-
     public MainLoader getMainLoader() {
         return mainLoader;
     }
 
     public FileSaver getFileSaver() {
         return fileSaver;
+    }
+
+    public File getProgressDirectory() {
+        return progressDirectory;
+    }
+
+    public Map<String, File> getUserGameSaveList() {
+        return userGameSaveList;
+    }
+
+    public void setUserGameSaveList(final Map<String, File> userGameSaveList) {
+        this.userGameSaveList = userGameSaveList;
+    }
+
+    public File getRankingFile() {
+        return rankingFile;
     }
 }

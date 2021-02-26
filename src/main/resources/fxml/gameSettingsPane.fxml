@@ -6,11 +6,12 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="820.0" prefWidth="1457.0"
-            style="-fx-background-image: url('/img/gui/background.png')" xmlns="http://javafx.com/javafx/8.0.202-ea"
+            style="-fx-background-image: url('/img/gui/background/background.png')" stylesheets="/css/button.css"
+            xmlns="http://javafx.com/javafx/8.0.202-ea"
             fx:controller="pl.crystalek.sokoban.controller.GameSettingsController">
     <children>
         <Button layoutX="612.0" layoutY="714.0" mnemonicParsing="false" onAction="#back" prefHeight="79.0"
-                prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Powrót" textFill="#a10000">
+                prefWidth="234.0" text="Powrót" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="35.0"/>
             </font>
