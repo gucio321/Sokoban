@@ -86,7 +86,7 @@ public final class Game {
             return "Liczba graczy na mapie musi być równa 1!";
         }
 
-        if (progress.getName() == null) {
+        if (progress.getProgressName() == null) {
             if (bombCount != crateCount || bombCount == 0) {
                 return "Ilość skrzyń i bomb musi być równa i różna od zera!";
             }

@@ -1,5 +1,6 @@
 package pl.crystalek.sokoban.game.progress;
 
+import pl.crystalek.sokoban.map.DefaultMap;
 import pl.crystalek.sokoban.map.UserMap;
 import pl.crystalek.sokoban.ranking.Ranking;
 
@@ -7,20 +8,21 @@ public final class Progress extends UserMap {
     private static final long serialVersionUID = 8834273690803183686L;
     private boolean userMap;
     private String[][] stringEditedBlocks;
-    private String mapName;
+    private String progressName;
     private Ranking ranking = new Ranking();
     private int setCrates;
 
-    public Progress(final String[][] stringEditedBlocks) {
+    public Progress(final String[][] stringEditedBlocks, final String mapName, final DefaultMap defaultMap) {
+        super(mapName, defaultMap.getDefaultPointNumber(), defaultMap.getBonus(), defaultMap.getTimeInSeconds());
         this.stringEditedBlocks = stringEditedBlocks;
     }
 
-    public String getMapName() {
-        return mapName;
+    public String getProgressName() {
+        return progressName;
     }
 
-    public void setMapName(final String mapName) {
-        this.mapName = mapName;
+    public void setProgressName(final String progressName) {
+        this.progressName = progressName;
     }
 
     public boolean isUserMap() {

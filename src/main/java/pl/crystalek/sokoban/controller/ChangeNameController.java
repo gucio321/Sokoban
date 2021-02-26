@@ -75,8 +75,8 @@ public final class ChangeNameController implements Controller {
                 final LoadGameController loadGameController = mainLoader.getController(LoadGameController.class);
                 final Game game = loadGameController.getGame();
                 final Progress progress = game.getProgress();
-                progress.setOldName(progress.getName());
-                progress.setName(text);
+                progress.setOldName(progress.getOldName());
+                progress.setProgressName(text);
                 progress.setModificationDate(LocalDateTime.now());
                 mainLoader.getController(GameController.class).save();
                 mainLoader.getViewLoader().setWindow(GameController.class);

@@ -21,7 +21,7 @@ public final class LoadUtil {
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private Button clickedButton;
     private boolean userMapSave;
-    private Object chosenObject;
+    private DefaultMap chosenObject;
 
     public LoadUtil(final MainLoader mainLoader) {
         this.mainLoader = mainLoader;
@@ -39,8 +39,8 @@ public final class LoadUtil {
 
             final String infoLabelText = "Data stworzenia: " + progress.getCreationDate().format(dateTimeFormatter) +
                     "\nData modyfikacji: " + progress.getModificationDate().format(dateTimeFormatter) +
-                    "\nZapisana mapa: " + progress.getMapName();
-            final Button button = getButton(progress.getName(), progress, infoLabelText, loadGameController.getSaveInfoLabel(), loadGameController);
+                    "\nZapisana mapa: " + progress.getName();
+            final Button button = getButton(progress.getProgressName(), progress, infoLabelText, loadGameController.getSaveInfoLabel(), loadGameController);
             children.add(button);
         }
     }
@@ -72,7 +72,7 @@ public final class LoadUtil {
         }
     }
 
-    private Button getButton(final String ButtonName, final Object chosenObject, final String infoLabelText, final Label infoLabel, final Load load) {
+    private Button getButton(final String ButtonName, final DefaultMap chosenObject, final String infoLabelText, final Label infoLabel, final Load load) {
         final Button button = new Button();
         button.setOnMouseEntered(mouseEvent -> {
             infoLabel.setText(infoLabelText);
@@ -86,7 +86,7 @@ public final class LoadUtil {
             this.clickedButton = button;
             this.chosenObject = chosenObject;
             load.getLoadButton().setDisable(false);
-            load.getDeleteButton().setDisable(chosenObject instanceof DefaultMap);
+            load.getDeleteButton().setDisable(!(chosenObject instanceof UserMap));
         });
         button.setMaxWidth(149);
         button.setMaxHeight(27);
@@ -102,7 +102,7 @@ public final class LoadUtil {
         return clickedButton;
     }
 
-    public Object getChosenObject() {
+    public DefaultMap getChosenObject() {
         return chosenObject;
     }
 

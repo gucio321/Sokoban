@@ -66,7 +66,7 @@ public final class GameController implements Controller {
             return;
         }
 
-        if (progress.getName() == null) {
+        if (progress.getProgressName() == null) {
             changeName();
             return;
         }
@@ -86,26 +86,18 @@ public final class GameController implements Controller {
         progress.setMapLines(game.getConvertGridPaneToString().convertGridPaneToString(game.getBoxLocationList()));
         progress.setStringEditedBlocks(game.getConvertImageToStringImage().convertImageToStringImage(game.getDeleteImageList()));
         progress.getRanking().setPlayTime(game.getTimeCounter().getPlayTime() + progress.getRanking().getPlayTime());
+        progress.setChangesToSave(false);
+        final List<Progress> progressList = mainLoader.getProgressManager().getSaveList();
+        final Progress progressCopy = SerializationUtils.clone(progress);
+        final int progressIndex = progressList.indexOf(loadGameController.getProgress());
+
+        if (progressIndex != -1) {
+            progressList.set(progressIndex, progressCopy);
+        } else {
+            progressList.add(progressCopy);
+        }
 
         try {
-            progress.setChangesToSave(false);
-
-            final List<Progress> progressList = mainLoader.getProgressManager().getSaveList();
-            final Progress progressCopy = SerializationUtils.clone(progress);
-
-            boolean elementExists = false;
-            for (int i = 0; i < progressList.size(); i++) {
-                final Progress progress1 = progressList.get(i);
-                if (progress1.getName().equalsIgnoreCase(progressCopy.getName())) {
-                    progressList.set(i, progressCopy);
-                    elementExists = true;
-                    break;
-                }
-            }
-            if (!elementExists) {
-                progressList.add(progressCopy);
-            }
-
             mainLoader.getFileManager().getFileSaver().saveUserFile(progress, FileSaveType.PROGRESS);
             mainLoader.getController(DialogController.class).showDialogWindow("info", "Informacja", "Zapis zostal pomyslnie zapisany!");
         } catch (final SaveUserFileException exception) {
