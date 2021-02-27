@@ -4,10 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.SerializationUtils;
 import pl.crystalek.sokoban.controller.*;
+import pl.crystalek.sokoban.controller.game.GameController;
 import pl.crystalek.sokoban.game.Game;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
@@ -20,9 +20,6 @@ import java.util.List;
 public final class LoadGameController implements Controller, Load {
     private MainLoader mainLoader;
     private LoadUtil loadUtil;
-    private Game game;
-    private ResetMap resetMap;
-    private Progress progress;
     @FXML
     private VBox mapBox;
     @FXML
@@ -59,10 +56,9 @@ public final class LoadGameController implements Controller, Load {
 
     @FXML
     private void loadButton(final ActionEvent event) {
-        this.resetMap = new ResetMap(mainLoader);
-        this.game = new Game(mainLoader);
         final DefaultMap choosenObject = loadUtil.getChosenObject();
         final List<String> mapLines = choosenObject.getMapLines();
+        final Progress progress;
 
         if (choosenObject instanceof Progress) {
             progress = (Progress) choosenObject;
@@ -73,17 +69,19 @@ public final class LoadGameController implements Controller, Load {
             progress.getRanking().setMapName(name);
         }
 
-        final String start = game.loadGame(mainLoader.getController(GameController.class).getMapBox(), mapLines, SerializationUtils.clone(progress));
+        final GameController gameController = mainLoader.getController(GameController.class);
+        final Game game = new Game(mainLoader, progress, gameController.getMapBox());
+        gameController.setGame(game);
+        final String start = game.loadGame(mapLines, SerializationUtils.clone(progress));
         if (!start.isEmpty()) {
             mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", start);
             return;
         }
 
+        progress.setMapLines(mapLines);
         loadButton.setDisable(true);
         deleteButton.setDisable(true);
-        mainLoader.getViewLoader().getMainStage().addEventFilter(KeyEvent.KEY_RELEASED, resetMap);
         mainLoader.getViewLoader().setWindow(GameController.class);
-        progress.setMapLines(mapLines);
     }
 
     public Button getDeleteButton() {
@@ -119,17 +117,5 @@ public final class LoadGameController implements Controller, Load {
 
     public VBox getSaveBox() {
         return saveBox;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public ResetMap getResetMapListener() {
-        return resetMap;
-    }
-
-    public Progress getProgress() {
-        return progress;
     }
 }

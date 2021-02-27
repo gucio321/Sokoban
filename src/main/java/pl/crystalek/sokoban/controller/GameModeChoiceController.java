@@ -3,6 +3,7 @@ package pl.crystalek.sokoban.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import pl.crystalek.sokoban.controller.game.ChooseByDifficultyController;
 import pl.crystalek.sokoban.controller.load.LoadGameController;
 import pl.crystalek.sokoban.controller.load.LoadType;
 import pl.crystalek.sokoban.controller.load.LoadUtil;

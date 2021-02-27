@@ -2,10 +2,9 @@ package pl.crystalek.sokoban.game;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
-import pl.crystalek.sokoban.controller.GameController;
 import pl.crystalek.sokoban.controller.LevelFinishController;
 import pl.crystalek.sokoban.controller.LevelLostController;
-import pl.crystalek.sokoban.controller.load.LoadGameController;
+import pl.crystalek.sokoban.controller.game.GameController;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
@@ -29,9 +28,9 @@ public final class TimeCounter {
     }
 
     public void start() {
-        final LoadGameController loadGameController = mainLoader.getController(LoadGameController.class);
-        final Label timeLabel = mainLoader.getController(GameController.class).getTimeLabel();
-        final Progress progress = loadGameController.getProgress();
+        final GameController gameController = mainLoader.getController(GameController.class);
+        final Label timeLabel = gameController.getTimeLabel();
+        final Progress progress = gameController.getGame().getOldProgress();
         counting = progress.getTimeInSeconds();
 
         final Timer timer = new Timer();
@@ -59,8 +58,7 @@ public final class TimeCounter {
 
     public void stop() {
         timer.cancel();
-        final LoadGameController loadGameController = mainLoader.getController(LoadGameController.class);
-        final Progress progress = loadGameController.getGame().getProgress();
+        final Progress progress = mainLoader.getController(GameController.class).getGame().getOldProgress();
         final Ranking ranking = progress.getRanking();
 
         final int playTime = ranking.getPlayTime() + this.playTime;

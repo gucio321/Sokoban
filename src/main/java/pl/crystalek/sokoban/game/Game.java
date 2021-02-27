@@ -7,6 +7,8 @@ import javafx.scene.layout.GridPane;
 import pl.crystalek.sokoban.editor.convert.ConvertGridPaneToString;
 import pl.crystalek.sokoban.game.convert.ConvertImageToStringImage;
 import pl.crystalek.sokoban.game.convert.ConvertStringImageToImage;
+import pl.crystalek.sokoban.game.listener.PlayerMoveListener;
+import pl.crystalek.sokoban.game.listener.ResetMapListener;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
 
@@ -21,6 +23,9 @@ public final class Game {
     private final ConvertImageToStringImage convertImageToStringImage;
     private final ConvertGridPaneToString convertGridPaneToString;
     private final PlayerMoveListener playerMoveListener = new PlayerMoveListener(this);
+    private final ResetMapListener resetMapListener = new ResetMapListener(this);
+    private final Progress oldProgress;
+    private final GridPane mapBox;
     private Map<String, Image> imageList;
     private Player player;
     private Progress progress;
@@ -28,15 +33,18 @@ public final class Game {
     private TimeCounter timeCounter;
     private int crateCount;
 
-    public Game(final MainLoader mainLoader) { //PROGRESS OD TERAZ MA BYC NOWYM OBIEKTEM Z KTOREGO BRANE BEDA RZECZY DO ZAPISU.
+    public Game(final MainLoader mainLoader, final Progress oldProgress, final GridPane mapBox) {
         this.mainLoader = mainLoader;
         this.convertStringImageToImage = new ConvertStringImageToImage(mainLoader);
         this.convertImageToStringImage = new ConvertImageToStringImage(mainLoader);
         this.convertGridPaneToString = new ConvertGridPaneToString(mainLoader);
+        this.oldProgress = oldProgress;
+        this.mapBox = mapBox;
         mainLoader.getViewLoader().getMainStage().addEventFilter(KeyEvent.KEY_PRESSED, playerMoveListener);
+        mainLoader.getViewLoader().getMainStage().addEventFilter(KeyEvent.KEY_RELEASED, resetMapListener);
     }
 
-    public String loadGame(final GridPane mapBox, final List<String> mapLines, final Progress progress) {
+    public String loadGame(final List<String> mapLines, final Progress progress) {
         final Map<String, Image> imageList = new HashMap<>(mainLoader.getImageList());
         imageList.remove("info");
         imageList.remove("error");
@@ -139,5 +147,17 @@ public final class Game {
 
     public int getCrateCount() {
         return crateCount;
+    }
+
+    public Progress getOldProgress() {
+        return oldProgress;
+    }
+
+    public ResetMapListener getResetMapListener() {
+        return resetMapListener;
+    }
+
+    public GridPane getMapBox() {
+        return mapBox;
     }
 }

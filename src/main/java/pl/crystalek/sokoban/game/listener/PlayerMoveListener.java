@@ -1,9 +1,11 @@
-package pl.crystalek.sokoban.game;
+package pl.crystalek.sokoban.game.listener;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import pl.crystalek.sokoban.game.Game;
+import pl.crystalek.sokoban.game.Player;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.ranking.Ranking;
 

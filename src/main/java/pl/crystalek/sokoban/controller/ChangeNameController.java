@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import pl.crystalek.sokoban.controller.load.LoadGameController;
+import pl.crystalek.sokoban.controller.game.GameController;
 import pl.crystalek.sokoban.game.Game;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
@@ -27,10 +27,9 @@ public final class ChangeNameController implements Controller {
 
     @FXML
     private void cancel(final ActionEvent event) {
-        final LoadGameController loadGameController = mainLoader.getController(LoadGameController.class);
         final Stage mainStage = mainLoader.getViewLoader().getMainStage();
-        final Game game = loadGameController.getGame();
-        mainStage.addEventFilter(KeyEvent.KEY_RELEASED, loadGameController.getResetMapListener());
+        final Game game = mainLoader.getController(GameController.class).getGame();
+        mainStage.addEventFilter(KeyEvent.KEY_RELEASED, game.getResetMapListener());
         mainStage.addEventFilter(KeyEvent.KEY_PRESSED, game.getPlayerMoveListener());
         game.getTimeCounter().setPause(false);
         mainLoader.getViewLoader().setWindow(GameController.class);
@@ -49,8 +48,7 @@ public final class ChangeNameController implements Controller {
             return;
         }
 
-        final LoadGameController loadGameController = mainLoader.getController(LoadGameController.class);
-        final Game game = loadGameController.getGame();
+        final Game game = mainLoader.getController(GameController.class).getGame();
         final Progress progress = game.getProgress();
         final Stage mainStage = mainLoader.getViewLoader().getMainStage();
         progress.setOldName(progress.getOldName());
@@ -59,12 +57,12 @@ public final class ChangeNameController implements Controller {
         mainLoader.getController(GameController.class).save();
         mainLoader.getViewLoader().setWindow(GameController.class);
         game.getTimeCounter().setPause(false);
-        mainStage.addEventFilter(KeyEvent.KEY_RELEASED, loadGameController.getResetMapListener());
+        mainStage.addEventFilter(KeyEvent.KEY_RELEASED, game.getResetMapListener());
         mainStage.addEventFilter(KeyEvent.KEY_PRESSED, game.getPlayerMoveListener());
 
     }
 
-    Label getTextLabel() {
+    public Label getTextLabel() {
         return textLabel;
     }
 }

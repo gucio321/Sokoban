@@ -9,7 +9,7 @@
             prefHeight="820.0" prefWidth="1457.0"
             style="-fx-background-image: url('/img/gui/background/backgroundGame.png')" stylesheets="/css/button.css"
             xmlns="http://javafx.com/javafx/8.0.202-ea"
-            fx:controller="pl.crystalek.sokoban.controller.GameController">
+            fx:controller="pl.crystalek.sokoban.controller.game.GameController">
     <children>
         <Button layoutX="14.0" layoutY="417.0" mnemonicParsing="false" onMousePressed="#back" prefHeight="37.0"
                 prefWidth="138.0" text="Wróć do menu" textFill="WHITE">
@@ -17,8 +17,8 @@
                 <Font name="System Bold Italic" size="16.0"/>
             </font>
         </Button>
-        <Button layoutX="14.0" layoutY="317.0" mnemonicParsing="false" onMousePressed="#saveGame" prefHeight="37.0"
-                prefWidth="138.0" text="Zapisz grę" textFill="WHITE">
+        <Button fx:id="saveButton" layoutX="14.0" layoutY="317.0" mnemonicParsing="false" onMousePressed="#saveGame"
+                prefHeight="37.0" prefWidth="138.0" text="Zapisz grę" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="16.0"/>
             </font>

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import pl.crystalek.sokoban.controller.editor.MapEditorController;
+import pl.crystalek.sokoban.controller.game.GameController;
 import pl.crystalek.sokoban.controller.load.Load;
 import pl.crystalek.sokoban.controller.load.LoadGameController;
 import pl.crystalek.sokoban.controller.load.LoadMapToEditController;
