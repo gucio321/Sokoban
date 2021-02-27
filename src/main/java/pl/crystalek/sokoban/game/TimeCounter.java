@@ -39,7 +39,8 @@ public final class TimeCounter {
             public void run() {
                 if (!pause) {
                     if (counting > 0) {
-                        Platform.runLater(() -> timeLabel.setText(String.valueOf(counting + 1)));
+                        Platform.runLater(() -> timeLabel.setText(String.valueOf(counting)));
+                        counting--;
                     } else {
                         if (progress.isCloseGameWhenTimeEnd()) {
                             cancel();
@@ -49,7 +50,6 @@ public final class TimeCounter {
                     }
 
                     playTime++;
-                    counting--;
                 }
             }
         }, 0, 1000);
