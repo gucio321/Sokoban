@@ -31,7 +31,12 @@ public final class FileSaver {
         saveUserFiles();
     }
 
-    private void saveFile(final File fileToSave, final Object objectToSave) throws SaveUserFileException {
+    public void saveFile(final File fileToSave, final Object objectToSave) throws SaveUserFileException {
+        final File programDirectory = fileManager.getProgramDirectory();
+        if (!programDirectory.exists()) {
+            programDirectory.mkdir();
+        }
+
         try (
                 final FileOutputStream fileOutputStream = new FileOutputStream(fileToSave);
                 final ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)
@@ -56,6 +61,14 @@ public final class FileSaver {
         final String name = userMap.getName();
         final Map<String, File> userFileList = fileSaveType == FileSaveType.MAP ? fileManager.getUserMapFileList() : fileManager.getUserGameSaveList();
         final File directory = fileSaveType == FileSaveType.MAP ? fileManager.getUserMapDirectory() : fileManager.getProgressDirectory();
+        final File programDirectory = fileManager.getProgramDirectory();
+        if (!programDirectory.exists()) {
+            programDirectory.mkdir();
+        }
+
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
 
         userFileList.putIfAbsent(name, new File(directory, name + ".sokoban"));
 

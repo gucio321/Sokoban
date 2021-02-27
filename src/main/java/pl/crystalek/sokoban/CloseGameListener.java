@@ -4,7 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import pl.crystalek.sokoban.controller.ConfirmationController;
-import pl.crystalek.sokoban.controller.type.ConfirmationType;
+import pl.crystalek.sokoban.controller.ConfirmationType;
 import pl.crystalek.sokoban.io.MainLoader;
 
 final class CloseGameListener implements EventHandler<KeyEvent> {

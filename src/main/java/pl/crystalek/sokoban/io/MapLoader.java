@@ -31,7 +31,7 @@ final class MapLoader {
                         entry.getKey(),
                         Integer.parseInt(bufferedReaderLines.get(0)),
                         bufferedReaderLines.subList(4, bufferedReaderLines.size()),
-                        Integer.parseInt(bufferedReaderLines.get(1)),
+                        Boolean.parseBoolean(bufferedReaderLines.get(1)),
                         Integer.parseInt(bufferedReaderLines.get(3)),
                         Integer.parseInt(bufferedReaderLines.get(2)) * 60));
             } catch (final IOException exception) {

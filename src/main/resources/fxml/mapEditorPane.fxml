@@ -12,19 +12,13 @@
             xmlns="http://javafx.com/javafx/8.0.202-ea"
             fx:controller="pl.crystalek.sokoban.controller.editor.MapEditorController">
     <children>
-        <Button layoutX="8.0" layoutY="531.0" mnemonicParsing="false" onAction="#leave" prefHeight="37.0"
+        <Button layoutX="8.0" layoutY="576.0" mnemonicParsing="false" onAction="#leave" prefHeight="37.0"
                 prefWidth="138.0" text="Opuść edytor" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="16.0"/>
             </font>
         </Button>
-        <Button layoutX="8.0" layoutY="288.0" mnemonicParsing="false" onAction="#changeMapName" prefHeight="37.0"
-                prefWidth="138.0" text="Zmień nazwę mapy" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="13.0"/>
-            </font>
-        </Button>
-        <Button fx:id="saveMapButton" layoutX="8.0" layoutY="240.0" mnemonicParsing="false" prefHeight="37.0"
+        <Button fx:id="saveMapButton" layoutX="8.0" layoutY="286.0" mnemonicParsing="false" prefHeight="37.0"
                 prefWidth="138.0" text="Zapisz mapę" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="16.0"/>
@@ -60,6 +54,12 @@
                 prefWidth="138.0" text="Eksport mapy" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="16.0"/>
+            </font>
+        </Button>
+        <Button layoutX="8.0" layoutY="528.0" mnemonicParsing="false" onAction="#mapSettings" prefHeight="37.0"
+                prefWidth="138.0" text="Ustawienia mapy" textFill="WHITE">
+            <font>
+                <Font name="System Bold Italic" size="14.0"/>
             </font>
         </Button>
     </children>

@@ -13,7 +13,7 @@ public final class Progress extends UserMap {
     private int setCrates;
 
     public Progress(final String[][] stringEditedBlocks, final String mapName, final DefaultMap defaultMap) {
-        super(mapName, defaultMap.getDefaultPointNumber(), defaultMap.getBonus(), defaultMap.getTimeInSeconds());
+        super(mapName, defaultMap.isCloseGameWhenTimeEnd(), defaultMap.getBonus(), defaultMap.getTimeInSeconds());
         this.stringEditedBlocks = stringEditedBlocks;
     }
 

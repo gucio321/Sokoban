@@ -4,9 +4,12 @@ import javafx.application.Platform;
 import javafx.scene.control.Label;
 import pl.crystalek.sokoban.controller.GameController;
 import pl.crystalek.sokoban.controller.LevelFinishController;
+import pl.crystalek.sokoban.controller.LevelLostController;
 import pl.crystalek.sokoban.controller.load.LoadGameController;
+import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.io.file.FileManager;
 import pl.crystalek.sokoban.ranking.Ranking;
 import pl.crystalek.sokoban.util.TimeUtil;
 
@@ -28,18 +31,25 @@ public final class TimeCounter {
     public void start() {
         final LoadGameController loadGameController = mainLoader.getController(LoadGameController.class);
         final Label timeLabel = mainLoader.getController(GameController.class).getTimeLabel();
-        counting = loadGameController.getLoadUtil().getChosenObject().getTimeInSeconds();
+        final Progress progress = loadGameController.getProgress();
+        counting = progress.getTimeInSeconds();
 
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                playTime++;
                 if (!pause) {
-
-                    if (counting >= 0) {
+                    if (counting > 0) {
                         Platform.runLater(() -> timeLabel.setText(String.valueOf(counting + 1)));
+                    } else {
+                        if (progress.isCloseGameWhenTimeEnd()) {
+                            cancel();
+                            Platform.runLater(() -> mainLoader.getController(LevelLostController.class).getPlayTime().setText(TimeUtil.getDateInString((progress.getRanking().getPlayTime() + playTime) * 1_000L, ", ", true)));
+                            mainLoader.getViewLoader().setWindow(LevelLostController.class);
+                        }
                     }
+
+                    playTime++;
                     counting--;
                 }
             }
@@ -52,23 +62,26 @@ public final class TimeCounter {
         final LoadGameController loadGameController = mainLoader.getController(LoadGameController.class);
         final Progress progress = loadGameController.getGame().getProgress();
         final Ranking ranking = progress.getRanking();
-        final int maxBonusPoint = progress.getBonus();
 
         final int playTime = ranking.getPlayTime() + this.playTime;
-        final int bonusPoint = counting * POINT_FOR_TIME;
-        final int pointsForTime = counting < 0 ? Math.max(bonusPoint, -maxBonusPoint) : Math.min(bonusPoint, maxBonusPoint);
-        final int totalPoints = progress.getDefaultPointNumber() + pointsForTime;
+        final int pointsForTime = Math.min(counting * POINT_FOR_TIME, progress.getBonus());
 
         ranking.setPlayTime(playTime);
         ranking.setPointsForTime(pointsForTime);
-        ranking.setTotalPoints(totalPoints);
         mainLoader.getRankingManager().add(ranking);
         progress.setRanking(new Ranking());
 
         final LevelFinishController levelFinishController = mainLoader.getController(LevelFinishController.class);
         levelFinishController.getPlayTime().setText(TimeUtil.getDateInString(playTime * 1_000L, ", ", true));
-        levelFinishController.getGainedPoints().setText(String.valueOf(totalPoints));
+        levelFinishController.getGainedPoints().setText(String.valueOf(pointsForTime));
         mainLoader.getViewLoader().setWindow(LevelFinishController.class);
+
+        final FileManager fileManager = mainLoader.getFileManager();
+        try {
+            fileManager.getFileSaver().saveFile(fileManager.getRankingFile(), mainLoader.getRankingManager());
+        } catch (final SaveUserFileException exception) {
+            exception.printStackTrace();
+        }
     }
 
     public void setPause(final boolean pause) {

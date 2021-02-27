@@ -22,6 +22,8 @@ ranking.fxml
 rankingDetails.fxml
 sokobanMainPane.fxml
 levelFinishPane.fxml
+levelLostPane.fxml
+mapSettingsPane.fxml
 poziom 1.txt
 poziom 2.txt
 poziom 3.txt

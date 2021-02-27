@@ -6,8 +6,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="820.0" prefWidth="1457.0"
-            stylesheets="/css/button.css"
-            style="-fx-background-image: url('/img/gui/background/background.png')"
+            style="-fx-background-image: url('/img/gui/background/background.png')" stylesheets="/css/button.css"
             xmlns="http://javafx.com/javafx/8.0.202-ea"
             fx:controller="pl.crystalek.sokoban.controller.RankingDetailsController">
     <children>
@@ -45,18 +44,6 @@
                prefWidth="240.0" style="-fx-background-color: #bbbbbb;" textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="24.0"/>
-            </font>
-        </Label>
-        <Label fx:id="totalPoints" alignment="CENTER" layoutX="773.0" layoutY="446.0" prefHeight="40.0"
-               prefWidth="240.0" style="-fx-background-color: #bbbbbb;" textFill="#a10000">
-            <font>
-                <Font name="System Bold Italic" size="24.0"/>
-            </font>
-        </Label>
-        <Label alignment="CENTER" layoutX="495.0" layoutY="446.0" prefHeight="40.0" prefWidth="189.0"
-               style="-fx-background-color: #bbbbbb;" text="Punkty łącznie" textFill="#a10000">
-            <font>
-                <Font name="System Bold Italic" size="17.0"/>
             </font>
         </Label>
         <Label fx:id="playTimeLabel" alignment="CENTER" layoutX="773.0" layoutY="273.0" prefHeight="40.0"

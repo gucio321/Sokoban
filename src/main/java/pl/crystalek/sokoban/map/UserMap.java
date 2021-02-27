@@ -16,8 +16,8 @@ public class UserMap extends DefaultMap {
         super(name);
     }
 
-    public UserMap(final String name, final int defaultPointNumber, final int bonus, final int timeInSeconds) {
-        super(name, defaultPointNumber, bonus, timeInSeconds);
+    public UserMap(final String name, final boolean closeGameWhenTimeEnd, final int bonus, final int timeInSeconds) {
+        super(name, closeGameWhenTimeEnd, bonus, timeInSeconds);
     }
 
     public String getOldName() {

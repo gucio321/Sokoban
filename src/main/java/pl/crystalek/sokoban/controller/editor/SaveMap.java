@@ -2,9 +2,8 @@ package pl.crystalek.sokoban.controller.editor;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import pl.crystalek.sokoban.controller.ChangeNameController;
 import pl.crystalek.sokoban.controller.DialogController;
-import pl.crystalek.sokoban.controller.type.ChangeNameType;
+import pl.crystalek.sokoban.controller.MapSettingsController;
 import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.io.MainLoader;
@@ -30,10 +29,7 @@ public final class SaveMap implements EventHandler<ActionEvent> {
         }
 
         if (editedMap.getName() == null) {
-            final ChangeNameController controller = mainLoader.getController(ChangeNameController.class);
-            controller.setChangeNameType(ChangeNameType.MAP);
-            controller.getTextLabel().setText("Podaj nazwe mapy");
-            mainLoader.getViewLoader().setWindow(ChangeNameController.class);
+            mainLoader.getViewLoader().setWindow(MapSettingsController.class);
             return;
         }
         saveMap(mapEditor);
@@ -42,8 +38,8 @@ public final class SaveMap implements EventHandler<ActionEvent> {
     public void saveMap(final MapEditor mapEditor) {
         final UserMap editedMap = mapEditor.getEditedMap();
         final String oldMapName = editedMap.getOldName();
-        if (oldMapName != null) {
-            final File fileMapToDelete = mainLoader.getFileManager().getUserMapFileList().remove(oldMapName);
+        final File fileMapToDelete = mainLoader.getFileManager().getUserMapFileList().remove(oldMapName);
+        if (fileMapToDelete != null) {
             fileMapToDelete.delete();
             editedMap.setOldName(null);
         }

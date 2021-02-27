@@ -5,12 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import pl.crystalek.sokoban.io.MainLoader;
 
-public final class LevelFinishController implements Controller {
+public final class LevelLostController implements Controller {
     private MainLoader mainLoader;
+
     @FXML
     private Label playTime;
-    @FXML
-    private Label gainedPoints;
 
     @Override
     public void setManagers(final MainLoader mainLoader) {
@@ -18,15 +17,12 @@ public final class LevelFinishController implements Controller {
     }
 
     @FXML
-    private void backToMenu(final ActionEvent event) {
+    private void back(final ActionEvent event) {
+        playTime.setText("");
         mainLoader.getController(GameController.class).leaveGame();
     }
 
     public Label getPlayTime() {
         return playTime;
-    }
-
-    public Label getGainedPoints() {
-        return gainedPoints;
     }
 }

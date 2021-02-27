@@ -10,10 +10,10 @@ import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.ranking.Ranking;
 
-public class ResetMapListener implements EventHandler<KeyEvent> {
+public final class ResetMap implements EventHandler<KeyEvent> {
     private final MainLoader mainLoader;
 
-    public ResetMapListener(final MainLoader mainLoader) {
+    public ResetMap(final MainLoader mainLoader) {
         this.mainLoader = mainLoader;
     }
 

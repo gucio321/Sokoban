@@ -17,7 +17,8 @@ import java.io.IOException;
 public final class Sokoban extends Application {
     private MainLoader mainLoader;
 
-    public static void main(final String[] args) {//USTAWIENIA: WASD -> WSAD
+    //TODO USTAWIENIA: WASD -> WSAD
+    public static void main(final String[] args) {
         launch(args);
     }
 

@@ -8,7 +8,6 @@ import pl.crystalek.sokoban.controller.load.Load;
 import pl.crystalek.sokoban.controller.load.LoadGameController;
 import pl.crystalek.sokoban.controller.load.LoadMapToEditController;
 import pl.crystalek.sokoban.controller.load.LoadUtil;
-import pl.crystalek.sokoban.controller.type.ConfirmationType;
 import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
@@ -36,9 +35,6 @@ public final class ConfirmationController implements Controller {
     @FXML
     private void yes(final ActionEvent event) {
         switch (confirmationType) {
-            case STATISTIC:
-                //tu bylo resetowanie statystyk
-                break;
             case RESETMAP:
                 final MapEditorController mapEditorController = mainLoader.getController(MapEditorController.class);
                 final MapEditor mapEditor1 = mapEditorController.getMapEditor();

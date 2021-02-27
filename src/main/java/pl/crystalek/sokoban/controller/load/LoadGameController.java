@@ -8,7 +8,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.SerializationUtils;
 import pl.crystalek.sokoban.controller.*;
-import pl.crystalek.sokoban.controller.type.ConfirmationType;
 import pl.crystalek.sokoban.game.Game;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
@@ -22,7 +21,7 @@ public final class LoadGameController implements Controller, Load {
     private MainLoader mainLoader;
     private LoadUtil loadUtil;
     private Game game;
-    private ResetMapListener resetMapListener;
+    private ResetMap resetMap;
     private Progress progress;
     @FXML
     private VBox mapBox;
@@ -60,7 +59,7 @@ public final class LoadGameController implements Controller, Load {
 
     @FXML
     private void loadButton(final ActionEvent event) {
-        this.resetMapListener = new ResetMapListener(mainLoader);
+        this.resetMap = new ResetMap(mainLoader);
         this.game = new Game(mainLoader);
         final DefaultMap choosenObject = loadUtil.getChosenObject();
         final List<String> mapLines = choosenObject.getMapLines();
@@ -82,7 +81,7 @@ public final class LoadGameController implements Controller, Load {
 
         loadButton.setDisable(true);
         deleteButton.setDisable(true);
-        mainLoader.getViewLoader().getMainStage().addEventFilter(KeyEvent.KEY_RELEASED, resetMapListener);
+        mainLoader.getViewLoader().getMainStage().addEventFilter(KeyEvent.KEY_RELEASED, resetMap);
         mainLoader.getViewLoader().setWindow(GameController.class);
         progress.setMapLines(mapLines);
     }
@@ -126,8 +125,8 @@ public final class LoadGameController implements Controller, Load {
         return game;
     }
 
-    public ResetMapListener getResetMapListener() {
-        return resetMapListener;
+    public ResetMap getResetMapListener() {
+        return resetMap;
     }
 
     public Progress getProgress() {

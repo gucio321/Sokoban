@@ -5,10 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import org.apache.commons.lang3.SerializationUtils;
 import pl.crystalek.sokoban.controller.load.LoadGameController;
-import pl.crystalek.sokoban.controller.type.ChangeNameType;
-import pl.crystalek.sokoban.controller.type.ConfirmationType;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.game.Game;
 import pl.crystalek.sokoban.game.TimeCounter;
@@ -113,9 +112,10 @@ public final class GameController implements Controller {
     private void changeName() {
         final LoadGameController loadGameController = mainLoader.getController(LoadGameController.class);
         final ChangeNameController changeNameController = mainLoader.getController(ChangeNameController.class);
-        mainLoader.getViewLoader().getMainStage().removeEventFilter(KeyEvent.KEY_RELEASED, loadGameController.getResetMapListener());
+        final Stage mainStage = mainLoader.getViewLoader().getMainStage();
+        mainStage.removeEventFilter(KeyEvent.KEY_RELEASED, loadGameController.getResetMapListener());
+        mainStage.removeEventFilter(KeyEvent.KEY_PRESSED, loadGameController.getGame().getPlayerMoveListener());
         loadGameController.getGame().getTimeCounter().setPause(true);
-        changeNameController.setChangeNameType(ChangeNameType.SAVE);
         changeNameController.getTextLabel().setText("Podaj nazwe zapisu");
         mainLoader.getViewLoader().setWindow(ChangeNameController.class);
     }

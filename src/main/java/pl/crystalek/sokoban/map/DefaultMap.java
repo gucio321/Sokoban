@@ -8,7 +8,7 @@ public class DefaultMap implements Comparable<DefaultMap>, Serializable {
     private String name;
     private transient int priority;
     private List<String> mapLines;
-    private int defaultPointNumber;
+    private boolean closeGameWhenTimeEnd;
     private int bonus;
     private int timeInSeconds;
 
@@ -19,20 +19,28 @@ public class DefaultMap implements Comparable<DefaultMap>, Serializable {
         this.name = name;
     }
 
-    public DefaultMap(final String name, final int defaultPointNumber, final int bonus, final int timeInSeconds) {
+    public DefaultMap(final String name, final boolean closeGameWhenTimeEnd, final int bonus, final int timeInSeconds) {
         this.name = name;
-        this.defaultPointNumber = defaultPointNumber;
+        this.closeGameWhenTimeEnd = closeGameWhenTimeEnd;
         this.bonus = bonus;
         this.timeInSeconds = timeInSeconds;
     }
 
-    public DefaultMap(final String name, final int priority, final List<String> mapLines, final int defaultPointNumber, final int bonus, final int timeInSeconds) {
+    public DefaultMap(final String name, final int priority, final List<String> mapLines, final boolean closeGameWhenTimeEnd, final int bonus, final int timeInSeconds) {
         this.name = name;
         this.priority = priority;
         this.mapLines = mapLines;
-        this.defaultPointNumber = defaultPointNumber;
+        this.closeGameWhenTimeEnd = closeGameWhenTimeEnd;
         this.bonus = bonus;
         this.timeInSeconds = timeInSeconds;
+    }
+
+    public boolean isCloseGameWhenTimeEnd() {
+        return closeGameWhenTimeEnd;
+    }
+
+    public void setCloseGameWhenTimeEnd(final boolean closeGameWhenTimeEnd) {
+        this.closeGameWhenTimeEnd = closeGameWhenTimeEnd;
     }
 
     public String getName() {
@@ -53,14 +61,6 @@ public class DefaultMap implements Comparable<DefaultMap>, Serializable {
 
     public void setMapLines(final List<String> mapLines) {
         this.mapLines = mapLines;
-    }
-
-    public int getDefaultPointNumber() {
-        return defaultPointNumber;
-    }
-
-    public void setDefaultPointNumber(final int defaultPointNumber) {
-        this.defaultPointNumber = defaultPointNumber;
     }
 
     public int getTimeInSeconds() {

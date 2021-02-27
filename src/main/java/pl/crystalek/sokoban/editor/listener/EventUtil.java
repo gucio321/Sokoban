@@ -78,6 +78,7 @@ final class EventUtil {
         }
 
         previousPaneChildren.clear();
+        boxListenerManager.setPreviousPane(null);
     }
 
     void goOutMapBorder() {

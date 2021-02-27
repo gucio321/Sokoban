@@ -8,17 +8,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import pl.crystalek.sokoban.controller.ChangeNameController;
-import pl.crystalek.sokoban.controller.ConfirmationController;
-import pl.crystalek.sokoban.controller.Controller;
-import pl.crystalek.sokoban.controller.GameModuleChoiceController;
+import pl.crystalek.sokoban.controller.*;
 import pl.crystalek.sokoban.controller.load.LoadMapToEditController;
 import pl.crystalek.sokoban.controller.load.LoadUtil;
-import pl.crystalek.sokoban.controller.type.ChangeNameType;
-import pl.crystalek.sokoban.controller.type.ConfirmationType;
 import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.io.view.ViewLoader;
+import pl.crystalek.sokoban.map.UserMap;
 
 public final class MapEditorController implements Controller {
     private MainLoader mainLoader;
@@ -51,6 +47,17 @@ public final class MapEditorController implements Controller {
     }
 
     @FXML
+    private void mapSettings(final ActionEvent event) {
+        final MapSettingsController mapSettingsController = mainLoader.getController(MapSettingsController.class);
+        final UserMap editedMap = mapEditor.getEditedMap();
+        mapSettingsController.getBonusForTimeTextField().setText(String.valueOf(editedMap.getBonus()));
+        mapSettingsController.getMapNameTextField().setText(editedMap.getName());
+        mapSettingsController.getCloseGameCheckBox().setSelected(editedMap.isCloseGameWhenTimeEnd());
+        mapSettingsController.getPlayTimeTextField().setText(String.valueOf(editedMap.getTimeInSeconds()));
+        mainLoader.getViewLoader().setWindow(MapSettingsController.class);
+    }
+
+    @FXML
     private void leave(final ActionEvent event) {
         if (!mapEditor.getEditedMap().isChangesToSave()) {
             clearMapWhenLeave();
@@ -61,14 +68,6 @@ public final class MapEditorController implements Controller {
         controller.setConfirmationType(ConfirmationType.LEAVE);
         controller.getTextLabel().setText("Czy na pewno chcesz opuscic edytor? Zapisz mape, w przeciwnym wypadku utracisz niezapisane zmiany.");
         mainLoader.getViewLoader().getStage(ConfirmationController.class).show();
-    }
-
-    @FXML
-    private void changeMapName(final ActionEvent event) {
-        final ChangeNameController controller = mainLoader.getController(ChangeNameController.class);
-        controller.setChangeNameType(ChangeNameType.MAP);
-        controller.getTextLabel().setText("Podaj nazwe mapy");
-        mainLoader.getViewLoader().setWindow(ChangeNameController.class);
     }
 
     @FXML

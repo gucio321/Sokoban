@@ -15,9 +15,6 @@ public final class RankingDetailsController implements Controller {
     private Label pointsForTimeLabel;
 
     @FXML
-    private Label totalPoints;
-
-    @FXML
     private Label playTimeLabel;
 
     @Override
@@ -32,19 +29,15 @@ public final class RankingDetailsController implements Controller {
         mainLoader.getViewLoader().setWindow(RankingController.class);
     }
 
-    public Label getStepsNumberLabel() {
+    Label getStepsNumberLabel() {
         return stepsNumberLabel;
     }
 
-    public Label getPointsForTimeLabel() {
+    Label getPointsForTimeLabel() {
         return pointsForTimeLabel;
     }
 
-    public Label getTotalPoints() {
-        return totalPoints;
-    }
-
-    public Label getPlayTimeLabel() {
+    Label getPlayTimeLabel() {
         return playTimeLabel;
     }
 }

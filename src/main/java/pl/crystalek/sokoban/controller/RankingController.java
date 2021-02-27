@@ -39,7 +39,6 @@ public final class RankingController implements Controller {
         rankingDetailsController.getPlayTimeLabel().setText(TimeUtil.getDateInString(chosenRanking.getPlayTime() * 1_000L, ", ", true));
         rankingDetailsController.getPointsForTimeLabel().setText(String.valueOf(chosenRanking.getPointsForTime()));
         rankingDetailsController.getStepsNumberLabel().setText(String.valueOf(chosenRanking.getStepsNumber()));
-        rankingDetailsController.getTotalPoints().setText(String.valueOf(chosenRanking.getTotalPoints()));
         mainLoader.getViewLoader().setWindow(RankingDetailsController.class);
     }
 
@@ -61,16 +60,12 @@ public final class RankingController implements Controller {
             button.setTextFill(Paint.valueOf("#a10000"));
             button.setStyle("-fx-background-color: #a0a0a0; -fx-border-color: #aaaaaa");
             button.setFont(new Font("System Bold Italic", 12));
-            button.setText(ranking.getMapName() + " - " + ranking.getTotalPoints());
+            button.setText(ranking.getMapName() + " - " + ranking.getPointsForTime());
             children.add(button);
         }
     }
 
-    public Ranking getChosenRanking() {
-        return chosenRanking;
-    }
-
-    public Button getDetailsButton() {
+    Button getDetailsButton() {
         return detailsButton;
     }
 }
