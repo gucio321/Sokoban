@@ -12,6 +12,7 @@ import pl.crystalek.sokoban.controller.load.LoadUtil;
 import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.map.DefaultMap;
 import pl.crystalek.sokoban.map.UserMap;
 
 import java.time.LocalDateTime;
@@ -46,7 +47,7 @@ public final class ConfirmationController implements Controller {
                 break;
             case DELETE:
                 final LoadUtil loadUtil = load.getLoadUtil();
-                final Object choosenObject = loadUtil.getChosenObject();
+                final DefaultMap choosenObject = loadUtil.getChosenObject();
                 if (choosenObject instanceof Progress) {
                     final Progress progress = (Progress) choosenObject;
                     mainLoader.getProgressManager().deleteSave(progress);

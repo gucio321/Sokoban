@@ -24,8 +24,9 @@ public final class RankingDetailsController implements Controller {
 
     @FXML
     private void back(final ActionEvent event) {
-        final RankingController controller = mainLoader.getController(RankingController.class);
-        controller.getDetailsButton().setDisable(true);
+        final RankingController rankingController = mainLoader.getController(RankingController.class);
+        rankingController.getDetailsButton().setDisable(true);
+        rankingController.getDeleteButton().setDisable(true);
         mainLoader.getViewLoader().setWindow(RankingController.class);
     }
 

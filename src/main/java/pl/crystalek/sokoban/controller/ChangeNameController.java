@@ -33,6 +33,7 @@ public final class ChangeNameController implements Controller {
         mainStage.addEventFilter(KeyEvent.KEY_PRESSED, game.getPlayerMoveListener());
         game.getTimeCounter().setPause(false);
         mainLoader.getViewLoader().setWindow(GameController.class);
+        nameTextField.setText("");
     }
 
     @FXML
@@ -59,6 +60,7 @@ public final class ChangeNameController implements Controller {
         game.getTimeCounter().setPause(false);
         mainStage.addEventFilter(KeyEvent.KEY_RELEASED, game.getResetMapListener());
         mainStage.addEventFilter(KeyEvent.KEY_PRESSED, game.getPlayerMoveListener());
+        nameTextField.setText("");
 
     }
 

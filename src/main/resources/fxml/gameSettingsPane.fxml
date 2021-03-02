@@ -16,18 +16,6 @@
                 <Font name="System Bold Italic" size="35.0"/>
             </font>
         </Button>
-        <Button layoutX="780.0" layoutY="482.0" mnemonicParsing="false" onAction="#brightnessPlus" prefHeight="79.0"
-                prefWidth="79.0" style="-fx-background-color: #bbbbbb;" text="+" textFill="#a10000">
-            <font>
-                <Font name="System Bold Italic" size="30.0"/>
-            </font>
-        </Button>
-        <Button layoutX="935.0" layoutY="482.0" mnemonicParsing="false" onAction="#brightnessMinus" prefHeight="79.0"
-                prefWidth="79.0" style="-fx-background-color: #bbbbbb;" text="-" textFill="#a10000">
-            <font>
-                <Font name="System Bold Italic" size="30.0"/>
-            </font>
-        </Button>
         <Label alignment="CENTER" layoutX="449.0" layoutY="272.0" prefHeight="79.0" prefWidth="234.0"
                style="-fx-background-color: #bbbbbb;" text="Dźwięk" textFill="#a10000">
             <font>
@@ -46,32 +34,22 @@
                 <Font name="System Bold Italic" size="30.0"/>
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="449.0" layoutY="593.0" prefHeight="79.0" prefWidth="234.0"
-               style="-fx-background-color: #bbbbbb;" text="Tekstury" textFill="#a10000">
-            <font>
-                <Font name="System Bold Italic" size="30.0"/>
-            </font>
-        </Label>
         <Button fx:id="soundButton" layoutX="780.0" layoutY="272.0" mnemonicParsing="false" onAction="#soundButton"
-                prefHeight="79.0" prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Włączony"
+                prefHeight="79.0" prefWidth="243.0" style="-fx-background-color: #bbbbbb;" text="Włączony"
                 textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="30.0"/>
             </font>
         </Button>
         <Button fx:id="controlButton" layoutX="780.0" layoutY="375.0" mnemonicParsing="false" onAction="#control"
-                prefHeight="79.0" prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="WASD"
+                prefHeight="79.0" prefWidth="243.0" style="-fx-background-color: #bbbbbb;" text="WSAD"
                 textFill="#a10000">
             <font>
                 <Font name="System Bold Italic" size="30.0"/>
             </font>
         </Button>
-        <Button fx:id="textureButton" layoutX="780.0" layoutY="593.0" mnemonicParsing="false" onAction="#texture"
-                prefHeight="79.0" prefWidth="234.0" style="-fx-background-color: #bbbbbb;" text="Zestaw 1"
-                textFill="#a10000">
-            <font>
-                <Font name="System Bold Italic" size="30.0"/>
-            </font>
-        </Button>
+        <Slider fx:id="brightnessSlider" blockIncrement="20.0" layoutX="780.0" layoutY="482.0" majorTickUnit="10.0"
+                max="200.0" prefHeight="79.0" prefWidth="243.0" showTickLabels="true"
+                style="-fx-background-color: #bbbbbb;" value="100.0"/>
     </children>
 </AnchorPane>

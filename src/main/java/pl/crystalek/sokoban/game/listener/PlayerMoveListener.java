@@ -3,40 +3,42 @@ package pl.crystalek.sokoban.game.listener;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import pl.crystalek.sokoban.game.Game;
 import pl.crystalek.sokoban.game.Player;
 import pl.crystalek.sokoban.game.progress.Progress;
+import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.ranking.Ranking;
+import pl.crystalek.sokoban.settings.Control;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
 public final class PlayerMoveListener implements EventHandler<KeyEvent> {
     private final Game game;
+    private final MainLoader mainLoader;
 
-    public PlayerMoveListener(final Game game) {
+    public PlayerMoveListener(final Game game, final MainLoader mainLoader) {
         this.game = game;
+        this.mainLoader = mainLoader;
     }
 
     @Override
     public void handle(final KeyEvent event) {
         final int column = game.getPlayer().getColumn();
         final int row = game.getPlayer().getRow();
+        final Control controlType = mainLoader.getSettings().getControlType();
+        final KeyCode keyCode = event.getCode();
 
-        switch (event.getCode()) {
-            case UP:
-                move(column, row - 1, column, row - 2);
-                break;
-            case DOWN:
-                move(column, row + 1, column, row + 2);
-                break;
-            case RIGHT:
-                move(column + 1, row, column + 2, row);
-                break;
-            case LEFT:
-                move(column - 1, row, column - 2, row);
-                break;
+        if ((keyCode == KeyCode.UP && controlType == Control.ARROWS) || keyCode == KeyCode.W && controlType == Control.WSAD) {
+            move(column, row - 1, column, row - 2);
+        } else if ((keyCode == KeyCode.DOWN && controlType == Control.ARROWS) || (keyCode == KeyCode.S && controlType == Control.WSAD)) {
+            move(column, row + 1, column, row + 2);
+        } else if ((keyCode == KeyCode.RIGHT && controlType == Control.ARROWS) || (keyCode == KeyCode.D && controlType == Control.WSAD)) {
+            move(column + 1, row, column + 2, row);
+        } else if ((keyCode == KeyCode.LEFT && controlType == Control.ARROWS) || (keyCode == KeyCode.A && controlType == Control.WSAD)) {
+            move(column - 1, row, column - 2, row);
         }
     }
 

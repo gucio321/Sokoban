@@ -1,4 +1,4 @@
-package pl.crystalek.sokoban;
+package pl.crystalek.sokoban.main;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;

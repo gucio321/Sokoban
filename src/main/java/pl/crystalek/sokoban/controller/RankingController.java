@@ -9,7 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.io.file.FileManager;
 import pl.crystalek.sokoban.ranking.Ranking;
 import pl.crystalek.sokoban.util.TimeUtil;
 
@@ -18,10 +20,13 @@ import java.util.List;
 public final class RankingController implements Controller {
     private MainLoader mainLoader;
     private Ranking chosenRanking;
+    private Button chosenButton;
     @FXML
     private VBox boxList;
     @FXML
     private Button detailsButton;
+    @FXML
+    private Button deleteButton;
 
     @Override
     public void setManagers(final MainLoader mainLoader) {
@@ -42,6 +47,23 @@ public final class RankingController implements Controller {
         mainLoader.getViewLoader().setWindow(RankingDetailsController.class);
     }
 
+    @FXML
+    private void deleteRanking(final ActionEvent event) {
+        mainLoader.getRankingManager().remove(chosenRanking);
+        mainLoader.getFileManager().getRankingFile().delete();
+        boxList.getChildren().remove(chosenButton);
+        final FileManager fileManager = mainLoader.getFileManager();
+
+        try {
+            fileManager.getFileSaver().saveFile(fileManager.getRankingFile(), mainLoader.getRankingManager());
+        } catch (final SaveUserFileException exception) {
+            exception.printStackTrace();
+        }
+
+        detailsButton.setDisable(true);
+        deleteButton.setDisable(true);
+    }
+
     void showRanking() {
         final ObservableList<Node> children = boxList.getChildren();
         children.clear();
@@ -52,7 +74,9 @@ public final class RankingController implements Controller {
             final Button button = new Button();
             button.setOnAction(event -> {
                 this.chosenRanking = ranking;
+                this.chosenButton = button;
                 detailsButton.setDisable(false);
+                deleteButton.setDisable(false);
             });
             button.setMaxWidth(149);
             button.setMaxHeight(27);
@@ -67,5 +91,9 @@ public final class RankingController implements Controller {
 
     Button getDetailsButton() {
         return detailsButton;
+    }
+
+    public Button getDeleteButton() {
+        return deleteButton;
     }
 }

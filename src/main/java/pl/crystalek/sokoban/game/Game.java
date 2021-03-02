@@ -22,7 +22,7 @@ public final class Game {
     private final ConvertStringImageToImage convertStringImageToImage;
     private final ConvertImageToStringImage convertImageToStringImage;
     private final ConvertGridPaneToString convertGridPaneToString;
-    private final PlayerMoveListener playerMoveListener = new PlayerMoveListener(this);
+    private final PlayerMoveListener playerMoveListener;
     private final ResetMapListener resetMapListener = new ResetMapListener(this);
     private final Progress oldProgress;
     private final GridPane mapBox;
@@ -40,6 +40,7 @@ public final class Game {
         this.convertGridPaneToString = new ConvertGridPaneToString(mainLoader);
         this.oldProgress = oldProgress;
         this.mapBox = mapBox;
+        this.playerMoveListener = new PlayerMoveListener(this, mainLoader);
         mainLoader.getViewLoader().getMainStage().addEventFilter(KeyEvent.KEY_PRESSED, playerMoveListener);
         mainLoader.getViewLoader().getMainStage().addEventFilter(KeyEvent.KEY_RELEASED, resetMapListener);
     }

@@ -50,5 +50,17 @@
                 <Font name="System Bold Italic" size="18.0"/>
             </font>
         </Label>
+        <Label alignment="CENTER" layoutX="371.0" layoutY="544.0" prefHeight="65.0" prefWidth="264.0"
+               style="-fx-background-color: #bbbbbb;" text="Liczba kroków" textFill="#a10000">
+            <font>
+                <Font name="System Bold Italic" size="28.0"/>
+            </font>
+        </Label>
+        <Label fx:id="stepsNumber" alignment="CENTER" layoutX="791.0" layoutY="544.0" prefHeight="65.0"
+               prefWidth="264.0" style="-fx-background-color: #bbbbbb;" textFill="#a10000">
+            <font>
+                <Font name="System Bold Italic" size="18.0"/>
+            </font>
+        </Label>
     </children>
 </AnchorPane>

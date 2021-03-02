@@ -18,6 +18,7 @@ import java.util.Map;
 public final class FileManager {
     private final Map<String, InputStream> imageFileList = new HashMap<>();
     private final Map<String, InputStream> mapFileList = new HashMap<>();
+    private final Map<String, InputStream> soundFileList = new HashMap<>();
     private final List<InputStream> fxmlFileList = new ArrayList<>();
     private final FileLoader fileLoader;
     private final FileSaver fileSaver;
@@ -141,5 +142,9 @@ public final class FileManager {
 
     public File getRankingFile() {
         return rankingFile;
+    }
+
+    public Map<String, InputStream> getSoundFileList() {
+        return soundFileList;
     }
 }

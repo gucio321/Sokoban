@@ -8,6 +8,7 @@ import javafx.stage.StageStyle;
 import pl.crystalek.sokoban.controller.ConfirmationController;
 import pl.crystalek.sokoban.controller.Controller;
 import pl.crystalek.sokoban.controller.DialogController;
+import pl.crystalek.sokoban.io.MainLoader;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Map;
 public final class ViewLoader {
     private final Map<Class<?>, Stage> stageMap = new HashMap<>();
     private final Stage mainStage;
+    private MainLoader mainLoader;
     private Map<Class<?>, Pane> paneMap;
 
     public ViewLoader(final Stage mainStage) {
@@ -23,7 +25,7 @@ public final class ViewLoader {
     }
 
     public void load(final List<FXMLLoader> fxmlList) {
-        this.paneMap = new PaneLoader().getPaneList(fxmlList);
+        this.paneMap = new PaneLoader().getPaneList(fxmlList, mainLoader);
         setStageList();
     }
 
@@ -51,5 +53,13 @@ public final class ViewLoader {
 
     public Pane getPane(final Class<? extends Controller> controllerClass) {
         return paneMap.get(controllerClass);
+    }
+
+    public Map<Class<?>, Pane> getPaneMap() {
+        return paneMap;
+    }
+
+    public void setMainLoader(final MainLoader mainLoader) {
+        this.mainLoader = mainLoader;
     }
 }

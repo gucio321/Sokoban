@@ -7,6 +7,9 @@ blocks/tree.png
 gui/error.png
 gui/info.png
 gui/warning.png
+buttonClick.wav
+defeat.wav
+victory.wav
 changeNamePane.fxml
 chooseByDifficultyPane.fxml
 confirmationPane.fxml

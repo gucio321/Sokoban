@@ -36,6 +36,7 @@ final class FileLoader {
         final Map<String, InputStream> mapFileList = fileManager.getMapFileList();
         final Map<String, InputStream> imageFileList = fileManager.getImageFileList();
         final List<InputStream> fxmlFileList = fileManager.getFXMLFileList();
+        final Map<String, InputStream> soundFileList = fileManager.getSoundFileList();
 
         try (
                 final InputStream fileNameStream = getClass().getResourceAsStream("/FileNameList.txt")
@@ -54,6 +55,9 @@ final class FileLoader {
                         break;
                     case "fxml":
                         fxmlFileList.add(getClass().getResourceAsStream("/fxml/" + fileName));
+                        break;
+                    case "wav":
+                        soundFileList.put(fileNameWithoutExtension, getClass().getResourceAsStream("/sound/" + fileName));
                         break;
                 }
             }

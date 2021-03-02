@@ -1,4 +1,4 @@
-package pl.crystalek.sokoban;
+package pl.crystalek.sokoban.main;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,12 +12,13 @@ import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.io.view.ViewLoader;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public final class Sokoban extends Application {
     private MainLoader mainLoader;
 
-    //TODO USTAWIENIA: WASD -> WSAD
     public static void main(final String[] args) {
         launch(args);
     }
@@ -26,9 +27,10 @@ public final class Sokoban extends Application {
     public void start(final Stage stage) {
         final ViewLoader viewLoader = new ViewLoader(stage);
         final MainLoader mainLoader = new MainLoader(viewLoader);
+        viewLoader.setMainLoader(mainLoader);
         try {
             mainLoader.load();
-        } catch (final LoadUserFileException | LoadResourcesException | CreateFileException | IOException exception) {
+        } catch (final LoadUserFileException | LoadResourcesException | CreateFileException | IOException | LineUnavailableException | UnsupportedAudioFileException exception) {
             exception.printStackTrace();
             return;
         }

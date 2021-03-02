@@ -8,6 +8,7 @@ import pl.crystalek.sokoban.map.UserMap;
 
 import java.io.*;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 final class MapLoader {
@@ -20,7 +21,7 @@ final class MapLoader {
     private MapManager getDefaultMap() throws LoadUserFileException {
         final MapManager mapManager = new MapManager();
 
-        for (final java.util.Map.Entry<String, InputStream> entry : fileManager.getMapFileList().entrySet()) {
+        for (final Map.Entry<String, InputStream> entry : fileManager.getMapFileList().entrySet()) {
             try (
                     final InputStream inputStream = entry.getValue();
                     final InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -44,7 +45,7 @@ final class MapLoader {
     MapManager getMaps() throws LoadUserFileException {
         final MapManager mapManager = getDefaultMap();
 
-        for (final java.util.Map.Entry<String, File> entry : fileManager.getUserMapFileList().entrySet()) {
+        for (final Map.Entry<String, File> entry : fileManager.getUserMapFileList().entrySet()) {
             try (
                     final FileInputStream fileInputStream = new FileInputStream(entry.getValue());
                     final ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)

@@ -12,6 +12,8 @@ public final class LevelFinishController implements Controller {
     private Label playTime;
     @FXML
     private Label gainedPoints;
+    @FXML
+    private Label stepsNumber;
 
     @Override
     public void setManagers(final MainLoader mainLoader) {
@@ -29,5 +31,9 @@ public final class LevelFinishController implements Controller {
 
     public Label getGainedPoints() {
         return gainedPoints;
+    }
+
+    public Label getStepsNumber() {
+        return stepsNumber;
     }
 }

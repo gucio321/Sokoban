@@ -12,6 +12,7 @@ import pl.crystalek.sokoban.io.file.FileManager;
 import pl.crystalek.sokoban.ranking.Ranking;
 import pl.crystalek.sokoban.util.TimeUtil;
 
+import javax.sound.sampled.Clip;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -46,6 +47,9 @@ public final class TimeCounter {
                             cancel();
                             Platform.runLater(() -> mainLoader.getController(LevelLostController.class).getPlayTime().setText(TimeUtil.getDateInString((progress.getRanking().getPlayTime() + playTime) * 1_000L, ", ", true)));
                             mainLoader.getViewLoader().setWindow(LevelLostController.class);
+                            final Clip clip = mainLoader.getSoundList().get("defeat");
+                            clip.setFramePosition(0);
+                            clip.start();
                         }
                     }
 
@@ -58,7 +62,8 @@ public final class TimeCounter {
 
     public void stop() {
         timer.cancel();
-        final Progress progress = mainLoader.getController(GameController.class).getGame().getOldProgress();
+        final Game game = mainLoader.getController(GameController.class).getGame();
+        final Progress progress = game.getOldProgress();
         final Ranking ranking = progress.getRanking();
 
         final int playTime = ranking.getPlayTime() + this.playTime;
@@ -66,12 +71,14 @@ public final class TimeCounter {
 
         ranking.setPlayTime(playTime);
         ranking.setPointsForTime(pointsForTime);
+        ranking.setStepsNumber(game.getProgress().getRanking().getStepsNumber());
         mainLoader.getRankingManager().add(ranking);
         progress.setRanking(new Ranking());
 
         final LevelFinishController levelFinishController = mainLoader.getController(LevelFinishController.class);
         levelFinishController.getPlayTime().setText(TimeUtil.getDateInString(playTime * 1_000L, ", ", true));
         levelFinishController.getGainedPoints().setText(String.valueOf(pointsForTime));
+        levelFinishController.getStepsNumber().setText(String.valueOf(ranking.getStepsNumber()));
         mainLoader.getViewLoader().setWindow(LevelFinishController.class);
 
         final FileManager fileManager = mainLoader.getFileManager();
@@ -80,6 +87,10 @@ public final class TimeCounter {
         } catch (final SaveUserFileException exception) {
             exception.printStackTrace();
         }
+
+        final Clip clip = mainLoader.getSoundList().get("victory");
+        clip.setFramePosition(0);
+        clip.start();
     }
 
     public void setPause(final boolean pause) {

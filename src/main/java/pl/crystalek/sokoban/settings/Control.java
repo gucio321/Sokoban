@@ -1,7 +1,7 @@
 package pl.crystalek.sokoban.settings;
 
 public enum Control {
-    WASD("WASD"),
+    WSAD("WSAD"),
     ARROWS("Strzałki");
 
     private final String name;

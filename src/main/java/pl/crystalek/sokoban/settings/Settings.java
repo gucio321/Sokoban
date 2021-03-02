@@ -5,18 +5,10 @@ import java.io.Serializable;
 public final class Settings implements Serializable {
     private static final long serialVersionUID = 5179680418474481551L;
     private Sound sound = Sound.ENABLE;
-    private Control controlType = Control.WASD;
-    private int brightness = 100;
-    private Texture textureType = Texture.SET1;
+    private Control controlType = Control.WSAD;
+    private double brightness = 0;
 
     public Settings() {
-    }
-
-    public Settings(final Sound sound, final Control controlType, final int brightness, final Texture textureType) {
-        this.sound = sound;
-        this.controlType = controlType;
-        this.brightness = brightness;
-        this.textureType = textureType;
     }
 
     public Sound getSound() {
@@ -35,19 +27,11 @@ public final class Settings implements Serializable {
         this.controlType = controlType;
     }
 
-    public int getBrightness() {
+    public double getBrightness() {
         return brightness;
     }
 
-    public void setBrightness(final int brightness) {
+    public void setBrightness(final double brightness) {
         this.brightness = brightness;
-    }
-
-    public Texture getTextureType() {
-        return textureType;
-    }
-
-    public void setTextureType(final Texture textureType) {
-        this.textureType = textureType;
     }
 }

@@ -15,6 +15,9 @@ import pl.crystalek.sokoban.map.MapManager;
 import pl.crystalek.sokoban.ranking.RankingManager;
 import pl.crystalek.sokoban.settings.Settings;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +25,7 @@ import java.util.Map;
 
 public final class MainLoader {
     private final Map<Class<?>, Controller> controllerMap = new HashMap<>();
+    private Map<String, Clip> soundList;
     private final FileManager fileManager = new FileManager(this);
     private final ViewLoader viewLoader;
     private MapManager mapManager;
@@ -34,13 +38,14 @@ public final class MainLoader {
         this.viewLoader = viewLoader;
     }
 
-    public void load() throws LoadUserFileException, LoadResourcesException, CreateFileException, IOException {
+    public void load() throws LoadUserFileException, LoadResourcesException, CreateFileException, IOException, LineUnavailableException, UnsupportedAudioFileException {
         final MapLoader mapLoader = new MapLoader(fileManager);
         final ProgressLoader progressLoader = new ProgressLoader();
         fileManager.load();
         this.progressManager = progressLoader.getGameProgress(fileManager.getUserGameSaveList());
         this.mapManager = mapLoader.getMaps();
         this.imageList = new ImageLoader().getImageList(fileManager);
+        this.soundList = new SoundLoader().getSoundList(fileManager);
         final List<FXMLLoader> fxmlList = new FXMLFileLoader().getFXMLList(fileManager);
         setMapController(fxmlList);
         viewLoader.load(fxmlList);
@@ -92,5 +97,9 @@ public final class MainLoader {
 
     public void setRankingManager(final RankingManager rankingManager) {
         this.rankingManager = rankingManager;
+    }
+
+    public Map<String, Clip> getSoundList() {
+        return soundList;
     }
 }
