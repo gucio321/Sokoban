@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SoundLoader {
+final class SoundLoader {
 
     Map<String, Clip> getSoundList(final FileManager fileManager) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         final Map<String, Clip> soundList = new HashMap<>();
