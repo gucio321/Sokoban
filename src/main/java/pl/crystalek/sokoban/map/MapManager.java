@@ -5,7 +5,7 @@ import java.util.List;
 
 public final class MapManager {
     private final List<DefaultMap> defaultMapList = new ArrayList<>();
-    private List<UserMap> userMapList = new ArrayList<>();
+    private final List<UserMap> userMapList = new ArrayList<>();
 
     public void addMap(final DefaultMap defaultMap) {
         defaultMapList.add(defaultMap);
@@ -21,10 +21,6 @@ public final class MapManager {
 
     public List<UserMap> getUserMapList() {
         return userMapList;
-    }
-
-    public void setUserMapList(final List<UserMap> userMapList) {
-        this.userMapList = userMapList;
     }
 
     public List<DefaultMap> getDefaultMapList() {
