@@ -38,6 +38,7 @@ public final class GameSettingsController implements Controller, Initializable {
         brightnessSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             double value = newValue.doubleValue() / 100;
             value = value < 1 ? (1 - value) * -1 : value - 1;
+
             colorAdjust.setBrightness(value);
             mainLoader.getSettings().setBrightness(value);
 
@@ -53,6 +54,7 @@ public final class GameSettingsController implements Controller, Initializable {
         try {
             fileManager.getFileSaver().saveFile(fileManager.getSettingsFile(), mainLoader.getSettings());
         } catch (final SaveUserFileException exception) {
+            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", exception.getMessage());
             exception.printStackTrace();
         }
         mainLoader.getViewLoader().setWindow(SokobanMainController.class);

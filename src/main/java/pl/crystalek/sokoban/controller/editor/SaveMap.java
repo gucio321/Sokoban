@@ -55,6 +55,7 @@ public final class SaveMap implements EventHandler<ActionEvent> {
             mainLoader.getController(DialogController.class).showDialogWindow("info", "Informacja", "Mapa zostala pomyslnie zapisana!");
         } catch (final SaveUserFileException exception) {
             mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", exception.getMessage());
+            exception.printStackTrace();
         }
     }
 }

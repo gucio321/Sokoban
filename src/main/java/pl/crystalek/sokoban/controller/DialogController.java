@@ -28,18 +28,6 @@ public final class DialogController implements Controller {
         infoImageView.setImage(null);
     }
 
-    Label getHeaderTextLabel() {
-        return headerTextLabel;
-    }
-
-    Label getContentTextLabel() {
-        return contentTextLabel;
-    }
-
-    ImageView getInfoImageView() {
-        return infoImageView;
-    }
-
     public void showDialogWindow(final String imageName, final String title, final String subtitle) {
         infoImageView.setImage(mainLoader.getImageList().get(imageName));
         headerTextLabel.setText(title);

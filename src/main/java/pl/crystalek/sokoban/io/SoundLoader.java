@@ -3,6 +3,7 @@ package pl.crystalek.sokoban.io;
 import pl.crystalek.sokoban.io.file.FileManager;
 
 import javax.sound.sampled.*;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ final class SoundLoader {
 
         for (final Map.Entry<String, InputStream> entry : fileManager.getSoundFileList().entrySet()) {
             final InputStream inputStream = entry.getValue();
-            final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(inputStream);
+            final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream));
 
             final Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);

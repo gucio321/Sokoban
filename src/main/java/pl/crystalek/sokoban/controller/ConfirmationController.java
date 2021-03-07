@@ -47,9 +47,9 @@ public final class ConfirmationController implements Controller {
                 break;
             case DELETE:
                 final LoadUtil loadUtil = load.getLoadUtil();
-                final DefaultMap choosenObject = loadUtil.getChosenObject();
-                if (choosenObject instanceof Progress) {
-                    final Progress progress = (Progress) choosenObject;
+                final DefaultMap chosenObject = loadUtil.getChosenObject();
+                if (chosenObject instanceof Progress) {
+                    final Progress progress = (Progress) chosenObject;
                     mainLoader.getProgressManager().deleteSave(progress);
                     mainLoader.getFileManager().getUserGameSaveList().get(progress.getName()).delete();
                     mainLoader.getController(LoadGameController.class).getSaveBox().getChildren().remove(loadUtil.getClickedButton());
@@ -57,9 +57,9 @@ public final class ConfirmationController implements Controller {
                     load.getDeleteButton().setDisable(true);
                     break;
                 }
-                final UserMap choosenMap = (UserMap) choosenObject;
-                mainLoader.getMapManager().deleteMap(choosenMap);
-                mainLoader.getFileManager().getUserMapFileList().get(choosenMap.getName()).delete();
+                final UserMap chosenMap = (UserMap) chosenObject;
+                mainLoader.getMapManager().deleteMap(chosenMap);
+                mainLoader.getFileManager().getUserMapFileList().get(chosenMap.getName()).delete();
                 load.getMapBox().getChildren().remove(loadUtil.getClickedButton());
                 load.getLoadButton().setDisable(true);
                 load.getDeleteButton().setDisable(true);
@@ -71,10 +71,10 @@ public final class ConfirmationController implements Controller {
                 final MapEditorController mapEditorController2 = mainLoader.getController(MapEditorController.class);
                 final MapEditor mapEditor = mapEditorController2.getMapEditor();
                 final LoadMapToEditController loadMapToEditController = mainLoader.getController(LoadMapToEditController.class);
-                final UserMap chosenMap = (UserMap) loadMapToEditController.getLoadUtil().getChosenObject();
+                final UserMap chosenMap2 = (UserMap) loadMapToEditController.getLoadUtil().getChosenObject();
                 mapEditorController2.clearMap();
-                mapEditor.setEditedMap(chosenMap);
-                mapEditor.getConvertStringToGridPane().stringToGridPane(chosenMap.getMapLines());
+                mapEditor.setEditedMap(chosenMap2);
+                mapEditor.getConvertStringToGridPane().stringToGridPane(chosenMap2.getMapLines());
                 mainLoader.getViewLoader().setWindow(MapEditorController.class);
                 loadMapToEditController.getLoadButton().setDisable(true);
                 loadMapToEditController.getDeleteButton().setDisable(true);

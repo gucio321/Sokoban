@@ -57,6 +57,7 @@ public final class RankingController implements Controller {
         try {
             fileManager.getFileSaver().saveFile(fileManager.getRankingFile(), mainLoader.getRankingManager());
         } catch (final SaveUserFileException exception) {
+            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", exception.getMessage());
             exception.printStackTrace();
         }
 

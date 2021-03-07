@@ -49,13 +49,14 @@ public final class ChangeNameController implements Controller {
             return;
         }
 
-        final Game game = mainLoader.getController(GameController.class).getGame();
+        final GameController gameController = mainLoader.getController(GameController.class);
+        final Game game = gameController.getGame();
         final Progress progress = game.getProgress();
         final Stage mainStage = mainLoader.getViewLoader().getMainStage();
         progress.setOldName(progress.getOldName());
         progress.setProgressName(text);
         progress.setModificationDate(LocalDateTime.now());
-        mainLoader.getController(GameController.class).save();
+        gameController.save();
         mainLoader.getViewLoader().setWindow(GameController.class);
         game.getTimeCounter().setPause(false);
         mainStage.addEventFilter(KeyEvent.KEY_RELEASED, game.getResetMapListener());

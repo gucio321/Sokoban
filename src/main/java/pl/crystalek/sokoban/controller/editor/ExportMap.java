@@ -19,7 +19,6 @@ import java.util.List;
 
 public final class ExportMap implements EventHandler<ActionEvent> {
     private final MainLoader mainLoader;
-    private File fileToSave;
 
     ExportMap(final MainLoader mainLoader) {
         this.mainLoader = mainLoader;
@@ -47,7 +46,6 @@ public final class ExportMap implements EventHandler<ActionEvent> {
         fileChooser.setTitle("Wybierz miejsce zapisu mapy");
 
         final File fileToSave = fileChooser.showSaveDialog(mainLoader.getViewLoader().getMainStage());
-        this.fileToSave = fileToSave;
         if (fileToSave == null) {
             mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", "Nie wybrano lokalizacji!");
             return;
@@ -57,6 +55,7 @@ public final class ExportMap implements EventHandler<ActionEvent> {
             try {
                 fileToSave.createNewFile();
             } catch (final IOException exception) {
+                mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", exception.getMessage());
                 exception.printStackTrace();
             }
         }

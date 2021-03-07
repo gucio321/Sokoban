@@ -21,7 +21,6 @@ public final class MapEditorController implements Controller {
     private MapEditor mapEditor;
     private ImportMap importMap;
     private ExportMap exportMap;
-    private SaveMap saveMap;
     @FXML
     private GridPane mapBox;
     @FXML
@@ -42,8 +41,7 @@ public final class MapEditorController implements Controller {
         importMapButton.setOnAction(importMap);
         this.exportMap = new ExportMap(mainLoader);
         exportMapButton.setOnAction(exportMap);
-        this.saveMap = new SaveMap(mainLoader);
-        saveMapButton.setOnAction(saveMap);
+        saveMapButton.setOnAction(new SaveMap(mainLoader));
     }
 
     @FXML
@@ -124,10 +122,6 @@ public final class MapEditorController implements Controller {
 
     public ExportMap getExportMap() {
         return exportMap;
-    }
-
-    public SaveMap getSaveMap() {
-        return saveMap;
     }
 
     public ImportMap getImportMap() {

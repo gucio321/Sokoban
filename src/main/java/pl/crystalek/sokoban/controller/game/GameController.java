@@ -99,7 +99,6 @@ public final class GameController implements Controller {
     }
 
     public void save() {
-        final LoadGameController loadGameController = mainLoader.getController(LoadGameController.class);
         final Progress progress = game.getProgress();
         final String oldSaveName = progress.getOldName();
         if (oldSaveName != null) {
@@ -121,11 +120,12 @@ public final class GameController implements Controller {
             progressList.add(progressCopy);
         }
 
+        final DialogController dialogController = mainLoader.getController(DialogController.class);
         try {
             mainLoader.getFileManager().getFileSaver().saveUserFile(progress, FileSaveType.PROGRESS);
-            mainLoader.getController(DialogController.class).showDialogWindow("info", "Informacja", "Zapis zostal pomyslnie zapisany!");
+            dialogController.showDialogWindow("info", "Informacja", "Zapis zostal pomyslnie zapisany!");
         } catch (final SaveUserFileException exception) {
-            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", exception.getMessage());
+            dialogController.showDialogWindow("error", "Błąd", exception.getMessage());
         }
     }
 
@@ -135,7 +135,6 @@ public final class GameController implements Controller {
     }
 
     private void changeName() {
-        final LoadGameController loadGameController = mainLoader.getController(LoadGameController.class);
         final ChangeNameController changeNameController = mainLoader.getController(ChangeNameController.class);
         final Stage mainStage = mainLoader.getViewLoader().getMainStage();
         mainStage.removeEventFilter(KeyEvent.KEY_RELEASED, game.getResetMapListener());
