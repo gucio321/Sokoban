@@ -22,6 +22,7 @@ public final class ConvertStringToGridPane {
         imageList.remove("error");
         imageList.remove("info");
         imageList.remove("warning");
+        imageList.remove("eraser");
     }
 
     public void stringToGridPane(final List<String> mapLines) {

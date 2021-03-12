@@ -1,10 +1,12 @@
-package pl.crystalek.sokoban.controller;
+package pl.crystalek.sokoban.controller.editor;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import pl.crystalek.sokoban.controller.editor.MapEditorController;
+import pl.crystalek.sokoban.controller.Controller;
+import pl.crystalek.sokoban.controller.DialogController;
+import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.map.UserMap;
 
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 
 public final class MapSettingsController implements Controller {
     private MainLoader mainLoader;
+    private boolean openFromSaveButton;
 
     @FXML
     private TextField playTimeTextField;
@@ -44,7 +47,9 @@ public final class MapSettingsController implements Controller {
         final String playTimeText = playTimeTextField.getText().trim();
         final String bonusForTimeText = bonusForTimeTextField.getText().trim();
         final String mapNameText = mapNameTextField.getText().trim();
-        final UserMap editedMap = mainLoader.getController(MapEditorController.class).getMapEditor().getEditedMap();
+        final MapEditorController mapEditorController = mainLoader.getController(MapEditorController.class);
+        final MapEditor mapEditor = mapEditorController.getMapEditor();
+        final UserMap editedMap = mapEditor.getEditedMap();
 
         if (playTimeText.isEmpty() || bonusForTimeText.isEmpty() || mapNameText.isEmpty()) {
             mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd!", "Pola nie mogą być puste!");
@@ -80,7 +85,14 @@ public final class MapSettingsController implements Controller {
         editedMap.setCloseGameWhenTimeEnd(closeGameCheckBox.isSelected());
         editedMap.setModificationDate(LocalDateTime.now());
         editedMap.setChangesToSave(true);
-        mainLoader.getController(DialogController.class).showDialogWindow("info", "Informacja", "Zmiany zostały zapisane!");
+
+        String dialogSubtitle = "Ustawienia mapy zostaly pomyślnie zapisane.";
+        if (openFromSaveButton) {
+            mapEditorController.getSaveMap().saveMap(mapEditor);
+            openFromSaveButton = false;
+            dialogSubtitle = "Mapa i jej ustawienia zostaly pomyslnie zapisane.";
+        }
+        mainLoader.getController(DialogController.class).showDialogWindow("info", "Informacja", dialogSubtitle);
     }
 
     public TextField getPlayTimeTextField() {
@@ -97,5 +109,9 @@ public final class MapSettingsController implements Controller {
 
     public CheckBox getCloseGameCheckBox() {
         return closeGameCheckBox;
+    }
+
+    public void setOpenFromSaveButton(final boolean openFromSaveButton) {
+        this.openFromSaveButton = openFromSaveButton;
     }
 }

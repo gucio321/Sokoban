@@ -3,7 +3,6 @@ package pl.crystalek.sokoban.controller.editor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import pl.crystalek.sokoban.controller.DialogController;
-import pl.crystalek.sokoban.controller.MapSettingsController;
 import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.io.MainLoader;
@@ -30,6 +29,7 @@ public final class SaveMap implements EventHandler<ActionEvent> {
 
         if (editedMap.getName() == null) {
             mainLoader.getViewLoader().setWindow(MapSettingsController.class);
+            mainLoader.getController(MapSettingsController.class).setOpenFromSaveButton(true);
             return;
         }
         saveMap(mapEditor);

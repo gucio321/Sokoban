@@ -8,7 +8,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import pl.crystalek.sokoban.controller.*;
+import pl.crystalek.sokoban.controller.ConfirmationController;
+import pl.crystalek.sokoban.controller.ConfirmationType;
+import pl.crystalek.sokoban.controller.Controller;
+import pl.crystalek.sokoban.controller.GameModuleChoiceController;
 import pl.crystalek.sokoban.controller.load.LoadMapToEditController;
 import pl.crystalek.sokoban.controller.load.LoadUtil;
 import pl.crystalek.sokoban.editor.MapEditor;
@@ -21,6 +24,7 @@ public final class MapEditorController implements Controller {
     private MapEditor mapEditor;
     private ImportMap importMap;
     private ExportMap exportMap;
+    private SaveMap saveMap;
     @FXML
     private GridPane mapBox;
     @FXML
@@ -41,7 +45,8 @@ public final class MapEditorController implements Controller {
         importMapButton.setOnAction(importMap);
         this.exportMap = new ExportMap(mainLoader);
         exportMapButton.setOnAction(exportMap);
-        saveMapButton.setOnAction(new SaveMap(mainLoader));
+        this.saveMap = new SaveMap(mainLoader);
+        saveMapButton.setOnAction(saveMap);
     }
 
     @FXML
@@ -126,5 +131,9 @@ public final class MapEditorController implements Controller {
 
     public ImportMap getImportMap() {
         return importMap;
+    }
+
+    public SaveMap getSaveMap() {
+        return saveMap;
     }
 }

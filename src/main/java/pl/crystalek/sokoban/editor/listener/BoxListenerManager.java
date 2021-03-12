@@ -1,10 +1,11 @@
 package pl.crystalek.sokoban.editor.listener;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import pl.crystalek.sokoban.controller.editor.MapEditorController;
 import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.io.MainLoader;
@@ -22,6 +23,7 @@ public final class BoxListenerManager {
     private ImageView movedImageView;
     private Image previousImage;
     private Pane previousPane;
+    private Map<String, Image> imageList;
 
     public BoxListenerManager(final MainLoader mainLoader, final MapEditor mapEditor) {
         this.mainLoader = mainLoader;
@@ -31,22 +33,30 @@ public final class BoxListenerManager {
     public void setListeners() {
         final MapEditorController mapEditorController = mainLoader.getController(MapEditorController.class);
         final AnchorPane editedArea = mapEditorController.getEditedAreaPane();
-        final VBox draggedBlockBox = mapEditorController.getBlockBox();
+        final ObservableList<Node> draggedBoxChildren = mapEditorController.getBlockBox().getChildren();
+        draggedBoxChildren.clear();
 
         final Map<String, Image> draggedBlockMap = new HashMap<>(mainLoader.getImageList());
         draggedBlockMap.remove("error");
         draggedBlockMap.remove("info");
         draggedBlockMap.remove("warning");
         this.copyDraggedBlockMap = eventUtil.getCopyImageList(draggedBlockMap);
+        this.imageList = draggedBlockMap;
 
         for (final Image boxImage : draggedBlockMap.values()) {
             final ImageView boxImageView = new ImageView(boxImage);
             boxImageView.setOnMousePressed(new BoxMousePressedListener(this));
-            draggedBlockBox.getChildren().add(boxImageView);
+            draggedBoxChildren.add(boxImageView);
         }
 
         editedArea.setOnMousePressed(new BoxPlaceMousePressedListener(this));
         editedArea.setOnMouseMoved(new BoxMouseMoveListener(this));
+    }
+
+    public void resetVariable() {
+        movedImageView = null;
+        previousImage = null;
+        previousPane = null;
     }
 
     double getOrgSceneX() {
@@ -99,5 +109,9 @@ public final class BoxListenerManager {
 
     void setPreviousPane(final Pane previousPane) {
         this.previousPane = previousPane;
+    }
+
+    Map<String, Image> getImageList() {
+        return imageList;
     }
 }

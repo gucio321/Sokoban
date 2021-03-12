@@ -20,6 +20,7 @@ public final class ConvertGridPaneToString {
         imageList.remove("error");
         imageList.remove("info");
         imageList.remove("warning");
+        imageList.remove("eraser");
     }
 
     public List<String> convertGridPaneToString(final Object object) {

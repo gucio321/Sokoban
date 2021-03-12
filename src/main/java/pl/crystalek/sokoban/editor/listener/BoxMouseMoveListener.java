@@ -74,6 +74,11 @@ final class BoxMouseMoveListener implements EventHandler<MouseEvent> {
             closestPaneChildren.add(imageViewInClosestPane);
         }
 
+        //nie ustawiaj gumki, jeżeli na najbliższym kwadracie nie ma żadnego bloku
+        if (imageViewInClosestPane.getImage() == null && movedBoxImageView.getImage().equals(boxListenerManager.getImageList().get("eraser"))) {
+            return;
+        }
+
         final Image imageFromClosestPane = imageViewInClosestPane.getImage(); //obrazek ktory znajduje sie na najblizszym kwadracie
         if (!draggedImage.equals(imageFromClosestPane)) { //sprawdzanie czy na kwadracie znajduje sie przenoszony obrazek, jesli nie, to ma ustawić obrazek ktory jest w kwadracie
             boxListenerManager.setPreviousImage(imageFromClosestPane);

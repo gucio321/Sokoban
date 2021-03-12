@@ -33,6 +33,7 @@ public final class ViewLoader {
 
         for (final Class controllerClass : new Class[]{ConfirmationController.class, DialogController.class}) {
             final Stage stage = new Stage();
+            stage.setAlwaysOnTop(true);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(new Scene(paneMap.get(controllerClass)));
             stageMap.put(controllerClass, stage);

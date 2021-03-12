@@ -14,11 +14,18 @@ final class BoxMousePressedListener implements EventHandler<MouseEvent> {
     @Override
     public void handle(final MouseEvent event) {
         final ImageView boxImageView = (ImageView) event.getTarget();
+        final ImageView movedImageView = boxListenerManager.getMovedImageView();
 
-        if (!boxImageView.equals(boxListenerManager.getMovedImageView())) {
-            boxListenerManager.setMovedImageView(boxImageView);
-            boxListenerManager.setOrgSceneX(event.getSceneX());
-            boxListenerManager.setOrgSceneY(event.getSceneY());
+        if (movedImageView != null) {
+            return;
         }
+
+        if (boxImageView.equals(movedImageView)) {
+            return;
+        }
+
+        boxListenerManager.setMovedImageView(boxImageView);
+        boxListenerManager.setOrgSceneX(event.getSceneX());
+        boxListenerManager.setOrgSceneY(event.getSceneY());
     }
 }

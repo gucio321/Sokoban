@@ -3,6 +3,7 @@ package pl.crystalek.sokoban.editor.listener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import pl.crystalek.sokoban.editor.model.BoxLocation;
@@ -44,7 +45,13 @@ final class BoxPlaceMousePressedListener implements EventHandler<MouseEvent> {
         }
 
         final ImageView imageView = (ImageView) closestPaneChildren.get(0);
-        imageView.setImage(boxListenerManager.getMovedImageView().getImage());
+        Image movedImage = boxListenerManager.getMovedImageView().getImage();
+        if (movedImage.equals(boxListenerManager.getImageList().get("eraser"))) {
+            boxListenerManager.setPreviousPane(null);
+            movedImage = null;
+        }
+
+        imageView.setImage(movedImage);
         final UserMap editedMap = boxListenerManager.getMapEditor().getEditedMap();
         editedMap.setChangesToSave(true);
         editedMap.setModificationDate(LocalDateTime.now());

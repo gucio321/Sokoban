@@ -66,4 +66,8 @@ public final class MapEditor {
     public ConvertStringToGridPane getConvertStringToGridPane() {
         return convertStringToGridPane;
     }
+
+    public BoxListenerManager getBoxListenerManager() {
+        return boxListenerManager;
+    }
 }

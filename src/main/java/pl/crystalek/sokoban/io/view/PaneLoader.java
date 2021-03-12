@@ -20,6 +20,7 @@ public final class PaneLoader {
 
         final ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(mainLoader.getSettings().getBrightness());
+        final ButtonPressedSoundListener buttonPressedSoundListener = new ButtonPressedSoundListener(mainLoader);
 
         for (final FXMLLoader fxmlLoader : fxmlList) {
             final Pane root = fxmlLoader.getRoot();
@@ -29,7 +30,7 @@ public final class PaneLoader {
             for (final Node child : children) {
                 if (child instanceof Button) {
                     final Button button = (Button) child;
-                    button.addEventFilter(MouseEvent.MOUSE_PRESSED, new ButtonPressedSoundListener(mainLoader));
+                    button.addEventFilter(MouseEvent.MOUSE_PRESSED, buttonPressedSoundListener);
                 }
             }
 

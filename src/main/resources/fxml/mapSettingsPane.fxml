@@ -8,7 +8,7 @@
             prefHeight="820.0" prefWidth="1457.0"
             style="-fx-background-image: url('/img/gui/background/background.png')" stylesheets="/css/button.css"
             xmlns="http://javafx.com/javafx/8.0.202-ea"
-            fx:controller="pl.crystalek.sokoban.controller.MapSettingsController">
+            fx:controller="pl.crystalek.sokoban.controller.editor.MapSettingsController">
     <children>
         <Button layoutX="809.0" layoutY="691.0" mnemonicParsing="false" onAction="#back" prefHeight="79.0"
                 prefWidth="260.0" text="Powrót" textAlignment="CENTER" textFill="WHITE">

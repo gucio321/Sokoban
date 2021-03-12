@@ -1,6 +1,7 @@
 blocks/bomb.png
 blocks/bricks.png
 blocks/crate.png
+blocks/eraser.png
 blocks/grass.png
 blocks/player.png
 blocks/tree.png

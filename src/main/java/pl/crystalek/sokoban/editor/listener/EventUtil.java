@@ -86,8 +86,6 @@ final class EventUtil {
         movedBoxImageView.setTranslateX(0);
         movedBoxImageView.setTranslateY(0);
         removeLastImage();
-        boxListenerManager.setMovedImageView(null);
-        boxListenerManager.setPreviousImage(null);
-        boxListenerManager.setPreviousPane(null);
+        boxListenerManager.resetVariable();
     }
 }

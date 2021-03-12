@@ -17,6 +17,7 @@ public final class ConvertStringImageToImage {
         imageList.remove("crate");
         imageList.remove("bricks");
         imageList.remove("player");
+        imageList.remove("eraser");
     }
 
     public Image[][] convertImageToStringImage(final String[][] stringImageList) {
