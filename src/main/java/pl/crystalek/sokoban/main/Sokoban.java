@@ -32,8 +32,10 @@ public final class Sokoban extends Application {
             mainLoader.load();
         } catch (final LoadUserFileException | LoadResourcesException | CreateFileException | IOException | LineUnavailableException | UnsupportedAudioFileException exception) {
             exception.printStackTrace();
+            System.exit(-1);
             return;
         }
+
         final Scene scene = new Scene(viewLoader.getPane(SokobanMainController.class));
         scene.setOnKeyPressed(new CloseGameListener(mainLoader));
         stage.setScene(scene);

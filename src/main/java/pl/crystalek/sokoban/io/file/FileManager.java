@@ -46,7 +46,7 @@ public final class FileManager {
         fileSaver.saveFiles();
     }
 
-    private void checkFilesExist() throws CreateFileException {
+    public void checkFilesExist() throws CreateFileException {
         try {
             final File programDirectory = new File(FileSystemView.getFileSystemView().getDefaultDirectory(), "Sokoban");
             final File userMapDirectory = new File(programDirectory, "your maps");
@@ -146,5 +146,9 @@ public final class FileManager {
 
     public Map<String, InputStream> getSoundFileList() {
         return soundFileList;
+    }
+
+    public FileLoader getFileLoader() {
+        return fileLoader;
     }
 }

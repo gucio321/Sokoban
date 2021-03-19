@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-final class FileLoader {
+public final class FileLoader {
     private final FileManager fileManager;
     private final MainLoader mainLoader;
 
@@ -24,7 +24,7 @@ final class FileLoader {
         this.mainLoader = mainLoader;
     }
 
-    void loadFiles() throws LoadResourcesException, LoadUserFileException {
+    public void loadFiles() throws LoadResourcesException, LoadUserFileException {
         loadResources();
         mainLoader.setSettings(loadUserFile(fileManager.getSettingsFile()).map(object -> (Settings) object).orElseGet(Settings::new));
         mainLoader.setRankingManager(loadUserFile(fileManager.getRankingFile()).map(object -> (RankingManager) object).orElseGet(RankingManager::new));

@@ -61,6 +61,7 @@ public final class ConfirmationController implements Controller {
                     load.getDeleteButton().setDisable(true);
                     break;
                 }
+
                 final UserMap chosenMap = (UserMap) chosenObject;
                 mainLoader.getMapManager().deleteMap(chosenMap);
                 mainLoader.getFileManager().getUserMapFileList().get(chosenMap.getName()).delete();
@@ -89,7 +90,7 @@ public final class ConfirmationController implements Controller {
                 break;
             case IMPORTMAP:
                 final MapEditorController mapEditorController4 = mainLoader.getController(MapEditorController.class);
-                mapEditorController4.getImportMap().showFileChooser(mapEditorController4, mapEditorController4.getMapEditor());
+                mapEditorController4.getImportMap().showFileChooser();
                 break;
             case LEAVEGAME:
                 mainLoader.getController(GameController.class).leaveGame();

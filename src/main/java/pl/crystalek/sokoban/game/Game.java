@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import pl.crystalek.sokoban.editor.convert.ConvertGridPaneToString;
 import pl.crystalek.sokoban.game.convert.ConvertImageToStringImage;
 import pl.crystalek.sokoban.game.convert.ConvertStringImageToImage;
@@ -41,8 +42,9 @@ public final class Game {
         this.oldProgress = oldProgress;
         this.mapBox = mapBox;
         this.playerMoveListener = new PlayerMoveListener(this, mainLoader);
-        mainLoader.getViewLoader().getMainStage().addEventFilter(KeyEvent.KEY_PRESSED, playerMoveListener);
-        mainLoader.getViewLoader().getMainStage().addEventFilter(KeyEvent.KEY_RELEASED, resetMapListener);
+        final Stage mainStage = mainLoader.getViewLoader().getMainStage();
+        mainStage.addEventFilter(KeyEvent.KEY_PRESSED, playerMoveListener);
+        mainStage.addEventFilter(KeyEvent.KEY_RELEASED, resetMapListener);
     }
 
     public String loadGame(final List<String> mapLines, final Progress progress) {
@@ -91,6 +93,7 @@ public final class Game {
                 mapBox.add(imageView, columnNumber, rowNumber);
             }
         }
+
         if (playerCount != 1) {
             return "Liczba graczy na mapie musi być równa 1!";
         }

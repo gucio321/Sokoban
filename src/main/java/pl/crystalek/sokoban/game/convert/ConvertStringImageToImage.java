@@ -21,6 +21,9 @@ public final class ConvertStringImageToImage {
     }
 
     public Image[][] convertImageToStringImage(final String[][] stringImageList) {
+        if (stringImageList.length == 0) {
+            return new Image[][]{};
+        }
         final Image[][] deletedImageList = new Image[stringImageList.length][stringImageList[0].length];
 
         for (int i = 0; i < stringImageList.length; i++) {

@@ -7,10 +7,10 @@ import pl.crystalek.sokoban.controller.ConfirmationController;
 import pl.crystalek.sokoban.controller.ConfirmationType;
 import pl.crystalek.sokoban.io.MainLoader;
 
-final class CloseGameListener implements EventHandler<KeyEvent> {
+public final class CloseGameListener implements EventHandler<KeyEvent> {
     private final MainLoader mainLoader;
 
-    CloseGameListener(final MainLoader mainLoader) {
+    public CloseGameListener(final MainLoader mainLoader) {
         this.mainLoader = mainLoader;
     }
 

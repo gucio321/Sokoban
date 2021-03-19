@@ -2,10 +2,13 @@ package pl.crystalek.sokoban.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import pl.crystalek.sokoban.io.MainLoader;
 
 public final class SokobanMainController implements Controller {
     private MainLoader mainLoader;
+    @FXML
+    private Button jd;
 
     @Override
     public void setManagers(final MainLoader mainLoader) {
@@ -34,4 +37,7 @@ public final class SokobanMainController implements Controller {
         mainLoader.getViewLoader().setWindow(GameModuleChoiceController.class);
     }
 
+    public Button getJd() {
+        return jd;
+    }
 }

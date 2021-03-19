@@ -45,10 +45,15 @@ public final class ExportMap implements EventHandler<ActionEvent> {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt"));
         fileChooser.setTitle("Wybierz miejsce zapisu mapy");
 
-        final File fileToSave = fileChooser.showSaveDialog(mainLoader.getViewLoader().getMainStage());
+        checkFile(fileChooser.showSaveDialog(mainLoader.getViewLoader().getMainStage()));
+    }
+
+    public boolean checkFile(final File fileToSave) {
+        final MapEditor mapEditor = mainLoader.getController(MapEditorController.class).getMapEditor();
+
         if (fileToSave == null) {
             mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", "Nie wybrano lokalizacji!");
-            return;
+            return false;
         }
 
         if (!fileToSave.exists()) {
@@ -73,5 +78,7 @@ public final class ExportMap implements EventHandler<ActionEvent> {
         } catch (final IOException exception) {
             exception.printStackTrace();
         }
+
+        return true;
     }
 }
