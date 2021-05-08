@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import pl.crystalek.sokoban.editor.convert.ConvertGridPaneToString;
 import pl.crystalek.sokoban.game.convert.ConvertImageToStringImage;
 import pl.crystalek.sokoban.game.convert.ConvertStringImageToImage;
+import pl.crystalek.sokoban.game.count.TimeCounter;
 import pl.crystalek.sokoban.game.listener.PlayerMoveListener;
 import pl.crystalek.sokoban.game.listener.ResetMapListener;
 import pl.crystalek.sokoban.game.progress.Progress;

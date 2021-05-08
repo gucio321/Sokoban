@@ -81,7 +81,5 @@
             <version>4.0.16-alpha</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
-
 </project>

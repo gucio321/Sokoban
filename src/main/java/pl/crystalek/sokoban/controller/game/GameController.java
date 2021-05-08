@@ -12,7 +12,7 @@ import pl.crystalek.sokoban.controller.*;
 import pl.crystalek.sokoban.controller.load.LoadGameController;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.game.Game;
-import pl.crystalek.sokoban.game.TimeCounter;
+import pl.crystalek.sokoban.game.count.TimeCounter;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.io.file.FileSaveType;
@@ -58,7 +58,7 @@ public final class GameController implements Controller {
         mainStage.removeEventFilter(KeyEvent.KEY_RELEASED, game.getResetMapListener());
         final TimeCounter timeCounter = game.getTimeCounter();
         final Ranking ranking = game.getProgress().getRanking();
-        ranking.setPlayTime(ranking.getPlayTime() + timeCounter.getPlayTime());
+        ranking.setPlayTime(ranking.getPlayTime() + timeCounter.getTimeCounterTask().getPlayTime());
         timeCounter.getTimer().cancel();
 
         mainLoader.getViewLoader().setWindow(ChooseByDifficultyController.class);
@@ -79,7 +79,7 @@ public final class GameController implements Controller {
         mapBox.getChildren().clear();
         final TimeCounter timeCounter = game.getTimeCounter();
         final Ranking ranking = game.getProgress().getRanking();
-        ranking.setPlayTime(ranking.getPlayTime() + timeCounter.getPlayTime());
+        ranking.setPlayTime(ranking.getPlayTime() + timeCounter.getTimeCounterTask().getPlayTime());
         timeCounter.getTimer().cancel();
     }
 
@@ -108,7 +108,7 @@ public final class GameController implements Controller {
 
         progress.setMapLines(game.getConvertGridPaneToString().convertGridPaneToString(game.getBoxLocationList()));
         progress.setStringEditedBlocks(game.getConvertImageToStringImage().convertImageToStringImage(game.getDeleteImageList()));
-        progress.getRanking().setPlayTime(game.getTimeCounter().getPlayTime() + progress.getRanking().getPlayTime());
+        progress.getRanking().setPlayTime(game.getTimeCounter().getTimeCounterTask().getPlayTime() + progress.getRanking().getPlayTime());
         progress.setChangesToSave(false);
         final List<Progress> progressList = mainLoader.getProgressManager().getSaveList();
         final Progress progressCopy = SerializationUtils.clone(progress);
@@ -139,7 +139,7 @@ public final class GameController implements Controller {
         final Stage mainStage = mainLoader.getViewLoader().getMainStage();
         mainStage.removeEventFilter(KeyEvent.KEY_RELEASED, game.getResetMapListener());
         mainStage.removeEventFilter(KeyEvent.KEY_PRESSED, game.getPlayerMoveListener());
-        game.getTimeCounter().setPause(true);
+        game.getTimeCounter().getTimeCounterTask().setPause(true);
         changeNameController.getTextLabel().setText("Podaj nazwe zapisu");
         mainLoader.getViewLoader().setWindow(ChangeNameController.class);
     }

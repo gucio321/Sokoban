@@ -1,11 +1,9 @@
-package pl.crystalek.sokoban.game;
+package pl.crystalek.sokoban.game.count;
 
-import javafx.application.Platform;
-import javafx.scene.control.Label;
 import pl.crystalek.sokoban.controller.LevelFinishController;
-import pl.crystalek.sokoban.controller.LevelLostController;
 import pl.crystalek.sokoban.controller.game.GameController;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
+import pl.crystalek.sokoban.game.Game;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.io.file.FileManager;
@@ -14,60 +12,30 @@ import pl.crystalek.sokoban.util.TimeUtil;
 
 import javax.sound.sampled.Clip;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public final class TimeCounter {
     private final static int POINT_FOR_TIME = 20;
     private final MainLoader mainLoader;
-    private int counting;
-    private int playTime;
-    private Timer timer;
-    private boolean pause = false;
+    private TimeCounterTask timeCounterTask;
 
     public TimeCounter(final MainLoader mainLoader) {
         this.mainLoader = mainLoader;
     }
 
     public void start() {
-        final GameController gameController = mainLoader.getController(GameController.class);
-        final Label timeLabel = gameController.getTimeLabel();
-        final Progress progress = gameController.getGame().getOldProgress();
-        counting = progress.getTimeInSeconds();
-
         final Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (!pause) {
-                    if (counting > 0) {
-                        Platform.runLater(() -> timeLabel.setText(String.valueOf(counting)));
-                        counting--;
-                    } else {
-                        if (progress.isCloseGameWhenTimeEnd()) {
-                            cancel();
-                            Platform.runLater(() -> mainLoader.getController(LevelLostController.class).getPlayTime().setText(TimeUtil.getDateInString((progress.getRanking().getPlayTime() + playTime) * 1_000L, ", ", true)));
-                            mainLoader.getViewLoader().setWindow(LevelLostController.class);
-                            final Clip clip = mainLoader.getSoundList().get("defeat");
-                            clip.setFramePosition(0);
-                            clip.start();
-                        }
-                    }
-
-                    playTime++;
-                }
-            }
-        }, 0, 1000);
-        this.timer = timer;
+        this.timeCounterTask = new TimeCounterTask(mainLoader);
+        timer.schedule(timeCounterTask, 0, 1000);
     }
 
     public void stop() {
-        timer.cancel();
+        timeCounterTask.cancel();
         final Game game = mainLoader.getController(GameController.class).getGame();
         final Progress progress = game.getOldProgress();
         final Ranking ranking = progress.getRanking();
 
-        final int playTime = ranking.getPlayTime() + this.playTime;
-        final int pointsForTime = Math.min(counting * POINT_FOR_TIME, progress.getBonus());
+        final int playTime = ranking.getPlayTime() + timeCounterTask.getPlayTime();
+        final int pointsForTime = Math.min(timeCounterTask.getCounting() * POINT_FOR_TIME, progress.getBonus());
 
         ranking.setPlayTime(playTime);
         ranking.setPointsForTime(pointsForTime);
@@ -93,15 +61,11 @@ public final class TimeCounter {
         clip.start();
     }
 
-    public void setPause(final boolean pause) {
-        this.pause = pause;
+    public TimeCounterTask getTimeCounterTask() {
+        return timeCounterTask;
     }
 
-    public Timer getTimer() {
-        return timer;
-    }
-
-    public int getPlayTime() {
-        return playTime;
+    public TimeCounterTask getTimer() {
+        return timeCounterTask;
     }
 }

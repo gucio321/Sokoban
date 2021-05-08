@@ -40,6 +40,7 @@ final class ConvertTester {
             exception.printStackTrace();
             System.exit(-1);
         }
+
         this.mainLoader = mainLoader;
     }
 

@@ -4,7 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import pl.crystalek.sokoban.game.Game;
-import pl.crystalek.sokoban.game.TimeCounter;
+import pl.crystalek.sokoban.game.count.TimeCounter;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.ranking.Ranking;
 
@@ -26,7 +26,7 @@ public final class ResetMapListener implements EventHandler<KeyEvent> {
         final TimeCounter timeCounter = game.getTimeCounter();
         final Ranking ranking = progress.getRanking();
 
-        ranking.setPlayTime(ranking.getPlayTime() + timeCounter.getPlayTime());
+        ranking.setPlayTime(ranking.getPlayTime() + timeCounter.getTimeCounterTask().getPlayTime());
         timeCounter.getTimer().cancel();
         progress.setSetCrates(oldProgress.getSetCrates());
 

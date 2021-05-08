@@ -31,7 +31,7 @@ public final class ChangeNameController implements Controller {
         final Game game = mainLoader.getController(GameController.class).getGame();
         mainStage.addEventFilter(KeyEvent.KEY_RELEASED, game.getResetMapListener());
         mainStage.addEventFilter(KeyEvent.KEY_PRESSED, game.getPlayerMoveListener());
-        game.getTimeCounter().setPause(false);
+        game.getTimeCounter().getTimeCounterTask().setPause(false);
         mainLoader.getViewLoader().setWindow(GameController.class);
         nameTextField.setText("");
     }
@@ -58,7 +58,7 @@ public final class ChangeNameController implements Controller {
         progress.setModificationDate(LocalDateTime.now());
         gameController.save();
         mainLoader.getViewLoader().setWindow(GameController.class);
-        game.getTimeCounter().setPause(false);
+        game.getTimeCounter().getTimeCounterTask().setPause(false);
         mainStage.addEventFilter(KeyEvent.KEY_RELEASED, game.getResetMapListener());
         mainStage.addEventFilter(KeyEvent.KEY_PRESSED, game.getPlayerMoveListener());
         nameTextField.setText("");
