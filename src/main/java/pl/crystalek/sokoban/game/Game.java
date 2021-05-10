@@ -13,6 +13,7 @@ import pl.crystalek.sokoban.game.listener.PlayerMoveListener;
 import pl.crystalek.sokoban.game.listener.ResetMapListener;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 
 import java.util.HashMap;
 import java.util.List;
@@ -96,12 +97,12 @@ public final class Game {
         }
 
         if (playerCount != 1) {
-            return "Liczba graczy na mapie musi być równa 1!";
+            return Lang.MAX_PLAYER_ON_MAP;
         }
 
         if (progress.getProgressName() == null) {
             if (bombCount != crateCount || bombCount == 0) {
-                return "Ilość skrzyń i bomb musi być równa i różna od zera!";
+                return Lang.ITEM_ERROR_COUNT;
             }
         }
 

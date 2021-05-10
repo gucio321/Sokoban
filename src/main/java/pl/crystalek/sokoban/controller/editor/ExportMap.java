@@ -8,6 +8,7 @@ import pl.crystalek.sokoban.controller.ConfirmationType;
 import pl.crystalek.sokoban.controller.DialogController;
 import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.map.UserMap;
 
 import javax.swing.filechooser.FileSystemView;
@@ -31,7 +32,7 @@ public final class ExportMap implements EventHandler<ActionEvent> {
         if (editedMap.isChangesToSave()) {
             final ConfirmationController controller = mainLoader.getController(ConfirmationController.class);
             controller.setConfirmationType(ConfirmationType.EXPORTMAP);
-            controller.getTextLabel().setText("Czy na pewno chcesz wyeksportować mapę bez aktualnych poprawek?");
+            controller.getTextLabel().setText(Lang.DO_YOU_WANT_EXPORT_MAP);
             mainLoader.getViewLoader().getStage(ConfirmationController.class).show();
             return;
         }
@@ -43,7 +44,7 @@ public final class ExportMap implements EventHandler<ActionEvent> {
         fileChooser.setInitialDirectory(FileSystemView.getFileSystemView().getDefaultDirectory());
         fileChooser.setInitialFileName(mapEditor.getEditedMap().getName());
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt"));
-        fileChooser.setTitle("Wybierz miejsce zapisu mapy");
+        fileChooser.setTitle(Lang.CHOOSE_SAVE_LOCATION);
 
         checkFile(fileChooser.showSaveDialog(mainLoader.getViewLoader().getMainStage()));
     }
@@ -52,7 +53,7 @@ public final class ExportMap implements EventHandler<ActionEvent> {
         final MapEditor mapEditor = mainLoader.getController(MapEditorController.class).getMapEditor();
 
         if (fileToSave == null) {
-            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", "Nie wybrano lokalizacji!");
+            mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, Lang.NOT_CHOOSE_LOCATION);
             return false;
         }
 
@@ -60,7 +61,7 @@ public final class ExportMap implements EventHandler<ActionEvent> {
             try {
                 fileToSave.createNewFile();
             } catch (final IOException exception) {
-                mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", exception.getMessage());
+                mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, Lang.EXPORT_FILE_ERROR);
                 exception.printStackTrace();
             }
         }

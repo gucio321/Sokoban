@@ -2,6 +2,7 @@ package pl.crystalek.sokoban.io;
 
 import pl.crystalek.sokoban.exception.LoadUserFileException;
 import pl.crystalek.sokoban.io.file.FileManager;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.map.DefaultMap;
 import pl.crystalek.sokoban.map.MapManager;
 import pl.crystalek.sokoban.map.UserMap;
@@ -36,7 +37,7 @@ final class MapLoader {
                         Integer.parseInt(bufferedReaderLines.get(3)),
                         Integer.parseInt(bufferedReaderLines.get(2)) * 60));
             } catch (final IOException exception) {
-                throw new LoadUserFileException("Wystapił błąd podczas ładowania mapy: " + entry.getKey(), exception);
+                throw new LoadUserFileException(Lang.ERROR_WHILE_LOADING_MAP_FILE.replace("{MAP_NAME}", entry.getKey()), exception);
             }
         }
         return mapManager;
@@ -53,7 +54,7 @@ final class MapLoader {
                 final UserMap userMap = (UserMap) objectInputStream.readObject();
                 mapManager.addMap(userMap);
             } catch (final IOException | ClassNotFoundException exception) {
-                throw new LoadUserFileException("Wystapił błąd podczas ładowania mapy: " + entry.getKey(), exception);
+                throw new LoadUserFileException(Lang.ERROR_WHILE_LOADING_MAP_FILE.replace("{MAP_NAME}", entry.getKey()), exception);
             }
         }
         return mapManager;

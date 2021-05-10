@@ -8,6 +8,7 @@ import pl.crystalek.sokoban.controller.Controller;
 import pl.crystalek.sokoban.controller.DialogController;
 import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.map.UserMap;
 
 import java.time.LocalDateTime;
@@ -52,13 +53,13 @@ public final class MapSettingsController implements Controller {
         final UserMap editedMap = mapEditor.getEditedMap();
 
         if (playTimeText.isEmpty() || bonusForTimeText.isEmpty() || mapNameText.isEmpty()) {
-            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd!", "Pola nie mogą być puste!");
+            mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, Lang.NOT_EMPTY_FIELD);
             return;
         }
 
         if (!mapNameText.equals(editedMap.getName())) {
             if (mainLoader.getMapManager().getUserMapList().stream().anyMatch(x -> x.getName().equalsIgnoreCase(mapNameText))) {
-                mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd!", "Taka nazwa mapy już istnieje!");
+                mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, Lang.MAP_NAME_EXIST);
                 return;
             }
         }
@@ -72,7 +73,7 @@ public final class MapSettingsController implements Controller {
                 throw new NumberFormatException();
             }
         } catch (final NumberFormatException exception) {
-            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd!", "Pola muszą być liczbą całkowitą z zakresu 0 - " + Integer.MAX_VALUE);
+            mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, Lang.RANGE_FIELD_ERROR);
             return;
         }
 
@@ -86,13 +87,13 @@ public final class MapSettingsController implements Controller {
         editedMap.setModificationDate(LocalDateTime.now());
         editedMap.setChangesToSave(true);
 
-        String dialogSubtitle = "Ustawienia mapy zostaly pomyślnie zapisane.";
+        String dialogSubtitle = Lang.SAVE_MAP_SETTINGS;
         if (openFromSaveButton) {
             mapEditorController.getSaveMap().saveMap(mapEditor);
             openFromSaveButton = false;
-            dialogSubtitle = "Mapa i jej ustawienia zostaly pomyslnie zapisane.";
+            dialogSubtitle = Lang.SAVE_MAP_AND_SETTINGS;
         }
-        mainLoader.getController(DialogController.class).showDialogWindow("info", "Informacja", dialogSubtitle);
+        mainLoader.getController(DialogController.class).showDialogWindow("info", Lang.TITLE_INFO, dialogSubtitle);
     }
 
     public TextField getPlayTimeTextField() {

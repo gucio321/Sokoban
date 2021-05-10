@@ -5,6 +5,7 @@ import pl.crystalek.sokoban.exception.LoadResourcesException;
 import pl.crystalek.sokoban.exception.LoadUserFileException;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
@@ -69,12 +70,12 @@ public final class FileManager {
 
             if (!settingsFile.exists()) {
                 settingsFile.createNewFile();
-                System.out.println("Plik konfiguracyjny został utworzony!");
+                System.out.println(Lang.CREATE_SETTINGS_FILE);
             }
 
             if (!rankingFile.exists()) {
                 rankingFile.createNewFile();
-                System.out.println("Plik rankingowy został utworzony!");
+                System.out.println(Lang.CREATE_RANKING_FILE);
             }
 
 
@@ -84,7 +85,7 @@ public final class FileManager {
             this.settingsFile = settingsFile;
             this.rankingFile = rankingFile;
         } catch (final IOException exception) {
-            throw new CreateFileException("Wystapił błąd podczas próby tworzenia plików konfiguracyjnych", exception);
+            throw new CreateFileException(Lang.ERROR_WHILE_CREATING, exception);
         }
     }
 

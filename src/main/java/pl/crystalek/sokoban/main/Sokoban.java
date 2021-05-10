@@ -11,6 +11,7 @@ import pl.crystalek.sokoban.exception.LoadUserFileException;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.io.view.ViewLoader;
+import pl.crystalek.sokoban.lang.Lang;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -48,7 +49,7 @@ public final class Sokoban extends Application {
     public void stop() {
         try {
             mainLoader.getFileManager().save();
-            System.out.println("Zapisywanie zostalo zakonczone");
+            System.out.println(Lang.SAVING_COMPLETE);
         } catch (final SaveUserFileException exception) {
             exception.printStackTrace();
         }

@@ -11,6 +11,7 @@ import pl.crystalek.sokoban.controller.Controller;
 import pl.crystalek.sokoban.controller.editor.MapEditorController;
 import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.map.UserMap;
 
 public final class LoadMapToEditController implements Controller, Load {
@@ -43,7 +44,7 @@ public final class LoadMapToEditController implements Controller, Load {
         final ConfirmationController confirmationController = mainLoader.getController(ConfirmationController.class);
         confirmationController.setConfirmationType(ConfirmationType.DELETE);
         confirmationController.setLoad(this);
-        confirmationController.getTextLabel().setText("Czy na pewno chcesz usunąć tą mapę?");
+        confirmationController.getTextLabel().setText(Lang.DO_YOU_WANT_DELETE_MAP);
         mainLoader.getViewLoader().getStage(ConfirmationController.class).show();
     }
 
@@ -54,7 +55,7 @@ public final class LoadMapToEditController implements Controller, Load {
         if (editedMap.isChangesToSave()) {
             final ConfirmationController confirmationController = mainLoader.getController(ConfirmationController.class);
             confirmationController.setConfirmationType(ConfirmationType.LOADMAP);
-            confirmationController.getTextLabel().setText("Czy na pewno chcesz wczytać nową mape? Posiadasz niezapisane zmiany na aktualnie edytowanej mapie! Jeśli klikniesz tak, zmiany zostaną utracone.");
+            confirmationController.getTextLabel().setText(Lang.DO_YOU_WANT_LOAD_NEW_MAP);
             mainLoader.getViewLoader().getStage(ConfirmationController.class).show();
             return;
         }

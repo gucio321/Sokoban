@@ -6,6 +6,7 @@ import javafx.scene.input.KeyEvent;
 import pl.crystalek.sokoban.controller.ConfirmationController;
 import pl.crystalek.sokoban.controller.ConfirmationType;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 
 public final class CloseGameListener implements EventHandler<KeyEvent> {
     private final MainLoader mainLoader;
@@ -22,7 +23,7 @@ public final class CloseGameListener implements EventHandler<KeyEvent> {
 
         final ConfirmationController confirmationController = mainLoader.getController(ConfirmationController.class);
         confirmationController.setConfirmationType(ConfirmationType.EXIT);
-        confirmationController.getTextLabel().setText("Czy na pewno chcesz zamknąć grę? Wszystkie niezapisane zmiany zostaną utracone");
+        confirmationController.getTextLabel().setText(Lang.DO_YOU_WANT_EXIT_GAME);
         mainLoader.getViewLoader().getStage(ConfirmationController.class).show();
     }
 }

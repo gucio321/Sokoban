@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.io.file.FileManager;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.ranking.Ranking;
 import pl.crystalek.sokoban.util.TimeUtil;
 
@@ -57,7 +58,7 @@ public final class RankingController implements Controller {
         try {
             fileManager.getFileSaver().saveFile(fileManager.getRankingFile(), mainLoader.getRankingManager());
         } catch (final SaveUserFileException exception) {
-            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", exception.getMessage());
+            mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, exception.getMessage());
             exception.printStackTrace();
         }
 

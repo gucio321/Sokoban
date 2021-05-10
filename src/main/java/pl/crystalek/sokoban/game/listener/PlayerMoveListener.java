@@ -46,6 +46,7 @@ public final class PlayerMoveListener implements EventHandler<KeyEvent> {
         if (columnToGetBox < 0 || rowToGetBox < 0 || columnToGetBox > 29 || rowToGetBox > 19) {
             return;
         }
+
         final Player player = game.getPlayer();
         final ImageView imageViewOverPlayer = game.getBoxLocationList()[columnToGetBox][rowToGetBox];
         final Image imageOverPlayer = imageViewOverPlayer.getImage();

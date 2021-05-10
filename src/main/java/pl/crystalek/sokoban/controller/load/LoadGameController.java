@@ -11,6 +11,7 @@ import pl.crystalek.sokoban.controller.game.GameController;
 import pl.crystalek.sokoban.game.Game;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.map.DefaultMap;
 import pl.crystalek.sokoban.map.UserMap;
 
@@ -50,7 +51,7 @@ public final class LoadGameController implements Controller, Load {
         final ConfirmationController confirmationController = mainLoader.getController(ConfirmationController.class);
         confirmationController.setConfirmationType(ConfirmationType.DELETE);
         confirmationController.setLoad(this);
-        confirmationController.getTextLabel().setText("Czy na pewno chcesz usunąć " + (loadUtil.getChosenObject() instanceof Progress ? "ten zapis?" : "tą mapę?"));
+        confirmationController.getTextLabel().setText(Lang.DO_YOU_WANT_DELETE + (loadUtil.getChosenObject() instanceof Progress ? Lang.DELETE_PROGRESS : Lang.DELETE_MAP));
         mainLoader.getViewLoader().getStage(ConfirmationController.class).show();
     }
 
@@ -74,7 +75,7 @@ public final class LoadGameController implements Controller, Load {
         gameController.setGame(game);
         final String start = game.loadGame(mapLines, SerializationUtils.clone(progress));
         if (!start.isEmpty()) {
-            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", start);
+            mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, start);
             return;
         }
 

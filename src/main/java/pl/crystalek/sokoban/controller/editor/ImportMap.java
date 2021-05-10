@@ -9,6 +9,7 @@ import pl.crystalek.sokoban.controller.ConfirmationType;
 import pl.crystalek.sokoban.controller.DialogController;
 import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.map.UserMap;
 
 import javax.swing.filechooser.FileSystemView;
@@ -29,7 +30,7 @@ public final class ImportMap implements EventHandler<ActionEvent> {
         if (mainLoader.getController(MapEditorController.class).getMapEditor().getEditedMap().isChangesToSave()) {
             final ConfirmationController controller = mainLoader.getController(ConfirmationController.class);
             controller.setConfirmationType(ConfirmationType.IMPORTMAP);
-            controller.getTextLabel().setText("Masz niezapisane zmiany na aktualnie edytowanej mapie, czy na pewno chcesz załadować nową mapę?");
+            controller.getTextLabel().setText(Lang.DO_YOU_WANT_LOAD_MAP);
             mainLoader.getViewLoader().getStage(ConfirmationController.class).show();
             return;
         }
@@ -41,7 +42,7 @@ public final class ImportMap implements EventHandler<ActionEvent> {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(FileSystemView.getFileSystemView().getDefaultDirectory());
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt"));
-        fileChooser.setTitle("Wybierz lokaliacje pliku mapy");
+        fileChooser.setTitle(Lang.CHOOSE_MAP_LOCATION);
 
         checkFile(fileChooser.showOpenDialog(mainLoader.getViewLoader().getMainStage()));
 
@@ -49,7 +50,7 @@ public final class ImportMap implements EventHandler<ActionEvent> {
 
     public boolean checkFile(final File chosenFile) {
         if (chosenFile == null || chosenFile.isDirectory()) {
-            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", "Nie wybrano lokalizacji!");
+            mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, Lang.NOT_CHOOSE_LOCATION);
             return false;
         }
 
@@ -63,15 +64,15 @@ public final class ImportMap implements EventHandler<ActionEvent> {
 
         if (mapLines.isEmpty()) {
             mainLoader.getController(DialogController.class).showDialogWindow("error",
-                    "Wczytanie nie powiodło się",
-                    "Plik mapy nie może być pusty!");
+                    Lang.LOAD_FILE_ERROR,
+                    Lang.EMPTY_FILE_CONTENT);
             return false;
         }
 
         if (mapLines.size() > 20) {
             mainLoader.getController(DialogController.class).showDialogWindow("error",
-                    "Wczytanie nie powiodło się",
-                    "Mapa nie może mieć więcej niż 20 rzędów!");
+                    Lang.LOAD_FILE_ERROR,
+                    Lang.TOO_MANY_ROWS);
             return false;
         }
 
@@ -79,8 +80,8 @@ public final class ImportMap implements EventHandler<ActionEvent> {
             final char[] lineInChars = mapLine.toCharArray();
             if (lineInChars.length > 30) {
                 mainLoader.getController(DialogController.class).showDialogWindow("error",
-                        "Wczytanie nie powiodło się",
-                        "Mapa nie może mieć więcej niż 30 kolumn!");
+                        Lang.LOAD_FILE_ERROR,
+                        Lang.TOO_MANY_COLUMNS);
                 return false;
             }
             for (final char character : lineInChars) {
@@ -88,8 +89,8 @@ public final class ImportMap implements EventHandler<ActionEvent> {
                     continue;
                 }
                 mainLoader.getController(DialogController.class).showDialogWindow("error",
-                        "Wczytanie nie powiodło się",
-                        "W pliku mapy wykryto niedozwolony znak.");
+                        Lang.LOAD_FILE_ERROR,
+                        Lang.NOT_ALLOWED_SIGN);
                 return false;
             }
         }

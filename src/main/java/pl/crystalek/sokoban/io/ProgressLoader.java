@@ -3,6 +3,7 @@ package pl.crystalek.sokoban.io;
 import pl.crystalek.sokoban.exception.LoadUserFileException;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.game.progress.ProgressManager;
+import pl.crystalek.sokoban.lang.Lang;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,7 +25,7 @@ public final class ProgressLoader {
                 progressManager.addSave(progress);
 
             } catch (final IOException | ClassNotFoundException exception) {
-                throw new LoadUserFileException("Wystapił błąd podczas ładowania zapisów gry: " + entry.getKey(), exception);
+                throw new LoadUserFileException(Lang.ERROR_WHILE_LOADING_PROGRESS_FILE.replace("{PROGRESS_NAME}", entry.getKey()), exception);
             }
         }
         return progressManager;

@@ -16,6 +16,7 @@ import pl.crystalek.sokoban.game.count.TimeCounter;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.io.file.FileSaveType;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.ranking.Ranking;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public final class GameController implements Controller {
 
         final ConfirmationController controller = mainLoader.getController(ConfirmationController.class);
         controller.setConfirmationType(ConfirmationType.LEAVEGAME);
-        controller.getTextLabel().setText("Masz niezapisane zmiany, czy na pewno chcesz wyjsc z gry?");
+        controller.getTextLabel().setText(Lang.DO_YOU_WANT_EXIT_GAME);
         mainLoader.getViewLoader().getStage(ConfirmationController.class).show();
     }
 
@@ -87,7 +88,7 @@ public final class GameController implements Controller {
     private void saveGame(final MouseEvent event) {
         final Progress progress = game.getProgress();
         if (!progress.isChangesToSave()) {
-            mainLoader.getController(DialogController.class).showDialogWindow("warning", "Ostrzezenie!", "Brak zmian do zapisu");
+            mainLoader.getController(DialogController.class).showDialogWindow("warning", Lang.TITLE_WARNING, Lang.NO_CHANGE_TO_SAVE);
             return;
         }
 
@@ -123,9 +124,9 @@ public final class GameController implements Controller {
         final DialogController dialogController = mainLoader.getController(DialogController.class);
         try {
             mainLoader.getFileManager().getFileSaver().saveUserFile(progress, FileSaveType.PROGRESS);
-            dialogController.showDialogWindow("info", "Informacja", "Zapis zostal pomyslnie zapisany!");
+            dialogController.showDialogWindow("info", Lang.TITLE_INFO, Lang.SAVE_MAP_PROGRESS);
         } catch (final SaveUserFileException exception) {
-            dialogController.showDialogWindow("error", "Błąd", exception.getMessage());
+            dialogController.showDialogWindow("error", Lang.TITLE_ERROR, exception.getMessage());
         }
     }
 
@@ -140,7 +141,7 @@ public final class GameController implements Controller {
         mainStage.removeEventFilter(KeyEvent.KEY_RELEASED, game.getResetMapListener());
         mainStage.removeEventFilter(KeyEvent.KEY_PRESSED, game.getPlayerMoveListener());
         game.getTimeCounter().getTimeCounterTask().setPause(true);
-        changeNameController.getTextLabel().setText("Podaj nazwe zapisu");
+        changeNameController.getTextLabel().setText(Lang.ENTER_MAP_NAME);
         mainLoader.getViewLoader().setWindow(ChangeNameController.class);
     }
 

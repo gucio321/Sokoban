@@ -10,6 +10,7 @@ import javafx.scene.text.Font;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.game.progress.ProgressManager;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.map.DefaultMap;
 import pl.crystalek.sokoban.map.UserMap;
 
@@ -37,9 +38,10 @@ public final class LoadUtil {
                 continue;
             }
 
-            final String infoLabelText = "Data stworzenia: " + progress.getCreationDate().format(dateTimeFormatter) +
-                    "\nData modyfikacji: " + progress.getModificationDate().format(dateTimeFormatter) +
-                    "\nZapisana mapa: " + progress.getName();
+            final String infoLabelText = Lang.PROGRESS_INFO_LABEL_TEXT
+                    .replace("{CREATION_DATE}", progress.getCreationDate().format(dateTimeFormatter)
+                            .replace("{MODIFICAION_DATE}", progress.getModificationDate().format(dateTimeFormatter))
+                            .replace("{NAME}", progress.getName()));
             final Button button = getButton(progress.getProgressName(), progress, infoLabelText, loadGameController.getSaveInfoLabel(), loadGameController);
             children.add(button);
         }
@@ -52,9 +54,9 @@ public final class LoadUtil {
         switch (loadType) {
             case USERMAP:
                 for (final UserMap userMap : mainLoader.getMapManager().getUserMapList()) {
-                    final String infoLabelText =
-                            "Data stworzenia: " + userMap.getCreationDate().format(dateTimeFormatter) +
-                                    "\nData modyfikacji: " + userMap.getModificationDate().format(dateTimeFormatter);
+                    final String infoLabelText = Lang.MAP_INFO_LABEL_TEXT
+                            .replace("{CREATION_DATE}", userMap.getCreationDate().format(dateTimeFormatter)
+                                    .replace("{MODIFICAION_DATE}", userMap.getModificationDate().format(dateTimeFormatter)));
                     final Button button = getButton(userMap.getName(), userMap, infoLabelText, load.getMapInfoLabel(), load);
                     children.add(button);
                 }
@@ -64,7 +66,7 @@ public final class LoadUtil {
                 defaultMapList.sort(DefaultMap::compareTo);
 
                 for (final DefaultMap defaultMap : defaultMapList) {
-                    final String infoLabelText = "Trudność: " + defaultMap.getPriority();
+                    final String infoLabelText = Lang.DIFFICULTY.replace("{DIFFICULTY}", String.valueOf(defaultMap.getPriority()));
                     final Button button = getButton(defaultMap.getName(), defaultMap, infoLabelText, load.getMapInfoLabel(), load);
                     children.add(button);
                 }

@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.io.file.FileManager;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.settings.Control;
 import pl.crystalek.sokoban.settings.Settings;
 import pl.crystalek.sokoban.settings.Sound;
@@ -54,7 +55,7 @@ public final class GameSettingsController implements Controller, Initializable {
         try {
             fileManager.getFileSaver().saveFile(fileManager.getSettingsFile(), mainLoader.getSettings());
         } catch (final SaveUserFileException exception) {
-            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", exception.getMessage());
+            mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, exception.getMessage());
             exception.printStackTrace();
         }
         mainLoader.getViewLoader().setWindow(SokobanMainController.class);

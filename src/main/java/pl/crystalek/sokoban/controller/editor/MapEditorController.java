@@ -17,6 +17,7 @@ import pl.crystalek.sokoban.controller.load.LoadUtil;
 import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.io.view.ViewLoader;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.map.UserMap;
 
 public final class MapEditorController implements Controller {
@@ -69,7 +70,7 @@ public final class MapEditorController implements Controller {
 
         final ConfirmationController controller = mainLoader.getController(ConfirmationController.class);
         controller.setConfirmationType(ConfirmationType.LEAVE);
-        controller.getTextLabel().setText("Czy na pewno chcesz opuscic edytor? Zapisz mape, w przeciwnym wypadku utracisz niezapisane zmiany.");
+        controller.getTextLabel().setText(Lang.DO_YOU_WANT_LEAVE_EDITOR);
         mainLoader.getViewLoader().getStage(ConfirmationController.class).show();
     }
 
@@ -77,7 +78,7 @@ public final class MapEditorController implements Controller {
     private void resetMap(final ActionEvent event) {
         final ConfirmationController controller = mainLoader.getController(ConfirmationController.class);
         controller.setConfirmationType(ConfirmationType.RESETMAP);
-        controller.getTextLabel().setText("Czy na pewno chcesz zresetować mapę?");
+        controller.getTextLabel().setText(Lang.DO_YOU_WANT_RESET_MAP);
         mainLoader.getViewLoader().getStage(ConfirmationController.class).show();
     }
 

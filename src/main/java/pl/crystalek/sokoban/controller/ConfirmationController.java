@@ -13,6 +13,7 @@ import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.editor.listener.BoxListenerManager;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.map.DefaultMap;
 import pl.crystalek.sokoban.map.UserMap;
 
@@ -47,7 +48,7 @@ public final class ConfirmationController implements Controller {
                 final BoxListenerManager boxListenerManager = mapEditor1.getBoxListenerManager();
                 boxListenerManager.resetVariable();
                 boxListenerManager.setListeners();
-                mainLoader.getController(DialogController.class).showDialogWindow("info", "Informacja", "Mapa zostala wyczyszczona");
+                mainLoader.getController(DialogController.class).showDialogWindow("info", Lang.TITLE_INFO, Lang.MAP_CLEAR);
                 break;
             case DELETE:
                 final LoadUtil loadUtil = load.getLoadUtil();

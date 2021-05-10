@@ -5,6 +5,7 @@ import org.apache.commons.io.IOUtils;
 import pl.crystalek.sokoban.exception.LoadResourcesException;
 import pl.crystalek.sokoban.exception.LoadUserFileException;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.ranking.RankingManager;
 import pl.crystalek.sokoban.settings.Settings;
 
@@ -63,7 +64,7 @@ public final class FileLoader {
             }
 
         } catch (final IOException exception) {
-            throw new LoadResourcesException("Wystapił błąd podczas ładowania plików gry!", exception);
+            throw new LoadResourcesException(Lang.ERROR_WHILE_LOADING_GAMES_FILE, exception);
         }
     }
 
@@ -77,7 +78,7 @@ public final class FileLoader {
         } catch (final EOFException exception) {
             return Optional.empty();
         } catch (final IOException | ClassNotFoundException exception) {
-            throw new LoadUserFileException("Wystapił błąd podczas ładowania pliku: " + fileToLoad.getName(), exception);
+            throw new LoadUserFileException(Lang.ERROR_WHILE_LOADING_FILE.replace("{FILE_NAME}", fileToLoad.getName()), exception);
         }
     }
 

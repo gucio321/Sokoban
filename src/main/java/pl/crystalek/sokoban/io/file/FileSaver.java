@@ -3,6 +3,7 @@ package pl.crystalek.sokoban.io.file;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.map.UserMap;
 
 import java.io.File;
@@ -43,7 +44,7 @@ public final class FileSaver {
         ) {
             objectOutputStream.writeObject(objectToSave);
         } catch (final IOException exception) {
-            throw new SaveUserFileException("Wystapił błąd podczas zapisywania pliku: " + fileToSave.getName(), exception);
+            throw new SaveUserFileException(Lang.ERROR_WHILE_SAVING_FILE.replace("{FILE_NAME}", fileToSave.getName()), exception);
         }
     }
 
@@ -78,7 +79,7 @@ public final class FileSaver {
         ) {
             objectOutputStream.writeObject(userMap);
         } catch (final IOException exception) {
-            throw new SaveUserFileException("Wystapił błąd podczas zapisywania mapy: " + name, exception);
+            throw new SaveUserFileException(Lang.ERROR_WHILE_SAVING_MAP_FILE.replace("{MAP_NAME}", name), exception);
         }
     }
 }

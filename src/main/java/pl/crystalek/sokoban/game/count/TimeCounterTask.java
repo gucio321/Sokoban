@@ -19,7 +19,7 @@ public final class TimeCounterTask extends TimerTask {
     private int playTime;
     private boolean pause = false;
 
-    public TimeCounterTask(final MainLoader mainLoader) {
+    TimeCounterTask(final MainLoader mainLoader) {
         this.mainLoader = mainLoader;
 
         final GameController gameController = mainLoader.getController(GameController.class);

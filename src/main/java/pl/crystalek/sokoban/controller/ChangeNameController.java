@@ -10,6 +10,7 @@ import pl.crystalek.sokoban.controller.game.GameController;
 import pl.crystalek.sokoban.game.Game;
 import pl.crystalek.sokoban.game.progress.Progress;
 import pl.crystalek.sokoban.io.MainLoader;
+import pl.crystalek.sokoban.lang.Lang;
 
 import java.time.LocalDateTime;
 
@@ -40,12 +41,12 @@ public final class ChangeNameController implements Controller {
     private void save(final ActionEvent event) {
         final String text = nameTextField.getText().trim();
         if (text.isEmpty()) {
-            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd!", "Podaj nazwę zapisu");
+            mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, Lang.ENTER_MAP_NAME);
             return;
         }
 
         if (mainLoader.getProgressManager().getSaveList().stream().anyMatch(x -> x.getName().equalsIgnoreCase(text))) {
-            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd!", "Taka nazwa zapisu już istnieje!");
+            mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, Lang.PROGRESS_NAME_EXIST);
             return;
         }
 

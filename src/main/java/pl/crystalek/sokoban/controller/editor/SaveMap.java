@@ -7,6 +7,7 @@ import pl.crystalek.sokoban.editor.MapEditor;
 import pl.crystalek.sokoban.exception.SaveUserFileException;
 import pl.crystalek.sokoban.io.MainLoader;
 import pl.crystalek.sokoban.io.file.FileSaveType;
+import pl.crystalek.sokoban.lang.Lang;
 import pl.crystalek.sokoban.map.UserMap;
 
 import java.io.File;
@@ -23,7 +24,7 @@ public final class SaveMap implements EventHandler<ActionEvent> {
         final MapEditor mapEditor = mainLoader.getController(MapEditorController.class).getMapEditor();
         final UserMap editedMap = mapEditor.getEditedMap();
         if (!editedMap.isChangesToSave()) {
-            mainLoader.getController(DialogController.class).showDialogWindow("warning", "Ostrzezenie!", "Brak zmian do zapisu");
+            mainLoader.getController(DialogController.class).showDialogWindow("warning", Lang.TITLE_WARNING, Lang.NO_CHANGE_TO_SAVE);
             return;
         }
 
@@ -51,10 +52,11 @@ public final class SaveMap implements EventHandler<ActionEvent> {
             if (mainLoader.getMapManager().getUserMapList().stream().noneMatch(x -> x.getName().equalsIgnoreCase(editedMap.getName()))) {
                 mainLoader.getMapManager().addMap(editedMap);
             }
+
             mainLoader.getFileManager().getFileSaver().saveUserFile(editedMap, FileSaveType.MAP);
-            mainLoader.getController(DialogController.class).showDialogWindow("info", "Informacja", "Mapa zostala pomyslnie zapisana!");
+            mainLoader.getController(DialogController.class).showDialogWindow("info", Lang.TITLE_INFO, Lang.SAVE_MAP);
         } catch (final SaveUserFileException exception) {
-            mainLoader.getController(DialogController.class).showDialogWindow("error", "Błąd", exception.getMessage());
+            mainLoader.getController(DialogController.class).showDialogWindow("error", Lang.TITLE_ERROR, exception.getMessage());
             exception.printStackTrace();
         }
     }
