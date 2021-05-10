@@ -30,7 +30,6 @@ public final class ViewLoader {
     }
 
     private void setStageList() {
-
         for (final Class controllerClass : new Class[]{ConfirmationController.class, DialogController.class}) {
             final Stage stage = new Stage();
             stage.setAlwaysOnTop(true);

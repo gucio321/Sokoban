@@ -50,7 +50,7 @@ final class BoxMouseMoveListener implements EventHandler<MouseEvent> {
         if (previousPane != null) { //sprawdzanie czy poprzedni pane (kwadrat) jest ustawiony
             if (!closestPane.equals(previousPane)) { //jesli oba kwadraty sie roznia
                 final ObservableList<Node> children = previousPane.getChildren();
-                if (children.size() != 0) {
+                if (!children.isEmpty()) {
                     final ImageView child = (ImageView) children.get(0);
                     if (boxListenerManager.getPreviousImage() != null) { //sprawdzanie czy wczesniej byl tam jakis obrazek
                         child.setImage(boxListenerManager.getPreviousImage()); //ustawianie poprzedniego obrazka
@@ -67,7 +67,7 @@ final class BoxMouseMoveListener implements EventHandler<MouseEvent> {
 
         //tworzenie obiektu imageview, jesli go nie ma
         final ImageView imageViewInClosestPane;
-        if (closestPaneChildren.size() != 0) {
+        if (!closestPaneChildren.isEmpty()) {
             imageViewInClosestPane = (ImageView) closestPaneChildren.get(0);
         } else {
             imageViewInClosestPane = new ImageView();

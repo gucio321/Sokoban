@@ -34,7 +34,7 @@ public final class ConvertGridPaneToString {
                     final List<BoxLocation> boxLocationList = (List<BoxLocation>) object;
                     final BoxLocation boxLocation = boxLocationList.get(i * 30 + j);
                     final ObservableList<Node> boxPaneChildren = boxLocation.getBoxPane().getChildren();
-                    if (boxPaneChildren.size() == 0) {
+                    if (boxPaneChildren.isEmpty()) {
                         stringBuilder.append(" ");
                         continue;
                     }

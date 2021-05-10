@@ -1,7 +1,6 @@
 package pl.crystalek.sokoban.util;
 
 enum Time {
-
     YEAR("rok", "lata", "lat", "y", 31_536_000_000L),
     MONTH("miesiąc", "miesiace", "miesiecy", "m", 2_592_000_000L),
     WEEK("tydzień", "tygodnie", "tygodni", "w", 604_800_000L),

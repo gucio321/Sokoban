@@ -11,7 +11,7 @@ import pl.crystalek.sokoban.util.TimeUtil;
 import javax.sound.sampled.Clip;
 import java.util.TimerTask;
 
-public class TimeCounterTask extends TimerTask {
+public final class TimeCounterTask extends TimerTask {
     private final MainLoader mainLoader;
     private final Label timeLabel;
     private final Progress progress;
